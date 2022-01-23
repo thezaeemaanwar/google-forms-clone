@@ -15,10 +15,11 @@ const App = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(user);
         dispatch(SignInEvent(user));
       }
     });
-  }, []);
+  }, [auth, dispatch]);
 
   const isLogged = useSelector((state) => state.isLogged);
   return (
