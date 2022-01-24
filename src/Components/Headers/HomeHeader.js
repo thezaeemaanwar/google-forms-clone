@@ -14,7 +14,7 @@ const HomeHeader = () => {
           <FontAwesomeIcon className="text-lg" icon={faBars} />
         </div>
         <img className="w-7 mx-3 my-auto" src={Logo} alt="logo" />
-        <div className="text-2xl p1 font-sans">Forms</div>
+        <div className="text-2xl p1">Forms</div>
       </div>
       <div className="bg-grey h-12 w-1/2 rounded-lg text-base flex p-1 items-center">
         <div className="p-2 px-3 hover:bg-hoverGrey m-2 rounded-full active:bg-white">

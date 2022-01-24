@@ -9,6 +9,9 @@ module.exports = {
         fontGrey: "#5f6368",
         purple: "#7248B9",
       },
+      fontFamily: {
+        googleSans: ["Open Sans", "arial", "sans-serif"],
+      },
     },
   },
   plugins: [],

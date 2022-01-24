@@ -29,7 +29,7 @@ const App = () => {
       ) : (
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/create" element={<CreateForm />} />
+          <Route path="/create/:type" element={<CreateForm />} />
         </Routes>
       )}
     </div>
