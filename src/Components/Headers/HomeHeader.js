@@ -1,11 +1,22 @@
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { signOut as firebaseSignOut, getAuth } from "firebase/auth";
 import Logo from "Assets/logo.png";
 import dots from "Assets/dots.png";
+import { useState } from "react";
 
 const HomeHeader = () => {
   const user = useSelector((state) => state.isLogged.user);
+  const [ddState, setDdState] = useState(false);
+  const toggleDropdown = () => {
+    setDdState(!ddState);
+  };
+
+  const signOut = () => {
+    const auth = getAuth();
+    firebaseSignOut(auth);
+  };
 
   return (
     <header className="fixed top-0 p-2 w-full bg-white h-16 flex flex-row justify-between items-center">
@@ -30,11 +41,21 @@ const HomeHeader = () => {
         <div className="hover:bg-hoverGrey hover:cursor-pointer p-3 w-10 h-10 rounded-full">
           <img className="" src={dots} alt="menu" />
         </div>
-        <img
-          className="rounded-full w-10 h-10 p-1"
-          src={user.photoURL}
-          alt="user"
-        />
+        <div className="hover:cursor-pointer" onClick={toggleDropdown}>
+          <img
+            className="rounded-full w-10 h-10 p-1"
+            src={user.photoURL}
+            alt="user"
+          />
+          {ddState ? (
+            <div
+              className="fixed right-2 bg-white p-3 border border-hoverGrey hover:bg-hoverGrey hover:cursor-pointer"
+              onClick={signOut}
+            >
+              Logout
+            </div>
+          ) : null}
+        </div>
       </div>
     </header>
   );
