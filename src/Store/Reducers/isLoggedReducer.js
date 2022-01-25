@@ -16,7 +16,7 @@ const isLoggedReducer = (state = initialState, action) => {
         error: action.payload.error,
       });
     case `${LOGOUT}`:
-      return (state = { logged: false, user: null });
+      return (state = { logged: false, user: action.payload.user });
     default:
       return state;
   }
