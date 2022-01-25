@@ -21,9 +21,9 @@ export const formTemplates = [
 ];
 
 export const ownershipFilters = [
-  "Owned by anyone",
-  "Owned by me",
-  "Not owned by me",
+  { text: "Owned by anyone" },
+  { text: "Owned by me" },
+  { text: "Not owned by me" },
 ];
 
 export const formSamples = [
