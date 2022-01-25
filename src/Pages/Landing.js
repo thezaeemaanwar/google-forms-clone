@@ -5,15 +5,24 @@ import {
   faEllipsisV,
   faChevronUp,
   faChevronDown,
+  faThList,
+  faGripHorizontal,
 } from "@fortawesome/free-solid-svg-icons";
+import { faFolder } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { formTemplates, ownershipFilters, formSamples } from "Data/Templates";
 import FormTile from "Components/FormTile/FormTile";
-
+import Dropdown from "Components/Custom Dropdown/Dropdown";
+import sortIcon from "Assets/sort.png";
 const Landing = () => {
   const [date, setDate] = useState("Yesterday");
+  const [gridView, setGridView] = useState(false);
   const [ownedFilter, setOwnedFilter] = useState(ownershipFilters[1]);
   const [forms, setForms] = useState(formSamples);
+
+  const toggleGridView = () => {
+    setGridView(!gridView);
+  };
   return (
     <div className="bg-red">
       <HomeHeader />
@@ -50,8 +59,37 @@ const Landing = () => {
           </div>
         </div>
         <div className="w-full flex flex-col items-center justify-center">
-          <div>
-            <div className="w-2/3">{date}</div>
+          <div className="w-2/3 flex  justify-between items-center my-2">
+            <div>{date}</div>
+            <Dropdown
+              options={ownershipFilters}
+              setSelected={setOwnedFilter}
+              defaultSelected={ownershipFilters[1].text}
+            />
+            <div className="flex items-center">
+              <div
+                onClick={toggleGridView}
+                className="w-10 h-10 flex justify-center items-center rounded-full text-white hover:cursor-pointer hover:bg-grey hover:text-hoverGrey active:bg-purple/[0.2]"
+              >
+                {gridView ? (
+                  <FontAwesomeIcon
+                    className="text-fontGrey text-2xl px-0.5 rounded-sm  active:text-purple"
+                    icon={faGripHorizontal}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    className=" bg-fontGrey px-px rounded-sm active:bg-purple hover:text-hoverGrey"
+                    icon={faThList}
+                  />
+                )}
+              </div>
+              <div className="w-10 h-10 flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2]">
+                <img className="w-5" src={sortIcon} alt="sort" />
+              </div>
+              <div className="w-10 h-10 flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2] active:text-purple">
+                <FontAwesomeIcon icon={faFolder} />
+              </div>
+            </div>
           </div>
           <div className="flex w-2/3">
             {forms.map((form) => (
