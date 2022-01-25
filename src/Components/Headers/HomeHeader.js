@@ -1,13 +1,15 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { signOut as firebaseSignOut, getAuth } from "firebase/auth";
+import { SignOutEvent } from "Store/Actions/actions";
 import Logo from "Assets/logo.png";
 import dots from "Assets/dots.png";
 import { useState } from "react";
 
 const HomeHeader = () => {
   const user = useSelector((state) => state.isLogged.user);
+  const dispatch = useDispatch();
   const [ddState, setDdState] = useState(false);
   const toggleDropdown = () => {
     setDdState(!ddState);
@@ -16,6 +18,7 @@ const HomeHeader = () => {
   const signOut = () => {
     const auth = getAuth();
     firebaseSignOut(auth);
+    dispatch(signOut());
   };
 
   return (
