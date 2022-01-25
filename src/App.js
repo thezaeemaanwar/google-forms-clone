@@ -24,7 +24,6 @@ const App = () => {
         signInWithRedirect(auth, provider)
           .then((re) => {
             dispatch(SignInEvent(re.user));
-            console.log("DONE");
           })
           .catch((err) => {
             console.error(err);
