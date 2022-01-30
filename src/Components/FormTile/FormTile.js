@@ -13,7 +13,7 @@ const FormTile = ({ formData }) => {
     { icon: faExternalLinkAlt, text: "Open in new tab" },
   ];
   return (
-    <div className="w-52 h-60 mr-5 mb-5 border border-hoverGrey hover:border-purple rounded-md">
+    <div className="w-56 h-60 mr-5 mb-5 border border-hoverGrey hover:border-purple rounded-md">
       <div className="h-2/3">
         <img src={formData.img} alt={formData.title} />
       </div>

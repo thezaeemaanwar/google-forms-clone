@@ -1,39 +1,42 @@
 import firebase_app from "services/firebase/firebase.config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
-import { useDispatch } from "react-redux";
-import { login } from "store/authentication/authentication.slice";
+import {
+  signInWithRedirect,
+  GoogleAuthProvider,
+  signOut as firebaseSignOut,
+} from "firebase/auth";
 
-const SignIn = () => {
-  const dispatch = useDispatch();
+const SignIn = (dispatchCallback) => {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  signInWithRedirect(auth, provider)
+    .then((re) => {
+      dispatchCallback({ user: re.user });
+    })
+    .catch((err) => {
+      dispatchCallback({ error: err });
+    });
+};
+
+const checkLogged = (dispatchCallback) => {
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      dispatch(login(user));
+      dispatchCallback({
+        uid: user.uid,
+        displayName: user.displayName,
+        profileImage: user.photoURL,
+      });
     } else {
-      const auth = getAuth();
-      const provider = new GoogleAuthProvider();
-      signInWithRedirect(auth, provider)
-        .then((re) => {
-          dispatch(login(re.user));
-        })
-        .catch((err) => {
-          dispatch(login(err));
-        });
+      dispatchCallback();
     }
   });
 };
 
-const IsSignedIn = () => {
+const SignOut = (dispatchCallback) => {
   const auth = getAuth();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      return user;
-    } else {
-      return null;
-    }
-  });
+  firebaseSignOut(auth);
+  dispatchCallback();
 };
-const SignOut = () => {};
 
-export { SignIn, SignOut, IsSignedIn };
+export { SignIn, SignOut, checkLogged };

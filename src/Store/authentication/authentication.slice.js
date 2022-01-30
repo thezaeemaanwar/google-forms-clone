@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IsSignedIn } from "services/firebase/firebase.auth";
 
 export const authSlice = createSlice({
   name: "authentication",
@@ -10,37 +9,25 @@ export const authSlice = createSlice({
     error: null,
   },
   reducers: {
-    login: (state, action) => {
+    loggedIn: (state, action) => {
+      console.log("User: ", action.payload.user);
       state.loading = false;
       state.logged = true;
       state.user = action.payload.user;
       state.error = action.payload.error;
     },
-    logout: (state, action) => {
+    loggedOut: (state, action) => {
       state.loading = false;
       state.logged = false;
-      state.user = action.payload.user;
-      state.error = action.payload.error;
+      state.user = null;
+      state.error = null;
     },
     loading: (state) => {
       state.loading = true;
     },
-    checkLogged: (state) => {
-      const user = IsSignedIn();
-      if (user) {
-        state.loading = false;
-        state.logged = true;
-        state.user = user;
-        state.error = null;
-      } else {
-        state.loading = false;
-        state.logged = false;
-        state.user = null;
-        state.error = null;
-      }
-    },
   },
 });
 
-export const { login, logout, loading, checkLogged } = authSlice.actions;
+export const { login, logout, loading, checkLogged, loggedIn, loggedOut } =
+  authSlice.actions;
 export default authSlice.reducer;

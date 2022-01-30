@@ -1,14 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { signOut as firebaseSignOut, getAuth } from "firebase/auth";
-import { SignOutEvent } from "store/Actions/actions";
 import Logo from "assets/logo.png";
 import dots from "assets/dots.png";
 import { useState } from "react";
+import { SignOut } from "services/firebase/firebase.auth";
+import { loggedOut } from "store/authentication/authentication.slice";
 
 const HomeHeader = () => {
-  const user = useSelector((state) => state.isLogged.user);
+  const { loading, user } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
   const [ddState, setDdState] = useState(false);
   const toggleDropdown = () => {
@@ -16,9 +16,10 @@ const HomeHeader = () => {
   };
 
   const signOut = () => {
-    const auth = getAuth();
-    firebaseSignOut(auth);
-    dispatch(signOut());
+    dispatch(loading());
+    SignOut(() => {
+      dispatch(loggedOut());
+    });
   };
 
   return (
@@ -47,7 +48,7 @@ const HomeHeader = () => {
         <div className="hover:cursor-pointer" onClick={toggleDropdown}>
           <img
             className="rounded-full w-10 h-10 p-1"
-            src={user.photoURL}
+            src={user.profileImage}
             alt="user"
           />
           {ddState ? (
