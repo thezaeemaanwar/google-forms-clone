@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT } from "./actionTypes";
+import { LOGIN, LOGOUT } from "./action_types";
 
 export const SignInEvent = (user) => {
   return { type: `${LOGIN}`, payload: { user: user } };
