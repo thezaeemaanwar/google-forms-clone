@@ -1,8 +1,21 @@
-import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisV,
+  faTextHeight,
+  faTrashAlt,
+  faExternalLinkAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import slogo from "Assets/logo2.svg";
+import Dropdown from "Components/CustomDropdown/Dropdown";
+import DropdownWithIcon from "Components/CustomDropdown/DropdownwithIcon";
+import { useState } from "react";
 
 const FormTile = ({ formData }) => {
+  const actions = [
+    { icon: faTextHeight, text: "Rename" },
+    { icon: faTrashAlt, text: "Remove" },
+    { icon: faExternalLinkAlt, text: "Open in new tab" },
+  ];
   return (
     <div className="w-52 h-60 mr-5 mb-5 border border-hoverGrey hover:border-purple rounded-md">
       <div className="h-2/3">
@@ -20,9 +33,7 @@ const FormTile = ({ formData }) => {
               {formData.date}
             </div>
           </div>
-          <div className="px-2 hover:cursor-pointer w-9 h-9 rounded-full hover:bg-hoverGrey flex items-center justify-center">
-            <FontAwesomeIcon icon={faEllipsisV} />
-          </div>
+          <DropdownWithIcon />
         </div>
       </div>
     </div>

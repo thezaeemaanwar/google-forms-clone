@@ -16,7 +16,6 @@ const SignIn = () => {
     .catch((err) => {
       console.error(err);
     });
-  
 };
 
 export default SignIn;

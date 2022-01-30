@@ -12,7 +12,7 @@ import { faFolder } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { formTemplates, ownershipFilters, formSamples } from "Data/Templates";
 import FormTile from "Components/FormTile/FormTile";
-import Dropdown from "Components/Custom Dropdown/Dropdown";
+import Dropdown from "Components/CustomDropdown/Dropdown";
 import sortIcon from "Assets/sort.png";
 const Landing = () => {
   const [date, setDate] = useState("Yesterday");
