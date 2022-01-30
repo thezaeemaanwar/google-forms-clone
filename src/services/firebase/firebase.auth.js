@@ -1,3 +1,4 @@
+import firebase_app from "services/firebase/firebase.config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 import { useDispatch } from "react-redux";
@@ -23,6 +24,16 @@ const SignIn = () => {
   });
 };
 
+const IsSignedIn = () => {
+  const auth = getAuth();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      return user;
+    } else {
+      return null;
+    }
+  });
+};
 const SignOut = () => {};
 
-export { SignIn, SignOut };
+export { SignIn, SignOut, IsSignedIn };
