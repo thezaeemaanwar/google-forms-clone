@@ -10,7 +10,9 @@ module.exports = {
         purple: "#7248B9",
       },
       fontFamily: {
-        googleSans: ["Open Sans", "arial", "sans-serif"],
+        regular: ["Product Sans Regular"],
+        bold: ["Product Sans Bold"],
+        thin: ["Product Sans Thin Regular"],
       },
     },
   },
