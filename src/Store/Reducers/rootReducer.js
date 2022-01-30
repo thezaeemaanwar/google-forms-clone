@@ -1,4 +1,4 @@
-import questionReducer from "./questionReducer";
+import questionReducer from "Store/Reducers/questionReducer";
 import isLoggedReducer from "./isLoggedReducer";
 import { combineReducers } from "redux";
 
