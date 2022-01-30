@@ -1,4 +1,4 @@
-import HomeHeader from "Components/Headers/HomeHeader";
+import HomeHeader from "components/layout/Headers/HomeHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import {
@@ -10,11 +10,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
-import { formTemplates, ownershipFilters, formSamples } from "Data/Templates";
-import FormTile from "Components/FormTile/FormTile";
-import Dropdown from "Components/CustomDropdown/Dropdown";
-import sortIcon from "Assets/sort.png";
-const Landing = () => {
+import { formTemplates, ownershipFilters, formSamples } from "data/Templates";
+import FormTile from "components/FormTile/FormTile";
+import Dropdown from "components/Dropdown/Dropdown";
+import sortIcon from "assets/sort.png";
+
+const Home = () => {
   const [date, setDate] = useState("Yesterday");
   const [gridView, setGridView] = useState(false);
   const [ownedFilter, setOwnedFilter] = useState(ownershipFilters[1]);
@@ -102,4 +103,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Home;

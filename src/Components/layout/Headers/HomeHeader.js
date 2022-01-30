@@ -2,9 +2,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { signOut as firebaseSignOut, getAuth } from "firebase/auth";
-import { SignOutEvent } from "Store/Actions/actions";
-import Logo from "Assets/logo.png";
-import dots from "Assets/dots.png";
+import { SignOutEvent } from "store/Actions/actions";
+import Logo from "assets/logo.png";
+import dots from "assets/dots.png";
 import { useState } from "react";
 
 const HomeHeader = () => {

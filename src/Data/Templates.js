@@ -1,8 +1,8 @@
-import eventReg from "Assets/eventReg.png";
-import newForm from "Assets/newForm.png";
-import partyInv from "Assets/partyInv.png";
-import rsvp from "Assets/rsvp.png";
-import contactInfo from "Assets/contactInfo.png";
+import eventReg from "assets/eventReg.png";
+import newForm from "assets/newForm.png";
+import partyInv from "assets/partyInv.png";
+import rsvp from "assets/rsvp.png";
+import contactInfo from "assets/contactInfo.png";
 
 export const formTemplates = [
   { name: "Blank", img: newForm, url: "/create/blank" },

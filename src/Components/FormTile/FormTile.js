@@ -1,14 +1,10 @@
 import {
-  faEllipsisV,
   faTextHeight,
   faTrashAlt,
   faExternalLinkAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import slogo from "Assets/logo2.svg";
-import Dropdown from "Components/CustomDropdown/Dropdown";
-import DropdownWithIcon from "Components/CustomDropdown/DropdownwithIcon";
-import { useState } from "react";
+import slogo from "assets/logo2.svg";
+import DropdownWithIcon from "components/Dropdown/DropdownwithIcon";
 
 const FormTile = ({ formData }) => {
   const actions = [

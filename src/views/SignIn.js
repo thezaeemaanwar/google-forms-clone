@@ -1,7 +1,7 @@
-import firebase_app from "MyFirebase/firebase";
+import firebase_app from "services/firebase/firebase.auth";
 import { getAuth, signInWithRedirect, GoogleAuthProvider } from "firebase/auth";
 // import { SignInEvent } from "Store/Actions/actions";
-import { SignInEvent } from "Store/Actions/actions";
+import { SignInEvent } from "store/Actions/actions";
 import { useDispatch } from "react-redux";
 
 const SignIn = () => {
