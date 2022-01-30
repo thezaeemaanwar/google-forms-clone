@@ -4,8 +4,7 @@ import Loading from "components/Loaders/page_loader";
 import Landing from "views/Landing";
 
 const App = () => {
-  const { loading, logged } = useSelector((state) => state.auth);
-  console.log("State in app: ", logged);
+  const { logged, loading } = useSelector((state) => state.authentication);
   return (
     <div>{loading ? <Loading /> : logged ? <PublicRoutes /> : <Landing />}</div>
   );
