@@ -5,10 +5,13 @@ import Logo from "assets/logo.png";
 import dots from "assets/dots.png";
 import { useState } from "react";
 import { SignOut } from "services/firebase/firebase.auth";
-import { loggedOut } from "store/authentication/authentication.slice";
+import {
+  startLoading,
+  loggedOut,
+} from "store/authentication/authentication.slice";
 
 const HomeHeader = () => {
-  const { loading, user } = useSelector((state) => state.authentication);
+  const { user } = useSelector((state) => state.authentication);
   const dispatch = useDispatch();
   const [ddState, setDdState] = useState(false);
   const toggleDropdown = () => {
@@ -16,7 +19,7 @@ const HomeHeader = () => {
   };
 
   const signOut = () => {
-    dispatch(loading());
+    dispatch(startLoading());
     SignOut(() => {
       dispatch(loggedOut());
     });

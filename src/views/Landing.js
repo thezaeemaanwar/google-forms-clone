@@ -3,7 +3,10 @@ import OutLinedButton from "components/Buttons/outLinedButton";
 import LandingHeader from "components/layout/Headers/LandingHeader";
 import bg from "assets/bg-1.png";
 import { useDispatch } from "react-redux";
-import { loading, loggedIn } from "store/authentication/authentication.slice";
+import {
+  startLoading,
+  loggedIn,
+} from "store/authentication/authentication.slice";
 import { SignIn } from "services/firebase/firebase.auth";
 
 const Landing = () => {
@@ -12,7 +15,7 @@ const Landing = () => {
     dispatch(loggedIn(payload));
   };
   const signIn = () => {
-    dispatch(loading());
+    dispatch(startLoading());
     SignIn(dispatchCallback);
   };
   return (

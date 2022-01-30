@@ -22,12 +22,12 @@ export const authSlice = createSlice({
       state.user = null;
       state.error = null;
     },
-    loading: (state) => {
+    startLoading: (state) => {
       state.loading = true;
     },
   },
 });
 
-export const { login, logout, loading, checkLogged, loggedIn, loggedOut } =
+export const { login, logout, startLoading, checkLogged, loggedIn, loggedOut } =
   authSlice.actions;
 export default authSlice.reducer;
