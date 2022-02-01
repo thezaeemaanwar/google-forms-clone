@@ -44,6 +44,7 @@ const QuestionCard = ({ question, selected }) => {
               />
             ))}
           </div>
+          
         </div>
       )}
     </div>

@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import IndividualOption from "./IndividualOption";
 import { SHORT_ANSWER, PARAGRAPH, MULTIPLE_CHOICE } from "data/OptionTypes";
 
+const addNewOption = () => {};
 const OptionCard = ({ type, options, setOptions }) => {
   if (type === SHORT_ANSWER || type === PARAGRAPH)
     return <div>Short Anser</div>;
@@ -11,6 +12,12 @@ const OptionCard = ({ type, options, setOptions }) => {
         {options.map((option) => (
           <IndividualOption key={option.id} type={type} option={option} />
         ))}
+        <div
+          className="hover:cursor-pointer text-blue"
+          onClick={() => addNewOption()}
+        >
+          Add Options
+        </div>
       </div>
     );
 };

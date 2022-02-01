@@ -24,11 +24,13 @@ const CustomDropdown = ({ options, setSelected, defaultSelected }) => {
     <div className="text-fontGrey">
       <div
         onClick={toggleDropdownOptions}
-        className="flex items-center justify-center px-2 py-1 hover:cursor-pointer hover:bg-grey m-2"
+        className="flex items-center justify-between px-4 py-3 hover:cursor-pointer hover:bg-grey m-2 border border-hoverGrey rounded w-56 "
       >
-        <FontAwesomeIcon icon={selectedOption.icon} />
+        <div className="flex items-center">
+          <FontAwesomeIcon icon={selectedOption.icon} />
 
-        <div className="px-2">{selectedOption.text}</div>
+          <div className="px-2">{selectedOption.text}</div>
+        </div>
         {openDropdown ? (
           <FontAwesomeIcon icon={faCaretUp} />
         ) : (
@@ -36,7 +38,7 @@ const CustomDropdown = ({ options, setSelected, defaultSelected }) => {
         )}
       </div>
       {openDropdown ? (
-        <ul className="py-1 rounded-sm drop-shadow fixed top-32 bg-white">
+        <ul className="py-2 rounded-sm drop-shadow fixed top-32 bg-white w-56">
           {options.map((op, idx) => (
             <li
               className="p-3 hover:bg-hoverGrey hover:cursor-pointer flex items-center"
