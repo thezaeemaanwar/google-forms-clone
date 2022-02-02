@@ -7,7 +7,7 @@ import { useState } from "react";
 import { SignOut } from "services/firebase/firebase.auth";
 import {
   startLoading,
-  loggedOut,
+  setUser,
 } from "store/authentication/authentication.slice";
 
 const HomeHeader = () => {
@@ -20,8 +20,8 @@ const HomeHeader = () => {
 
   const signOut = () => {
     dispatch(startLoading());
-    SignOut(() => {
-      dispatch(loggedOut());
+    SignOut((user) => {
+      dispatch(setUser(user));
     });
   };
 

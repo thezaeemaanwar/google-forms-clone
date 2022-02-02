@@ -4,15 +4,15 @@ import LandingHeader from "components/layout/Headers/LandingHeader";
 import bg from "assets/bg-1.png";
 import { useDispatch } from "react-redux";
 import {
+  setUser,
   startLoading,
-  loggedIn,
 } from "store/authentication/authentication.slice";
 import { SignIn } from "services/firebase/firebase.auth";
 
 const Landing = () => {
   const dispatch = useDispatch();
   const dispatchCallback = (payload) => {
-    dispatch(loggedIn(payload));
+    dispatch(setUser(payload));
   };
   const signIn = () => {
     dispatch(startLoading());

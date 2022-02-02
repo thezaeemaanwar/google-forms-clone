@@ -10,6 +10,7 @@ import { SignOut } from "services/firebase/firebase.auth";
 import {
   startLoading,
   loggedOut,
+  setUser,
 } from "store/authentication/authentication.slice";
 
 const FormHeader = ({ title }) => {
@@ -20,8 +21,8 @@ const FormHeader = ({ title }) => {
   };
   const signOut = () => {
     dispatch(startLoading());
-    SignOut(() => {
-      dispatch(loggedOut());
+    SignOut((user) => {
+      dispatch(setUser(user));
     });
   };
   const { user } = useSelector((state) => state.authentication);
