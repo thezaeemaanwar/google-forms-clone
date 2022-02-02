@@ -28,7 +28,7 @@ const checkLogged = (dispatchCallback) => {
         profileImage: user.photoURL,
       });
     } else {
-      dispatchCallback();
+      dispatchCallback(null);
     }
   });
 };
@@ -36,7 +36,7 @@ const checkLogged = (dispatchCallback) => {
 const SignOut = (dispatchCallback) => {
   const auth = getAuth();
   firebaseSignOut(auth);
-  dispatchCallback();
+  dispatchCallback(null);
 };
 
 export { SignIn, SignOut, checkLogged };
