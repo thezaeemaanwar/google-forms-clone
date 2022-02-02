@@ -1,15 +1,12 @@
 import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
-// import firebase from "firebase";
-
 const firebaseConfig = {
-  apiKey: "AIzaSyBuG_7L3iWr4iMJNDvdeyOs1Bu1smx7nzI",
-  authDomain: "forms-clone-89516.firebaseapp.com",
-  projectId: "forms-clone-89516",
-  storageBucket: "forms-clone-89516.appspot.com",
-  messagingSenderId: "815339855045",
-  appId: "1:815339855045:web:a8067b4d6fd4d0b29924ac",
-  measurementId: "G-YQHSF8F2Q5",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
+  measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 };
 
 // Initialize Firebase
