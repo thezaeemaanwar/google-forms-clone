@@ -17,9 +17,8 @@ const App = () => {
     checkLogged(dispatchCallback);
   }, [dispatch]);
 
-  return (
-    <div>{loading ? <Loading /> : logged ? <PublicRoutes /> : <Landing />}</div>
-  );
+  if (loading) return <Loading />;
+  else return <div>{logged ? <PublicRoutes /> : <Landing />}</div>;
 };
 
 export default App;
