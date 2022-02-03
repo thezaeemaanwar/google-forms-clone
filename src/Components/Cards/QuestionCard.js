@@ -4,6 +4,7 @@ import CustomDropdown from "components/Dropdown/CustomDropdown";
 import OptionCard from "components/Cards/Options/Option";
 import { dropdownOptions } from "data/OptionTypes";
 import DisplayOptions from "components/Cards/Options/DisplayOptions";
+
 const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
   const [myOptionType, setMyOptionType] = useState(question.optionType);
   const [questionTitle, setQuestionTitle] = useState(question.title);

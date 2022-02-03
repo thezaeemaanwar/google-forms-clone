@@ -1,26 +1,13 @@
-import { faDotCircle } from "@fortawesome/free-regular-svg-icons";
 import QuestionCard from "components/Cards/QuestionCard";
 import TitleCard from "components/Cards/TitleCard";
 import FormHeader from "components/layout/Headers/FormHeader";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { questionTemplate } from "data/Templates";
 
 const CreateForm = ({ theme }) => {
   const { type } = useParams();
-  const [questions, setQuestions] = useState([
-    {
-      id: "gyusegvybct",
-      title: "Question",
-      options: [{ id: 0, text: "Option 1" }],
-      optionType: { icon: faDotCircle, text: "Multiple choice" },
-    },
-    {
-      id: "hv4nu5huy45nh",
-      title: "Question",
-      options: [{ id: 0, text: "Option 1" }],
-      optionType: { icon: faDotCircle, text: "Multiple choice" },
-    },
-  ]);
+  const [questions, setQuestions] = useState(questionTemplate);
   const [formTitle, setFormTitle] = useState("Untitled Form");
   const [formDescription, setFormDescription] = useState("Form Description");
   const [selected, setSelected] = useState("gyusegvybct");
@@ -66,9 +53,7 @@ const CreateForm = ({ theme }) => {
 };
 
 CreateForm.defaultProps = {
-  theme: {
-    
-  }
-}
+  theme: {},
+};
 
 export default CreateForm;

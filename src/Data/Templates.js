@@ -3,6 +3,8 @@ import newForm from "assets/newForm.png";
 import partyInv from "assets/partyInv.png";
 import rsvp from "assets/rsvp.png";
 import contactInfo from "assets/contactInfo.png";
+import { faDotCircle } from "@fortawesome/free-regular-svg-icons";
+import { dropdownOptions } from "data/OptionTypes";
 
 export const formTemplates = [
   { name: "Blank", img: newForm, url: "/create/blank" },
@@ -50,5 +52,20 @@ export const formSamples = [
     date: "Apr 23, 2020",
     lastAction: "created",
     shared: false,
+  },
+];
+
+export const questionTemplate = [
+  {
+    id: "gyusegvybct",
+    title: "Question",
+    options: [{ id: 0, text: "Option 1" }],
+    optionType: dropdownOptions[2],
+  },
+  {
+    id: "hv4nu5huy45nh",
+    title: "Question",
+    options: [{ id: 0, text: "Option 1" }],
+    optionType: dropdownOptions[3],
   },
 ];

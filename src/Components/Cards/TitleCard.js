@@ -10,7 +10,7 @@ const TitleCard = ({
   selected,
 }) => {
   const [formTitle, setFormTitle] = useState(title);
-  const [formDescription, setFormDescription] = useState("");
+  const [formDescription, setFormDescription] = useState(description);
 
   const handleTitleChange = (e) => {
     setFormTitle(e.target.value);
@@ -19,7 +19,13 @@ const TitleCard = ({
     setFormDescription(e.target.value);
   };
 
-  
+  const saveTitle = (e) => {
+    setTitle(formTitle);
+  };
+  const saveDescription = (e) => {
+    setDescription(formDescription);
+  };
+
   return (
     <div
       className={`w-full rounded-lg border border-hoverGrey bg-white my-3  ${
@@ -35,6 +41,7 @@ const TitleCard = ({
           onChange={(e) => {
             handleTitleChange(e);
           }}
+          onBlur={saveTitle}
         />
         <input
           type="text"
@@ -44,6 +51,7 @@ const TitleCard = ({
           onChange={(e) => {
             handleDescriptionChange(e);
           }}
+          onBlur={saveDescription}
         />
       </div>
     </div>
@@ -52,7 +60,7 @@ const TitleCard = ({
 
 TitleCard.defaultProps = {
   title: "Untitled Form",
-  description: "Form description",
+  description: "",
   color: "purple",
   selected: true,
 };
