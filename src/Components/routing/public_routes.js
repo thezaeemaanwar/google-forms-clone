@@ -4,7 +4,7 @@ import Home from "views/Home";
 import { useSelector } from "react-redux";
 
 const PublicRoutes = () => {
-  const { theme } = useSelector((state) => state.questions);
+  const { theme } = useSelector((state) => state.form);
 
   return (
     <Routes>
