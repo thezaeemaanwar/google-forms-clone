@@ -19,6 +19,18 @@ const CreateForm = ({ theme }) => {
   const [formDescription, setFormDescription] = useState("Form Description");
   const [selected, setSelected] = useState(1);
 
+  const setQuestion = (id, question) => {
+    const temp = [...questions];
+    const ind = temp.findIndex((x) => x.id === id);
+    temp[ind] = question;
+    setQuestions(temp);
+    console.log("Questions in create form: ", temp);
+  };
+
+  const selectQuestionCard = (id) => {
+    setSelected(id);
+  };
+
   console.log("theme: ", theme);
   if (type === "blank")
     return (
@@ -37,6 +49,8 @@ const CreateForm = ({ theme }) => {
                 key={question.id}
                 selected={idx === selected + 1 ? true : false}
                 question={question}
+                setQuestion={setQuestion}
+                onClick={selectQuestionCard}
               />
             ))}
           </div>

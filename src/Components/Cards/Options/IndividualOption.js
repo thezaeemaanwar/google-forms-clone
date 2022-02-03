@@ -4,9 +4,11 @@ import { CHECKBOX, MULTIPLE_CHOICE } from "data/OptionTypes";
 
 const IndividualOption = ({ type, option }) => {
   const [iOption, setIOption] = useState(option.text);
+
   const handleInputChange = (e) => {
     setIOption(e.target.value);
   };
+
   return (
     <div className="my-2 py-2 flex items-center">
       <input
@@ -21,7 +23,7 @@ const IndividualOption = ({ type, option }) => {
         }
       />
       <input
-        className="w-2/3 p-3 border-b focus:outline-none textField focus:border-b-2"
+        className="w-4/5 p-1 pl-0 ml-3 border-b focus:outline-none textField focus:border-b-2"
         placeholder="Option"
         value={iOption}
         onChange={(e) => handleInputChange(e)}

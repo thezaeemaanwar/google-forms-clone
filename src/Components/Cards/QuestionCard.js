@@ -1,15 +1,20 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import CustomDropdown from "components/Dropdown/CustomDropdown";
-import OptionCard from "./Options/Option";
+import OptionCard from "components/Cards/Options/Option";
 import { dropdownOptions } from "data/OptionTypes";
 
-const QuestionCard = ({ question, selected }) => {
+const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
   const [myOptionType, setMyOptionType] = useState(question.optionType);
   const [questionTitle, setQuestionTitle] = useState(question.title);
 
   const handleTitleChange = (e) => {
     setQuestionTitle(e.target.value);
+  };
+  const setOptions = (options) => {
+    const temp = { ...question };
+    temp.options = options;
+    setQuestion(question.id, temp);
   };
 
   return (
@@ -17,6 +22,7 @@ const QuestionCard = ({ question, selected }) => {
       className={`p-6 rounded-lg border border-hoverGrey bg-white my-4 ${
         selected ? "selected-card" : ""
       }`}
+      onClick={onClick}
     >
       {selected ? (
         <div className="">{question.title}</div>
@@ -36,15 +42,12 @@ const QuestionCard = ({ question, selected }) => {
             />
           </div>
           <div className="w-full">
-            {question.options.map((op) => (
-              <OptionCard
-                key={op.id}
-                options={question.options}
-                type={myOptionType.text}
-              />
-            ))}
+            <OptionCard
+              options={question.options}
+              type={myOptionType.text}
+              setOptions={setOptions}
+            />
           </div>
-          
         </div>
       )}
     </div>
