@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { CHECKBOX, MULTIPLE_CHOICE } from "data/OptionTypes";
 
 const IndividualOption = ({ type, option }) => {
   const [iOption, setIOption] = useState(option.text);
@@ -12,9 +13,9 @@ const IndividualOption = ({ type, option }) => {
         className="text-2xl"
         disabled
         type={
-          type === "Multiple choice"
+          type === MULTIPLE_CHOICE
             ? "radio"
-            : type === "Checkboxes"
+            : type === CHECKBOX
             ? "checkbox"
             : "text"
         }
@@ -36,7 +37,7 @@ IndividualOption.propTypes = {
 
 IndividualOption.defaultProps = {
   option: { id: undefined, text: "option" },
-  type: "Multiple choice",
+  type: MULTIPLE_CHOICE,
 };
 
 export default IndividualOption;

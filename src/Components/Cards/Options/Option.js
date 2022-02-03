@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import IndividualOption from "./IndividualOption";
+import { SHORT_ANSWER, PARAGRAPH, MULTIPLE_CHOICE } from "data/OptionTypes";
 
 const OptionCard = ({ type, options, setOptions }) => {
-  if (type === "Short answer" || type === "Paragraph") return <div></div>;
+  if (type === SHORT_ANSWER || type === PARAGRAPH)
+    return <div>Short Anser</div>;
   else
     return (
       <div>
@@ -14,7 +16,7 @@ const OptionCard = ({ type, options, setOptions }) => {
 };
 
 OptionCard.defaultProps = {
-  type: "Multiple choice",
+  type: MULTIPLE_CHOICE,
   options: [],
 };
 OptionCard.propTypes = {

@@ -1,39 +1,17 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import CustomDropdown from "components/Dropdown/CustomDropdown";
-import {
-  faAlignLeft,
-  faCalendarDay,
-  faCheckSquare,
-  faChevronDown,
-  faCloudUploadAlt,
-  faEllipsisH,
-  faGripHorizontal,
-} from "@fortawesome/free-solid-svg-icons";
-import { faDotCircle, faClock } from "@fortawesome/free-regular-svg-icons";
 import OptionCard from "./Options/Option";
+import { dropdownOptions } from "data/OptionTypes";
 
 const QuestionCard = ({ question, selected }) => {
-  const dropdownOptions = [
-    { id: 1, text: "Short answer", icon: faAlignLeft },
-    { id: 2, text: "Paragraph", icon: faAlignLeft },
-    { id: 3, text: "Multiple choice", icon: faDotCircle },
-    { id: 4, text: "Checkbox", icon: faCheckSquare },
-    { id: 5, text: "Dropdown", icon: faChevronDown },
-    { id: 6, text: "File upload", icon: faCloudUploadAlt },
-    { id: 7, text: "Linear scale", icon: faEllipsisH },
-    { id: 8, text: "Multiple choice grid", icon: faGripHorizontal },
-    { id: 9, text: "Checkbox grid", icon: faGripHorizontal },
-    { id: 10, text: "Date", icon: faCalendarDay },
-    { id: 11, text: "Time", icon: faClock },
-  ];
   const [myOptionType, setMyOptionType] = useState(question.optionType);
   const [questionTitle, setQuestionTitle] = useState(question.title);
+
   const handleTitleChange = (e) => {
     setQuestionTitle(e.target.value);
   };
 
-  console.log("Question Type : ", myOptionType);
   return (
     <div
       className={`p-6 rounded-lg border border-hoverGrey bg-white my-4 ${
@@ -75,7 +53,7 @@ const QuestionCard = ({ question, selected }) => {
 QuestionCard.defaultProps = {
   question: {
     title: "Untitles Question",
-    optionType: { id: 3, text: "Multiple choice", icon: faDotCircle },
+    optionType: dropdownOptions[2],
     options: [{ text: "Option 1" }],
   },
   selected: false,
