@@ -6,9 +6,9 @@ const OptionCard = ({ type, options, setOptions }) => {
   const addNewOption = () => {
     const temp = [...options];
     temp.push({ id: options.length, text: "Option" });
-    console.log("temp in option: ", temp);
     setOptions(temp);
   };
+
   if (type === SHORT_ANSWER || type === PARAGRAPH)
     return <div>Short Anser</div>;
   else

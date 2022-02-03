@@ -12,7 +12,7 @@ const IndividualOption = ({ type, option }) => {
   return (
     <div className="my-2 py-2 flex items-center">
       <input
-        className="text-2xl"
+        className="ml-1"
         disabled
         type={
           type === MULTIPLE_CHOICE

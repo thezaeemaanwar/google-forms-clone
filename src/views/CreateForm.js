@@ -14,24 +14,28 @@ const CreateForm = ({ theme }) => {
       options: [{ id: 0, text: "Option 1" }],
       optionType: { icon: faDotCircle, text: "Multiple choice" },
     },
+    {
+      id: "hv4nu5huy45nh",
+      title: "Question",
+      options: [{ id: 0, text: "Option 1" }],
+      optionType: { icon: faDotCircle, text: "Multiple choice" },
+    },
   ]);
   const [formTitle, setFormTitle] = useState("Untitled Form");
   const [formDescription, setFormDescription] = useState("Form Description");
-  const [selected, setSelected] = useState(1);
+  const [selected, setSelected] = useState("gyusegvybct");
 
   const setQuestion = (id, question) => {
     const temp = [...questions];
     const ind = temp.findIndex((x) => x.id === id);
     temp[ind] = question;
     setQuestions(temp);
-    console.log("Questions in create form: ", temp);
   };
 
   const selectQuestionCard = (id) => {
     setSelected(id);
   };
 
-  console.log("theme: ", theme);
   if (type === "blank")
     return (
       <div>
@@ -42,12 +46,13 @@ const CreateForm = ({ theme }) => {
               title={formTitle}
               setTitle={setFormTitle}
               description={formDescription}
+              setDescription={setFormDescription}
               color={theme.color}
             />
-            {questions.map((question, idx) => (
+            {questions.map((question) => (
               <QuestionCard
                 key={question.id}
-                selected={idx === selected + 1 ? true : false}
+                selected={selected === question.id ? true : false}
                 question={question}
                 setQuestion={setQuestion}
                 onClick={selectQuestionCard}
@@ -59,5 +64,11 @@ const CreateForm = ({ theme }) => {
     );
   else return <div></div>;
 };
+
+CreateForm.defaultProps = {
+  theme: {
+    
+  }
+}
 
 export default CreateForm;
