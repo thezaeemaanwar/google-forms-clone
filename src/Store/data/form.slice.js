@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const questionSlice = createSlice({
-  name: "questions",
+export const formSlice = createSlice({
+  name: "form",
   initialState: {
     theme: {
       color: "purple",
@@ -30,5 +30,5 @@ export const questionSlice = createSlice({
   },
 });
 
-export const { addQuestion, removeQuestion, theme } = questionSlice.actions;
-export default questionSlice.reducer;
+export const { addQuestion, removeQuestion, theme } = formSlice.actions;
+export default formSlice.reducer;
