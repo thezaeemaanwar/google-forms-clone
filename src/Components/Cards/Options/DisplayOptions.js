@@ -5,7 +5,7 @@ const DisplayOptions = ({ type, options }) => {
     return (
       <div>
         {options.map((op) => (
-          <div className="flex items-center">
+          <div key={op.id} className="flex items-center">
             <input
               className="ml-1"
               disabled

@@ -8,6 +8,11 @@ const OptionCard = ({ type, options, setOptions }) => {
     temp.push({ id: options.length, text: "Option" });
     setOptions(temp);
   };
+  const deleteOption = (opId) => {
+    const temp = [...options];
+    const ind = temp.findIndex((e) => e.id === opId);
+    setOptions(temp.splice(ind, 1));
+  };
 
   if (type === SHORT_ANSWER || type === PARAGRAPH)
     return <div>Short Anser</div>;
@@ -15,7 +20,12 @@ const OptionCard = ({ type, options, setOptions }) => {
     return (
       <div>
         {options.map((option) => (
-          <IndividualOption key={option.id} type={type} option={option} />
+          <IndividualOption
+            key={option.id}
+            type={type}
+            option={option}
+            deleteOption={deleteOption}
+          />
         ))}
         <div
           className="hover:cursor-pointer text-blue"
