@@ -61,11 +61,13 @@ export const questionTemplate = [
     title: "Question",
     options: [{ id: 0, text: "Option 1" }],
     optionType: dropdownOptions[2],
+    required: true,
   },
   {
     id: "hv4nu5huy45nh",
     title: "Question",
     options: [{ id: 0, text: "Option 1" }],
     optionType: dropdownOptions[3],
+    required: false,
   },
 ];

@@ -32,6 +32,7 @@ const IndividualOption = ({ type, option, deleteOption }) => {
           onChange={(e) => handleInputChange(e)}
         />
       </div>
+
       <FontAwesomeIcon
         onClick={() => deleteOption(option.id)}
         className="text-fontGrey hover:cursor-pointer"
@@ -44,7 +45,7 @@ const IndividualOption = ({ type, option, deleteOption }) => {
 IndividualOption.propTypes = {
   type: PropTypes.string,
   option: PropTypes.object,
-  deleteOption: PropTypes.func,
+  deleteOption: PropTypes.func.isRequired,
 };
 
 IndividualOption.defaultProps = {
