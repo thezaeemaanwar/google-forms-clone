@@ -14,6 +14,7 @@ import {
 } from "store/authentication/authentication.slice";
 import { Link } from "react-router-dom";
 import Icon from "components/Icon/Icon";
+import NavBar from "../Navigation/NavBar";
 
 const FormHeader = ({ title }) => {
   const dispatch = useDispatch();
@@ -68,7 +69,8 @@ const FormHeader = ({ title }) => {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center">resp</div>
+      <NavBar />
+      {/* <div className="flex items-center justify-center">resp</div> */}
     </header>
   );
 };
