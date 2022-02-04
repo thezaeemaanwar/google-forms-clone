@@ -9,7 +9,6 @@ import { useState } from "react";
 import { SignOut } from "services/firebase/firebase.auth";
 import {
   startLoading,
-  loggedOut,
   setUser,
 } from "store/authentication/authentication.slice";
 import { Link } from "react-router-dom";

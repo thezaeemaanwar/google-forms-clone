@@ -7,7 +7,7 @@ import { faDotCircle } from "@fortawesome/free-regular-svg-icons";
 import { dropdownOptions } from "data/OptionTypes";
 
 export const formTemplates = [
-  { name: "Blank", img: newForm, url: "/create/blank" },
+  { name: "Blank", img: newForm, url: "/create/blank/edit" },
   {
     name: "Event Registration",
     img: eventReg,

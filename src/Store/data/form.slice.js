@@ -30,5 +30,6 @@ export const formSlice = createSlice({
   },
 });
 
-export const { addQuestion, removeQuestion, theme } = formSlice.actions;
+export const { addQuestion, removeQuestion, theme, setColor, setFont } =
+  formSlice.actions;
 export default formSlice.reducer;
