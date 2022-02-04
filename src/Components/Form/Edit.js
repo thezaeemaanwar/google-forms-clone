@@ -23,7 +23,7 @@ const Edit = () => {
   };
   return (
     <div>
-      <div className="w-full mt-28 text-black flex flex-col items-center bg-purple/10 min-h-screen">
+      <div className="w-full  text-black flex flex-col items-center min-h-screen">
         <div className="w-1/2">
           <TitleCard
             title={formTitle}
