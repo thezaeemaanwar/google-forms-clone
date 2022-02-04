@@ -7,7 +7,18 @@ module.exports = {
         grey: "#F1F3F4",
         hoverGrey: "#DDE1E2",
         fontGrey: "#5f6368",
+
         purple: "#7248B9",
+        indigo: "#3F51B5",
+        red: "#DB4437",
+        lightblue: "#03A9F4",
+        cyan: "#00BCD4",
+        redorange: "#FF5722",
+        orange: "#FF9800",
+        teal: "#009688",
+        green: "#4CAF50",
+        bluegray: "#607D8B",
+        gray: "#9E9E9E",
       },
       fontFamily: {
         regular: ["Product Sans Regular"],

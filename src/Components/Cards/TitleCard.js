@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const TitleCard = ({
   title,
@@ -9,6 +10,8 @@ const TitleCard = ({
   color,
   selected,
 }) => {
+  const { theme } = useSelector((state) => state.form);
+
   const [formTitle, setFormTitle] = useState(title);
   const [formDescription, setFormDescription] = useState(description);
 
@@ -36,7 +39,7 @@ const TitleCard = ({
       <div className="p-6 ">
         <input
           type="text"
-          className={`text-3xl w-full border-b border-hoverGrey focus:border-b-2 textField focus:outline-none py-2`}
+          className={`text-3xl w-full border-b border-hoverGrey focus:border-b-2 ${theme.color}TextField focus:outline-none py-2`}
           value={formTitle}
           onChange={(e) => {
             handleTitleChange(e);
@@ -45,7 +48,7 @@ const TitleCard = ({
         />
         <input
           type="text"
-          className={`text-base w-full border-b border-hoverGrey focus:border-b-2 textField focus:outline-none py-1 pt-3`}
+          className={`text-base w-full border-b border-hoverGrey focus:border-b-2 ${theme.color}TextField focus:outline-none py-1 pt-3`}
           placeholder="Form Description"
           value={formDescription}
           onChange={(e) => {

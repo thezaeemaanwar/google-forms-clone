@@ -1,0 +1,191 @@
+.gray-bg {
+  @apply bg-gray;
+}
+.gray-border {
+  @apply border-gray;
+}
+.gray-text {
+  @apply text-gray;
+}
+.gray-bg-10 {
+  @apply bg-gray/10;
+}
+.grayTextField:focus {
+  @apply border-gray;
+}
+
+.bluegray-bg {
+  @apply bg-bluegray;
+}
+.bluegray-border {
+  @apply border-bluegray;
+}
+.bluegray-text {
+  @apply text-bluegray;
+}
+.bluegray-bg-10 {
+  @apply bg-bluegray/10;
+}
+.bluegrayTextField:focus {
+  @apply border-bluegray;
+}
+
+.green-bg {
+  @apply bg-green;
+}
+.green-border {
+  @apply border-green;
+}
+.green-text {
+  @apply text-green;
+}
+.green-bg-10 {
+  @apply bg-green/10;
+}
+.greenTextField:focus {
+  @apply border-green;
+}
+
+.teal-bg {
+  @apply bg-teal;
+}
+.teal-border {
+  @apply border-teal;
+}
+.teal-text {
+  @apply text-teal;
+}
+.teal-bg-10 {
+  @apply bg-teal/10;
+}
+.tealTextField:focus {
+  @apply border-teal;
+}
+
+.orange-bg {
+  @apply bg-orange;
+}
+.orange-border {
+  @apply border-orange;
+}
+.orange-text {
+  @apply text-orange;
+}
+.orange-bg-10 {
+  @apply bg-orange/10;
+}
+.orangeTextField:focus {
+  @apply border-orange;
+}
+
+.redorange-bg {
+  @apply bg-redorange;
+}
+.redorange-border {
+  @apply border-redorange;
+}
+.redorange-text {
+  @apply text-redorange;
+}
+.redorange-bg-10 {
+  @apply bg-redorange/10;
+}
+.redorangeTextField:focus {
+  @apply border-redorange;
+}
+
+.cyan-bg {
+  @apply bg-cyan;
+}
+.cyan-border {
+  @apply border-cyan;
+}
+.cyan-text {
+  @apply text-cyan;
+}
+.cyan-bg-10 {
+  @apply bg-cyan/10;
+}
+.cyanTextField:focus {
+  @apply border-cyan;
+}
+
+.lightblue-bg {
+  @apply bg-lightblue;
+}
+.lightblue-border {
+  @apply border-lightblue;
+}
+.lightblue-text {
+  @apply text-lightblue;
+}
+.lightblue-bg-10 {
+  @apply bg-lightblue/10;
+}
+.lightblueTextField:focus {
+  @apply border-lightblue;
+}
+
+.indigo-bg {
+  @apply bg-indigo;
+}
+.indigo-border {
+  @apply border-indigo;
+}
+.indigo-text {
+  @apply text-indigo;
+}
+.indigo-bg-10 {
+  @apply bg-indigo/10;
+}
+.indigoTextField:focus {
+  @apply border-indigo;
+}
+
+.red-bg {
+  @apply bg-red;
+}
+.red-border {
+  @apply border-red;
+}
+.red-text {
+  @apply text-red;
+}
+.red-bg-10 {
+  @apply bg-red/10;
+}
+.redTextField:focus {
+  @apply border-red;
+}
+
+.blue-bg {
+  @apply bg-blue;
+}
+.blue-border {
+  @apply border-blue;
+}
+.blue-text {
+  @apply text-blue;
+}
+.blue-bg-10 {
+  @apply bg-blue/10;
+}
+.blueTextField:focus {
+  @apply border-blue;
+}
+
+.purple-bg {
+  @apply bg-purple;
+}
+.purple-border {
+  @apply border-purple;
+}
+.purple-text {
+  @apply text-purple;
+}
+.purple-bg-10 {
+  @apply bg-purple/10;
+}
+.purpleTextField:focus {
+  @apply border-purple;
+}

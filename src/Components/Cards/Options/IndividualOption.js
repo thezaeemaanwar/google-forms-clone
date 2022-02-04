@@ -3,6 +3,7 @@ import { useState } from "react";
 import { CHECKBOX, MULTIPLE_CHOICE } from "data/OptionTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useSelector } from "react-redux";
 
 const IndividualOption = ({ type, option, deleteOption }) => {
   const [iOption, setIOption] = useState(option.text);
@@ -10,6 +11,8 @@ const IndividualOption = ({ type, option, deleteOption }) => {
   const handleInputChange = (e) => {
     setIOption(e.target.value);
   };
+
+  const { theme } = useSelector((state) => state.form);
 
   return (
     <div className="my-2 py-2 flex items-center justify-between">
@@ -26,7 +29,7 @@ const IndividualOption = ({ type, option, deleteOption }) => {
           }
         />
         <input
-          className="w-4/5 p-1 pl-0 ml-3 border-b focus:outline-none textField focus:border-b-2"
+          className={`w-4/5 p-1 pl-0 ml-3 border-b focus:outline-none ${theme.color}TextField focus:border-b-2`}
           placeholder="Option"
           value={iOption}
           onChange={(e) => handleInputChange(e)}

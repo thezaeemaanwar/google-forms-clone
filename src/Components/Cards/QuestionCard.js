@@ -62,7 +62,7 @@ const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
           <div className="flex justify-between w-full">
             <input
               autoFocus
-              className="w-2/3 p-3 bg-grey border-fontGrey border-b focus:outline-none textField focus:border-b-2"
+              className={`w-2/3 p-3 bg-grey border-fontGrey border-b focus:outline-none ${theme.color}TextField focus:border-b-2`}
               placeholder="Question"
               value={questionTitle}
               onChange={(e) => handleTitleChange(e)}
