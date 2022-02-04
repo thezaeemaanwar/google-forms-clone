@@ -14,7 +14,8 @@ const PublicRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="create" element={<CreateForm theme={theme} />}>
-        <Route path=":type" element={<Edit theme={theme} />}>
+        <Route path=":type">
+          <Route index path="edit" element={<Edit theme={theme} />} />
           <Route path="responses" element={<Responses />} />
           <Route path="settings" element={<Settings />} />
         </Route>
