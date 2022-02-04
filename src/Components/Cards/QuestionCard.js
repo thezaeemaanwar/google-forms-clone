@@ -9,6 +9,7 @@ import { faClone, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import Slider from "components/Slider/Slider";
 import { useSelector } from "react-redux";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import Icon from "components/Icon/Icon";
 
 const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
   const { theme } = useSelector((state) => state.form);
@@ -44,7 +45,7 @@ const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
           <div className="flex w-full ">
             <div className="self-start">{question.title}</div>
             {question.required ? (
-              <div className="text-red-700">*</div>
+              <div className="text-red-700 mx-2">*</div>
             ) : (
               <div></div>
             )}
@@ -79,12 +80,14 @@ const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
               setOptions={setOptions}
             />
           </div>
-          <div className="p-3 w-full border-t-2 border-hoverGrey my-3 mt-5 flex justify-end text-fontGrey text-xl">
-            <FontAwesomeIcon className="mr-4" icon={faClone} />
-            <FontAwesomeIcon className="mr-4" icon={faTrashAlt} />
-            <div className=" mr-4 h-6 border-r-2 border-hoverGrey"></div>
+          <div className="p-3 w-full border-t-2 border-hoverGrey mt-5 flex items-center justify-end text-fontGrey text-xl">
+            <Icon icon={faClone} label="Duplicate" />
+            <Icon icon={faTrashAlt} label="Delete Question" />
+            <div className=" mr-4 h-8 self-center border-r-2 border-hoverGrey"></div>
             <div className="mr-4 flex items-center justify-center">
-              <div className="mr-4 text-sm text-black self-start">Required</div>
+              <div className="mr-4 text-sm text-black self-center">
+                Required
+              </div>
               <Slider
                 className="mr-4 self-center"
                 theme={theme}
@@ -92,7 +95,7 @@ const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
                 toggleRequired={toggleRequired}
               />
             </div>
-            <FontAwesomeIcon icon={faEllipsisV} />
+            <Icon icon={faEllipsisV} label="More" />
           </div>
         </div>
       )}

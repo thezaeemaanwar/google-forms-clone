@@ -9,6 +9,7 @@ import {
   startLoading,
   setUser,
 } from "store/authentication/authentication.slice";
+import Icon from "components/Icon/Icon";
 
 const HomeHeader = () => {
   const { user } = useSelector((state) => state.authentication);
@@ -28,9 +29,7 @@ const HomeHeader = () => {
   return (
     <header className="fixed top-0 p-2 w-full bg-white h-16 flex flex-row justify-between items-center">
       <div className="flex items-center">
-        <div className="w-12 p-3 h-12 hover:bg-hoverGrey hover:cursor-pointer rounded-full flex justify-center items-center">
-          <FontAwesomeIcon className="text-lg" icon={faBars} />
-        </div>
+        <Icon icon={faBars} label="Main menu" />
         <img className="w-7 mx-3 my-auto" src={Logo} alt="logo" />
         <div className="text-2xl p1">Forms</div>
       </div>

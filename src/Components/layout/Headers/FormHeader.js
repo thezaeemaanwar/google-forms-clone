@@ -12,6 +12,8 @@ import {
   loggedOut,
   setUser,
 } from "store/authentication/authentication.slice";
+import { Link } from "react-router-dom";
+import Icon from "components/Icon/Icon";
 
 const FormHeader = ({ title }) => {
   const dispatch = useDispatch();
@@ -30,26 +32,19 @@ const FormHeader = ({ title }) => {
     <header className="fixed top-0 p-2 w-full bg-white h-28 flex flex-col justify-between">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
-          <img className="w-7 mx-3 my-auto" src={logo} alt="logo" />
-          <div>{title}</div>
+          <Link to="/">
+            <img className="w-7 mx-3 my-auto" src={logo} alt="logo" />
+          </Link>
+          <div className="text-xl">{title}</div>
 
-          <FontAwesomeIcon
-            className="hover:cursor-pointer"
-            title="Move to folder"
-            icon={faFolder}
-          />
-
-          <FontAwesomeIcon
-            className="hover:cursor-pointer"
-            title="Star"
-            icon={faStar}
-          />
+          <Icon icon={faFolder} label="Move to folder" />
+          <Icon icon={faStar} label="Star" />
         </div>
         <div className="flex items-center">
-          <FontAwesomeIcon icon={faPalette} />
-          <FontAwesomeIcon icon={faEye} />
-          <FontAwesomeIcon icon={faUndo} />
-          <FontAwesomeIcon icon={faRedo} />
+          <Icon icon={faPalette} label="Theme" />
+          <Icon icon={faEye} label="Preview" />
+          <Icon icon={faUndo} label="Undo" />
+          <Icon icon={faRedo} label="Redo" />
           <FilledButton
             color="text-white"
             background="bg-purple py-2"
@@ -77,4 +72,9 @@ const FormHeader = ({ title }) => {
     </header>
   );
 };
+
+FormHeader.defaultProps = {
+  title: "Untitled Form",
+};
+
 export default FormHeader;

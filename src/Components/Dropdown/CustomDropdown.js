@@ -14,7 +14,7 @@ const CustomDropdown = ({ options, setSelected, defaultSelected }) => {
   const toggleDropdownOptions = () => {
     setOpenDropdown(!openDropdown);
   };
-  const handleSelectOption = (op, idx) => {
+  const handleSelectOption = (op) => {
     setSelectedOption(op);
     setSelected(op);
     toggleDropdownOptions();
@@ -39,11 +39,12 @@ const CustomDropdown = ({ options, setSelected, defaultSelected }) => {
       </div>
       {openDropdown ? (
         <ul className="py-2 rounded-sm drop-shadow fixed top-32 bg-white w-56">
-          {options.map((op, idx) => (
+          {options.map((op) => (
             <li
+              key={op.id}
               className="p-3 hover:bg-hoverGrey hover:cursor-pointer flex items-center"
               onClick={() => {
-                handleSelectOption(op, idx);
+                handleSelectOption(op);
               }}
             >
               {op.icon ? (
