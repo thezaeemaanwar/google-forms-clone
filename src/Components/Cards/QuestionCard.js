@@ -7,7 +7,10 @@ import DisplayOptions from "components/Cards/Options/DisplayOptions";
 import { faClone, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import Slider from "components/Slider/Slider";
 import { useDispatch, useSelector } from "react-redux";
-import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisV,
+  faGripHorizontal,
+} from "@fortawesome/free-solid-svg-icons";
 import Icon from "components/Icon/Icon";
 import {
   setQuestion,
@@ -15,6 +18,7 @@ import {
   duplicateQuestion,
 } from "store/data/form.slice";
 import createQuestion from "components/Helpers/CreateQuestion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const QuestionCard = ({ question, selected, onClick }) => {
   const { theme } = useSelector((state) => state.form);
@@ -56,13 +60,19 @@ const QuestionCard = ({ question, selected, onClick }) => {
 
   return (
     <div
-      className={`p-6 rounded-lg border border-hoverGrey bg-white my-4 ${
+      className={`p-6 pt-2 rounded-lg border border-hoverGrey bg-white my-4 ${
         selected ? "selected-card shadow-md" : ""
       }`}
       onClick={() => {
         onClick(question.id);
       }}
     >
+      <div className="w-full flex items-center justify-center opacity-0 hover:opacity-60 transition-opacity ease-in">
+        <FontAwesomeIcon
+          className="self-center text-fontGrey "
+          icon={faGripHorizontal}
+        />
+      </div>
       {!selected ? (
         <div>
           <div className="flex w-full ">

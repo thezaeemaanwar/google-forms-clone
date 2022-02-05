@@ -18,30 +18,31 @@ export const formSlice = createSlice({
     addQuestion: (state, action) => {
       const temp = [...state.questions];
       const question = action.payload.question;
-      console.log(question);
       temp.push(question);
-      console.log(temp);
       state.questions = temp;
     },
     setQuestion: (state, action) => {
       const temp = [...state.questions];
       const ind = temp.findIndex((x) => x.id === action.payload.id);
       temp[ind] = action.payload.question;
-      console.log(temp);
       state.questions = temp;
     },
     removeQuestion: (state, action) => {
-      console.log("rmeove questio", action.payload);
       const temp = state.questions;
       const index = temp.findIndex((e) => e.id === action.payload.id);
       temp.splice(index, 1);
-      console.log(temp);
+      state.questions = temp;
+    },
+    setDraggedQuestion: (state, action) => {
+      const result = action.payload.result;
+      const temp = [...state.questions];
+      const [reorderedItem] = temp.splice(result.source.index, 1);
+      temp.splice(result.destination.index, 0, reorderedItem);
       state.questions = temp;
     },
     duplicateQuestion: (state, action) => {
       const temp = state.questions;
       const index = temp.findIndex((e) => e.id === action.payload.id);
-      console.log(index);
       const question = { ...action.payload.question };
       question.id = generateKey(index);
       temp.splice(index, 0, question);
@@ -76,5 +77,6 @@ export const {
   setTitle,
   setDescription,
   duplicateQuestion,
+  setDraggedQuestion,
 } = formSlice.actions;
 export default formSlice.reducer;

@@ -2,10 +2,14 @@ import TitleCard from "components/Cards/TitleCard";
 import QuestionCard from "components/Cards/QuestionCard";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { questionTemplate } from "data/Templates";
 import ToolBar from "components/Toolbar/ToolBar";
 import createQuestion from "components/Helpers/CreateQuestion";
-import { addQuestion, setQuestion } from "store/data/form.slice";
+import {
+  addQuestion,
+  setDraggedQuestion,
+  setQuestion,
+} from "store/data/form.slice";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const Edit = () => {
   const { theme, questions } = useSelector((state) => state.form);
@@ -15,7 +19,7 @@ const Edit = () => {
   const dispatch = useDispatch();
 
   const setFormQuestion = (id, question) => {
-    setQuestion({ id, question });
+    dispatch(setQuestion({ id, question }));
   };
 
   const addNewQuestion = () => {
@@ -26,6 +30,12 @@ const Edit = () => {
   const selectQuestionCard = (id) => {
     setSelected(id);
   };
+
+  const handleOnDragEnd = (result) => {
+    if (!result.destination) return;
+    dispatch(setDraggedQuestion({ result }));
+  };
+
   return (
     <div>
       <div className="w-full  text-black flex flex-col items-center min-h-screen">
@@ -37,15 +47,43 @@ const Edit = () => {
             setDescription={setFormDescription}
             color={theme.color}
           />
-          {questions.map((question) => (
-            <QuestionCard
-              key={question.id}
-              selected={selected === question.id ? true : false}
-              question={question}
-              setQuestion={setFormQuestion}
-              onClick={selectQuestionCard}
-            />
-          ))}
+
+          <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="questions">
+              {(provided) => (
+                <div
+                  className="questions"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {questions.map((question, idx) => (
+                    <Draggable
+                      key={question.id}
+                      draggableId={question.id}
+                      index={idx}
+                    >
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <QuestionCard
+                            key={question.id}
+                            selected={selected === question.id ? true : false}
+                            question={question}
+                            setQuestion={setFormQuestion}
+                            onClick={selectQuestionCard}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </div>
         <ToolBar addQuestion={addNewQuestion} />
       </div>
