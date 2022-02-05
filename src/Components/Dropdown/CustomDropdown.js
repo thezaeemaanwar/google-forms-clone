@@ -47,7 +47,7 @@ const CustomDropdown = ({ options, setSelected, defaultSelected, type }) => {
         )}
       </div>
       {openDropdown ? (
-        <ul className="py-2 rounded-sm drop-shadow fixed top-32 bg-white w-56">
+        <ul className="py-2 rounded-sm drop-shadow fixed bottom-16 z-10 bg-white w-56">
           {options.map((op) => (
             <li
               key={op.id}
