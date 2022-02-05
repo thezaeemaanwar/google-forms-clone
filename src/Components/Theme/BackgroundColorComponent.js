@@ -1,8 +1,7 @@
 import { opacities } from "data/Theme/ThemeOptions";
-import ColorComponent from "./ColorComponent";
+import ColorComponent from "components/Theme/ColorComponent";
 
 const BackgroundColorComponent = ({ color, opacity, setOpacity }) => {
-  console.log(opacity);
   return (
     <div className="grid grid-cols-6 w-full items-center">
       {opacities.map((op) => (

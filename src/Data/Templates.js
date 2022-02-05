@@ -3,8 +3,17 @@ import newForm from "assets/newForm.png";
 import partyInv from "assets/partyInv.png";
 import rsvp from "assets/rsvp.png";
 import contactInfo from "assets/contactInfo.png";
-import { faDotCircle } from "@fortawesome/free-regular-svg-icons";
+import {
+  faImage,
+  faPlayCircle,
+  faPlusSquare,
+} from "@fortawesome/free-regular-svg-icons";
 import { dropdownOptions } from "data/OptionTypes";
+import {
+  faFileImport,
+  faPlusCircle,
+  faTextHeight,
+} from "@fortawesome/free-solid-svg-icons";
 
 export const formTemplates = [
   { name: "Blank", img: newForm, url: "/create/blank/edit" },
@@ -70,4 +79,13 @@ export const questionTemplate = [
     optionType: dropdownOptions[3],
     required: false,
   },
+];
+
+export const toolBarActions = [
+  { id: 1, icon: faPlusCircle, label: "Add Question" },
+  { id: 2, icon: faFileImport, label: "Import Question" },
+  { id: 3, icon: faTextHeight, label: "Add Title and Description" },
+  { id: 4, icon: faImage, label: "Add Image" },
+  { id: 5, icon: faPlayCircle, label: "Add Video" },
+  { id: 6, icon: faPlusSquare, label: "Add Section" },
 ];

@@ -4,37 +4,60 @@ import CustomDropdown from "components/Dropdown/CustomDropdown";
 import OptionCard from "components/Cards/Options/Option";
 import { dropdownOptions } from "data/OptionTypes";
 import DisplayOptions from "components/Cards/Options/DisplayOptions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClone, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
 import Slider from "components/Slider/Slider";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
 import Icon from "components/Icon/Icon";
+import {
+  setQuestion,
+  removeQuestion,
+  duplicateQuestion,
+} from "store/data/form.slice";
+import createQuestion from "components/Helpers/CreateQuestion";
 
-const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
+const QuestionCard = ({ question, selected, onClick }) => {
   const { theme } = useSelector((state) => state.form);
+  const dispatch = useDispatch();
   const [myOptionType, setMyOptionType] = useState(question.optionType);
   const [questionTitle, setQuestionTitle] = useState(question.title);
 
   const handleTitleChange = (e) => {
     setQuestionTitle(e.target.value);
   };
+
   const setOptions = (options) => {
     const temp = { ...question };
     temp.options = options;
-    setQuestion(question.id, temp);
+    dispatch(setQuestion({ id: question.id, question: temp }));
   };
 
   const toggleRequired = (e) => {
     const temp = { ...question };
     temp.required = !question.required;
-    setQuestion(question.id, temp);
+    dispatch(setQuestion({ id: question.id, question: temp }));
+  };
+
+  const deleteQuestion = (id) => {
+    console.log("in delete question");
+    dispatch(removeQuestion({ id }));
+  };
+
+  const handleDuplicateQuestion = (id) => {
+    dispatch(duplicateQuestion({ id: question.id, question }));
+  };
+
+  const saveTitle = () => {
+    console.log("In set title");
+    const ques = { ...question };
+    ques.title = questionTitle;
+    dispatch(setQuestion({ id: ques.id, question: ques }));
   };
 
   return (
     <div
       className={`p-6 rounded-lg border border-hoverGrey bg-white my-4 ${
-        selected ? "selected-card" : ""
+        selected ? "selected-card shadow-md" : ""
       }`}
       onClick={() => {
         onClick(question.id);
@@ -47,7 +70,7 @@ const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
               {question.title}
             </div>
             {question.required ? (
-              <div className="text-red-700 mx-2">*</div>
+              <div className="text-red mx-2">*</div>
             ) : (
               <div></div>
             )}
@@ -68,6 +91,7 @@ const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
               placeholder="Question"
               value={questionTitle}
               onChange={(e) => handleTitleChange(e)}
+              onBlur={saveTitle}
             />
             <CustomDropdown
               options={dropdownOptions}
@@ -83,8 +107,16 @@ const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
             />
           </div>
           <div className="p-3 w-full border-t-2 border-hoverGrey mt-5 flex items-center justify-end text-fontGrey text-xl">
-            <Icon icon={faClone} label="Duplicate" />
-            <Icon icon={faTrashAlt} label="Delete Question" />
+            <Icon
+              icon={faClone}
+              label="Duplicate"
+              onClick={handleDuplicateQuestion}
+            />
+            <Icon
+              onClick={() => deleteQuestion(question.id)}
+              icon={faTrashAlt}
+              label="Delete Question"
+            />
             <div className=" mr-4 h-8 self-center border-r-2 border-hoverGrey"></div>
             <div className="mr-4 flex items-center justify-center">
               <div className="mr-4 text-sm text-black self-center">
@@ -101,22 +133,18 @@ const QuestionCard = ({ question, selected, onClick, setQuestion }) => {
           </div>
         </div>
       )}
-      {/* QUESTION FOOTER */}
     </div>
   );
 };
 
 QuestionCard.defaultProps = {
-  question: {
-    title: "Untitles Question",
-    optionType: dropdownOptions[2],
-    options: [{ text: "Option 1" }],
-  },
+  question: createQuestion(0),
   selected: false,
 };
 QuestionCard.propTypes = {
   question: PropTypes.object,
   selected: PropTypes.bool,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default QuestionCard;

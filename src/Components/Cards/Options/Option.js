@@ -1,13 +1,13 @@
 import PropTypes from "prop-types";
 import IndividualOption from "components/Cards/Options/IndividualOption";
 import { SHORT_ANSWER, PARAGRAPH, MULTIPLE_CHOICE } from "data/OptionTypes";
-import generateKey from "components/Helpers/GenerateKey";
+import createOption from "components/Helpers/CreateOption";
 
 const OptionCard = ({ type, options, setOptions }) => {
   const addNewOption = () => {
-    const temp = [...options];
-    temp.push({ id: generateKey("option" + options.length), text: "Option" });
-    setOptions(temp);
+    const ops = [...options];
+    ops.push(createOption(options.length));
+    setOptions(ops);
   };
   const deleteOption = (opId) => {
     const temp = [...options];

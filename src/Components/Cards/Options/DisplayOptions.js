@@ -11,7 +11,7 @@ const DisplayOptions = ({ type, options }) => {
               disabled
               type={type === MULTIPLE_CHOICE ? "radio" : "checkbox"}
             />
-            <div className="p-1  ml-3 border-b focus:outline-none textField focus:border-b-2">
+            <div className="p-1  ml-3  focus:outline-none textField focus:border-b-2">
               {op.text}
             </div>
           </div>

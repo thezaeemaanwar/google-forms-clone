@@ -28,7 +28,6 @@ const TitleCard = ({
   const saveDescription = (e) => {
     setDescription(formDescription);
   };
-  console.log(theme);
 
   return (
     <div

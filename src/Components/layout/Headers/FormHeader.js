@@ -13,7 +13,7 @@ import {
 } from "store/authentication/authentication.slice";
 import { Link } from "react-router-dom";
 import Icon from "components/Icon/Icon";
-import NavBar from "../Navigation/NavBar";
+import NavBar from "components/layout/Navigation/NavBar";
 
 const FormHeader = ({ title, toggleThemeEditor }) => {
   const dispatch = useDispatch();
