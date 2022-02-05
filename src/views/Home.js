@@ -11,7 +11,7 @@ import {
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
 import { formTemplates, ownershipFilters, formSamples } from "data/Templates";
-import FormTile from "components/FormTile/FormTile";
+import FormTile from "components/Form/FormTile/FormTile";
 import Dropdown from "components/Dropdown/Dropdown";
 import sortIcon from "assets/sort.png";
 

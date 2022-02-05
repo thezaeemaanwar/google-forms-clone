@@ -29,7 +29,7 @@ const FormHeader = ({ title, toggleThemeEditor }) => {
   };
   const { user } = useSelector((state) => state.authentication);
   return (
-    <header className="fixed top-0 p-2 w-full bg-white h-28 flex flex-col justify-between">
+    <header className="fixed top-0 p-2 w-full bg-white h-28 flex flex-col justify-between shadow z-10">
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           <Link to="/">

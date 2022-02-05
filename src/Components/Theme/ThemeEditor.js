@@ -32,7 +32,7 @@ const ThemeEditor = ({ toggleThemeEditor }) => {
         </div>
         <Icon icon={faTimes} onClick={toggleThemeEditor} />
       </div>
-      <div className="flex flex-col items-start p-6 border-b-2">
+      <div className="flex flex-col items-start p-6 shadow">
         <div className="text-xs py-2">HEADER</div>
         <label
           htmlFor="upload-header"
@@ -51,7 +51,7 @@ const ThemeEditor = ({ toggleThemeEditor }) => {
           />
         </label>
       </div>
-      <div className="flex flex-col items-start p-6 border-b-2">
+      <div className="flex flex-col items-start p-6 shadow">
         <div className="text-xs py-2">THEME COLOR</div>
         <div className="grid grid-rows-2 grid-cols-6 gap-2 justify-center items-center">
           {colors.map((color) => (
@@ -64,7 +64,7 @@ const ThemeEditor = ({ toggleThemeEditor }) => {
           ))}
         </div>
       </div>
-      <div className="flex flex-col items-start p-6 border-b-2">
+      <div className="flex flex-col items-start p-6 shadow">
         <div className="text-xs py-2">BACKGROUND COLOR</div>
         <BackgroundColorComponent
           color={theme.color}
