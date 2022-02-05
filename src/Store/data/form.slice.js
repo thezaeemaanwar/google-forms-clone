@@ -6,6 +6,7 @@ export const formSlice = createSlice({
     theme: {
       color: "purple",
       font: "",
+      backgroundOpacity: 10,
     },
     questions: [],
     question_number: 0,
@@ -27,9 +28,19 @@ export const formSlice = createSlice({
     setFont: (state, action) => {
       state.theme.font = action.payload.font;
     },
+    setBackgroundOpacity: (state, action) => {
+      console.log("Set bg opacity: ", action.payload.opacity);
+      state.theme.backgroundOpacity = action.payload.opacity;
+    },
   },
 });
 
-export const { addQuestion, removeQuestion, theme, setColor, setFont } =
-  formSlice.actions;
+export const {
+  addQuestion,
+  removeQuestion,
+  theme,
+  setColor,
+  setFont,
+  setBackgroundOpacity,
+} = formSlice.actions;
 export default formSlice.reducer;

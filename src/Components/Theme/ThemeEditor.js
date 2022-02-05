@@ -3,13 +3,24 @@ import { faPalette, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Icon from "components/Icon/Icon";
 import { useSelector } from "react-redux";
-import { colors } from "data/Theme/Colors";
+import { colors } from "data/Theme/ThemeOptions";
 import ColorComponent from "./ColorComponent";
+import BackgroundColorComponent from "./BackgroundColorComponent";
+import { useDispatch } from "react-redux";
+import { setBackgroundOpacity, setColor } from "store/data/form.slice";
 
 const ThemeEditor = () => {
   const { theme } = useSelector((state) => state.form);
+
+  const dispatch = useDispatch();
+  const selectColor = (color) => {
+    dispatch(setColor({ color }));
+  };
+  const setBGOpacity = (opacity) => {
+    dispatch(setBackgroundOpacity({ opacity }));
+  };
   return (
-    <div className="fixed right-0 top-28 bg-white h-screen w-80 flex flex-col">
+    <div className="fixed right-0 top-28 bg-white h-screen w-80 flex flex-col shadow-xl">
       <div className="flex items-center justify-between py-2 pl-4 shadow-md">
         <div className="flex items-center">
           <FontAwesomeIcon
@@ -47,9 +58,18 @@ const ThemeEditor = () => {
               key={color}
               selected={theme.color === color}
               color={color}
+              selectColor={() => selectColor(color)}
             />
           ))}
         </div>
+      </div>
+      <div className="flex flex-col items-start p-6 border-b-2">
+        <div className="text-xs py-2">BACKGROUND COLOR</div>
+        <BackgroundColorComponent
+          color={theme.color}
+          opacity={theme.backgroundOpacity}
+          setOpacity={setBGOpacity}
+        />
       </div>
     </div>
   );

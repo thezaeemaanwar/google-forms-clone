@@ -25,7 +25,7 @@ const Home = () => {
     setGridView(!gridView);
   };
   return (
-    <div className="bg-red">
+    <div className="">
       <HomeHeader />
       <div className="mt-16">
         <div className="bg-grey h-64 w-full pt-4 flex flex-col items-center ">

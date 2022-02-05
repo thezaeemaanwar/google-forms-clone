@@ -7,11 +7,20 @@
 .gray-text {
   @apply text-gray;
 }
-.gray-bg-10 {
-  @apply bg-gray/10;
-}
 .grayTextField:focus {
   @apply border-gray;
+}
+.gray10-bg {
+  @apply bg-gray/10;
+}
+.gray20-bg {
+  @apply bg-gray/20;
+}
+.gray30-bg {
+  @apply bg-gray/30;
+}
+.grey0-bg {
+  background-color: #f6f6f6;
 }
 
 .bluegray-bg {
@@ -23,11 +32,20 @@
 .bluegray-text {
   @apply text-bluegray;
 }
-.bluegray-bg-10 {
-  @apply bg-bluegray/10;
-}
 .bluegrayTextField:focus {
   @apply border-bluegray;
+}
+.bluegray10-bg {
+  @apply bg-bluegray/10;
+}
+.bluegray20-bg {
+  @apply bg-bluegray/20;
+}
+.bluegray30-bg {
+  @apply bg-bluegray/30;
+}
+.bluegrey0-bg {
+  background-color: #f6f6f6;
 }
 
 .green-bg {
@@ -39,11 +57,20 @@
 .green-text {
   @apply text-green;
 }
-.green-bg-10 {
-  @apply bg-green/10;
-}
 .greenTextField:focus {
   @apply border-green;
+}
+.green10-bg {
+  @apply bg-green/10;
+}
+.green20-bg {
+  @apply bg-green/20;
+}
+.green30-bg {
+  @apply bg-green/30;
+}
+.green0-bg {
+  background-color: #f6f6f6;
 }
 
 .teal-bg {
@@ -55,11 +82,20 @@
 .teal-text {
   @apply text-teal;
 }
-.teal-bg-10 {
-  @apply bg-teal/10;
-}
 .tealTextField:focus {
   @apply border-teal;
+}
+.teal10-bg {
+  @apply bg-teal/10;
+}
+.teal20-bg {
+  @apply bg-teal/20;
+}
+.teal30-bg {
+  @apply bg-teal/30;
+}
+.teal0-bg {
+  background-color: #f6f6f6;
 }
 
 .orange-bg {
@@ -71,11 +107,20 @@
 .orange-text {
   @apply text-orange;
 }
-.orange-bg-10 {
-  @apply bg-orange/10;
-}
 .orangeTextField:focus {
   @apply border-orange;
+}
+.orange10-bg {
+  @apply bg-orange/10;
+}
+.orange20-bg {
+  @apply bg-orange/20;
+}
+.orange30-bg {
+  @apply bg-orange/30;
+}
+.orange0-bg {
+  background-color: #f6f6f6;
 }
 
 .redorange-bg {
@@ -87,11 +132,20 @@
 .redorange-text {
   @apply text-redorange;
 }
-.redorange-bg-10 {
-  @apply bg-redorange/10;
-}
 .redorangeTextField:focus {
   @apply border-redorange;
+}
+.redorange10-bg {
+  @apply bg-redorange/10;
+}
+.redorange20-bg {
+  @apply bg-redorange/20;
+}
+.redorange30-bg {
+  @apply bg-redorange/30;
+}
+.redorange0-bg {
+  background-color: #f6f6f6;
 }
 
 .cyan-bg {
@@ -103,11 +157,20 @@
 .cyan-text {
   @apply text-cyan;
 }
-.cyan-bg-10 {
-  @apply bg-cyan/10;
-}
 .cyanTextField:focus {
   @apply border-cyan;
+}
+.cyan10-bg {
+  @apply bg-cyan/10;
+}
+.cyan20-bg {
+  @apply bg-cyan/20;
+}
+.cyan30-bg {
+  @apply bg-cyan/30;
+}
+.cyan0-bg {
+  background-color: #f6f6f6;
 }
 
 .lightblue-bg {
@@ -119,11 +182,20 @@
 .lightblue-text {
   @apply text-lightblue;
 }
-.lightblue-bg-10 {
-  @apply bg-lightblue/10;
-}
 .lightblueTextField:focus {
   @apply border-lightblue;
+}
+.lightblue10-bg {
+  @apply bg-lightblue/10;
+}
+.lightblue20-bg {
+  @apply bg-lightblue/20;
+}
+.lightblue30-bg {
+  @apply bg-lightblue/30;
+}
+.lightblue0-bg {
+  background-color: #f6f6f6;
 }
 
 .indigo-bg {
@@ -135,11 +207,20 @@
 .indigo-text {
   @apply text-indigo;
 }
-.indigo-bg-10 {
-  @apply bg-indigo/10;
-}
 .indigoTextField:focus {
   @apply border-indigo;
+}
+.indigo10-bg {
+  @apply bg-indigo/10;
+}
+.indigo20-bg {
+  @apply bg-indigo/20;
+}
+.indigo30-bg {
+  @apply bg-indigo/30;
+}
+.indigo0-bg {
+  background-color: #f6f6f6;
 }
 
 .red-bg {
@@ -151,11 +232,20 @@
 .red-text {
   @apply text-red;
 }
-.red-bg-10 {
-  @apply bg-red/10;
-}
 .redTextField:focus {
   @apply border-red;
+}
+.red10-bg {
+  @apply bg-red/10;
+}
+.red20-bg {
+  @apply bg-red/20;
+}
+.red30-bg {
+  @apply bg-red/30;
+}
+.red0-bg {
+  background-color: #f6f6f6;
 }
 
 .blue-bg {
@@ -167,11 +257,20 @@
 .blue-text {
   @apply text-blue;
 }
-.blue-bg-10 {
-  @apply bg-blue/10;
-}
 .blueTextField:focus {
   @apply border-blue;
+}
+.blue10-bg {
+  @apply bg-blue/10;
+}
+.blue20-bg {
+  @apply bg-blue/20;
+}
+.blue30-bg {
+  @apply bg-blue/30;
+}
+.blue0-bg {
+  background-color: #f6f6f6;
 }
 
 .purple-bg {
@@ -183,9 +282,18 @@
 .purple-text {
   @apply text-purple;
 }
-.purple-bg-10 {
-  @apply bg-purple/10;
-}
 .purpleTextField:focus {
   @apply border-purple;
+}
+.purple10-bg {
+  @apply bg-purple/10;
+}
+.purple20-bg {
+  @apply bg-purple/20;
+}
+.purple30-bg {
+  @apply bg-purple/30;
+}
+.purple0-bg {
+  background-color: #f6f6f6;
 }

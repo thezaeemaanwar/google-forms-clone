@@ -10,7 +10,11 @@ const CreateForm = () => {
     return (
       <div>
         <FormHeader />
-        <div className={`w-full min-h-screen ${theme.color}-bg-10 mt-28`}>
+        <div
+          className={`w-full min-h-screen ${
+            theme.color + theme.backgroundOpacity
+          }-bg mt-28`}
+        >
           <Outlet />
         </div>
         <ThemeEditor />

@@ -12,3 +12,5 @@ export const colors = [
   "bluegray",
   "gray",
 ];
+
+export const opacities = [10, 20, 30, 0];
