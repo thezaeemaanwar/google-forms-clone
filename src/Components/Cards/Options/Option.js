@@ -1,17 +1,19 @@
 import PropTypes from "prop-types";
 import IndividualOption from "components/Cards/Options/IndividualOption";
 import { SHORT_ANSWER, PARAGRAPH, MULTIPLE_CHOICE } from "data/OptionTypes";
+import generateKey from "components/Helpers/GenerateKey";
 
 const OptionCard = ({ type, options, setOptions }) => {
   const addNewOption = () => {
     const temp = [...options];
-    temp.push({ id: options.length, text: "Option" });
+    temp.push({ id: generateKey("option" + options.length), text: "Option" });
     setOptions(temp);
   };
   const deleteOption = (opId) => {
     const temp = [...options];
     const ind = temp.findIndex((e) => e.id === opId);
-    setOptions(temp.splice(ind, 1));
+    temp.splice(ind, 1);
+    setOptions(temp);
   };
 
   if (type === SHORT_ANSWER || type === PARAGRAPH)
