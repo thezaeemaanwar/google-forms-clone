@@ -3,12 +3,13 @@ import { faPalette, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Icon from "components/Icon/Icon";
 import { useSelector } from "react-redux";
-import { colors } from "data/Theme/ThemeOptions";
+import { colors, fonts } from "data/Theme/ThemeOptions";
 import ColorComponent from "./ColorComponent";
 import BackgroundColorComponent from "./BackgroundColorComponent";
 import { useDispatch } from "react-redux";
-import { setBackgroundOpacity, setColor } from "store/data/form.slice";
+import { setBackgroundOpacity, setColor, setFont } from "store/data/form.slice";
 import PropTypes from "prop-types";
+import CustomDropdown from "components/Dropdown/CustomDropdown";
 
 const ThemeEditor = ({ toggleThemeEditor }) => {
   const { theme } = useSelector((state) => state.form);
@@ -19,6 +20,9 @@ const ThemeEditor = ({ toggleThemeEditor }) => {
   };
   const setBGOpacity = (opacity) => {
     dispatch(setBackgroundOpacity({ opacity }));
+  };
+  const setFormFont = (font) => {
+    dispatch(setFont({ font: font.text }));
   };
   return (
     <div className="fixed right-0 top-28 bg-white h-screen w-80 flex flex-col shadow-xl">
@@ -71,6 +75,17 @@ const ThemeEditor = ({ toggleThemeEditor }) => {
           opacity={theme.backgroundOpacity}
           setOpacity={setBGOpacity}
         />
+      </div>
+      <div className="flex flex-col items-start p-6 shadow">
+        <div className="text-xs py-2">FONT STYLE</div>
+        <div>
+          <CustomDropdown
+            options={fonts}
+            setSelected={setFormFont}
+            defaultSelected={{ text: theme.font }}
+            type="font"
+          />
+        </div>
       </div>
     </div>
   );

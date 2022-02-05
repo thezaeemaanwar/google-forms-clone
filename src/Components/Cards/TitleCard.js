@@ -28,6 +28,7 @@ const TitleCard = ({
   const saveDescription = (e) => {
     setDescription(formDescription);
   };
+  console.log(theme);
 
   return (
     <div
@@ -39,7 +40,7 @@ const TitleCard = ({
       <div className="p-6 ">
         <input
           type="text"
-          className={`text-3xl w-full border-b border-hoverGrey focus:border-b-2 ${theme.color}TextField focus:outline-none py-2`}
+          className={`text-3xl w-full border-b border-hoverGrey focus:border-b-2 ${theme.color}TextField ${theme.font}-text focus:outline-none py-2`}
           value={formTitle}
           onChange={(e) => {
             handleTitleChange(e);

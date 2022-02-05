@@ -5,7 +5,7 @@ export const formSlice = createSlice({
   initialState: {
     theme: {
       color: "purple",
-      font: "",
+      font: "basic",
       backgroundOpacity: 10,
     },
     questions: [],

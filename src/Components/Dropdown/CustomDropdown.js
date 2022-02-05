@@ -5,8 +5,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
-const CustomDropdown = ({ options, setSelected, defaultSelected }) => {
+const CustomDropdown = ({ options, setSelected, defaultSelected, type }) => {
   const [selectedOption, setSelectedOption] = useState(
     defaultSelected ? defaultSelected : options[0]
   );
@@ -27,9 +28,17 @@ const CustomDropdown = ({ options, setSelected, defaultSelected }) => {
         className="flex items-center justify-between px-4 py-3 hover:cursor-pointer hover:bg-grey m-2 border border-hoverGrey rounded w-56 "
       >
         <div className="flex items-center">
-          <FontAwesomeIcon icon={selectedOption.icon} />
+          {selectedOption.icon ? (
+            <FontAwesomeIcon icon={selectedOption.icon} />
+          ) : null}
 
-          <div className="px-2">{selectedOption.text}</div>
+          <div
+            className={`px-2 capitalize ${
+              type === "font" ? selectedOption.text + "-text" : null
+            }`}
+          >
+            {selectedOption.text}
+          </div>
         </div>
         {openDropdown ? (
           <FontAwesomeIcon icon={faCaretUp} />
@@ -42,7 +51,9 @@ const CustomDropdown = ({ options, setSelected, defaultSelected }) => {
           {options.map((op) => (
             <li
               key={op.id}
-              className="p-3 hover:bg-hoverGrey hover:cursor-pointer flex items-center"
+              className={`p-3 hover:bg-hoverGrey hover:cursor-pointer flex items-center capitalize ${
+                type === "font" ? op.text + "-text" : null
+              }`}
               onClick={() => {
                 handleSelectOption(op);
               }}
@@ -62,4 +73,17 @@ const CustomDropdown = ({ options, setSelected, defaultSelected }) => {
     </div>
   );
 };
+
+CustomDropdown.propTypes = {
+  options: PropTypes.array.isRequired,
+  setSelected: PropTypes.func.isRequired,
+  defaultSelected: PropTypes.object,
+  type: PropTypes.string,
+};
+
+CustomDropdown.defaultProps = {
+  defaultSelected: null,
+  type: undefined,
+};
+
 export default CustomDropdown;
