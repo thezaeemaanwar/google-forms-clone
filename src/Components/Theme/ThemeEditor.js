@@ -8,8 +8,9 @@ import ColorComponent from "./ColorComponent";
 import BackgroundColorComponent from "./BackgroundColorComponent";
 import { useDispatch } from "react-redux";
 import { setBackgroundOpacity, setColor } from "store/data/form.slice";
+import PropTypes from "prop-types";
 
-const ThemeEditor = () => {
+const ThemeEditor = ({ toggleThemeEditor }) => {
   const { theme } = useSelector((state) => state.form);
 
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const ThemeEditor = () => {
           />
           <div className="text-black text-base">Theme Options</div>
         </div>
-        <Icon icon={faTimes} />
+        <Icon icon={faTimes} onClick={toggleThemeEditor} />
       </div>
       <div className="flex flex-col items-start p-6 border-b-2">
         <div className="text-xs py-2">HEADER</div>
@@ -73,6 +74,10 @@ const ThemeEditor = () => {
       </div>
     </div>
   );
+};
+
+ThemeEditor.propTypes = {
+  toggleThemeEditor: PropTypes.func.isRequired,
 };
 
 export default ThemeEditor;

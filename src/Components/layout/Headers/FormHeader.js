@@ -15,7 +15,7 @@ import { Link } from "react-router-dom";
 import Icon from "components/Icon/Icon";
 import NavBar from "../Navigation/NavBar";
 
-const FormHeader = ({ title }) => {
+const FormHeader = ({ title, toggleThemeEditor }) => {
   const dispatch = useDispatch();
   const [ddState, setDdState] = useState(false);
   const toggleDropdown = () => {
@@ -41,7 +41,7 @@ const FormHeader = ({ title }) => {
           <Icon icon={faStar} label="Star" />
         </div>
         <div className="flex items-center">
-          <Icon icon={faPalette} label="Theme" />
+          <Icon icon={faPalette} label="Theme" onClick={toggleThemeEditor} />
           <Icon icon={faEye} label="Preview" />
           <Icon icon={faUndo} label="Undo" />
           <Icon icon={faRedo} label="Redo" />
