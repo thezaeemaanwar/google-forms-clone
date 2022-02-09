@@ -5,6 +5,7 @@ import generateKey from "components/Helpers/GenerateKey";
 export const formSlice = createSlice({
   name: "form",
   initialState: {
+    id: "",
     theme: {
       color: "purple",
       font: "basic",

@@ -14,16 +14,20 @@ import { formTemplates, ownershipFilters, formSamples } from "data/Templates";
 import FormTile from "components/Form/FormTile/FormTile";
 import Dropdown from "components/Dropdown/Dropdown";
 import sortIcon from "assets/sort.png";
+import { useSelector } from "react-redux";
+import Loading from "components/Loaders/page_loader";
 
 const Home = () => {
   const [date, setDate] = useState("Yesterday");
   const [gridView, setGridView] = useState(false);
   const [ownedFilter, setOwnedFilter] = useState(ownershipFilters[1]);
-  const [forms, setForms] = useState(formSamples);
+  // const [forms, setForms] = useState(formSamples);
+  const { forms, loading } = useSelector((state) => state.allForms);
 
   const toggleGridView = () => {
     setGridView(!gridView);
   };
+  console.log(forms);
   return (
     <div className="">
       <HomeHeader />
@@ -92,11 +96,15 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-2/3">
-            {forms.map((form) => (
-              <FormTile key={form.id} formData={form} />
-            ))}
-          </div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className="flex w-2/3">
+              {forms.map((form) => (
+                <FormTile key={form.id} formData={form} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
