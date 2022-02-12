@@ -5,7 +5,10 @@ import Landing from "views/Landing";
 import { useEffect } from "react";
 import { checkLogged } from "services/firebase/firebase.auth";
 import { setUser } from "store/authentication/authentication.slice";
-import { getFormsFromFirebase } from "services/firebase/firebase.firestore";
+import {
+  createUserInDB,
+  getFormsFromFirebase,
+} from "services/firebase/firebase.firestore";
 import { setForms, setLoading } from "store/data/allForms.slice";
 
 const App = () => {
@@ -22,6 +25,7 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    if (user) createUserInDB(user.uid);
     const dispatchCallback = (forms) => {
       dispatch(setForms({ forms }));
     };
