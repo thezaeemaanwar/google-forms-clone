@@ -24,7 +24,7 @@ const FormHeader = ({ title, toggleThemeEditor }) => {
   const signOut = () => {
     dispatch(startLoading());
     SignOut((user) => {
-      dispatch(setUser(user));
+      dispatch(setUser({user}));
     });
   };
   const { user } = useSelector((state) => state.authentication);
