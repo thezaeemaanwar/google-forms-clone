@@ -12,8 +12,10 @@ const OptionCard = ({ type, options, setOptions }) => {
   const saveOptions = (option) => {
     const ops = [...options];
     const i = ops.findIndex((o) => o.id === option.id);
-    ops[i].text = option.text;
-    setOptions(saveOptions);
+    console.log(ops[i].text);
+    ops[i] = option;
+    console.log("ops", ops);
+    setOptions(ops);
   };
   const deleteOption = (opId) => {
     const temp = [...options];

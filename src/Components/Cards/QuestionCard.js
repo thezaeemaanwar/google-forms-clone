@@ -46,6 +46,7 @@ const QuestionCard = ({ question, selected, onClick }) => {
   };
 
   const setOptions = (options) => {
+    console.log(options);
     const temp = { ...question };
     temp.options = options;
     dispatch(setQuestion({ id: question.id, question: temp }));
