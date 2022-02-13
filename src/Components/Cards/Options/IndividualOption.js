@@ -5,13 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
 
-const IndividualOption = ({ type, option, deleteOption }) => {
+const IndividualOption = ({ type, option, deleteOption, saveOption }) => {
   const [iOption, setIOption] = useState(option.text);
 
   const handleInputChange = (e) => {
     setIOption(e.target.value);
   };
 
+  const handleFocusOut = () => {
+    saveOption({ id: option.id, text: iOption });
+  };
   const { theme } = useSelector((state) => state.form);
 
   return (
@@ -33,6 +36,7 @@ const IndividualOption = ({ type, option, deleteOption }) => {
           placeholder="Option"
           value={iOption}
           onChange={(e) => handleInputChange(e)}
+          onBlur={handleFocusOut}
         />
       </div>
 
@@ -49,6 +53,7 @@ IndividualOption.propTypes = {
   type: PropTypes.string,
   option: PropTypes.object,
   deleteOption: PropTypes.func.isRequired,
+  saveOption: PropTypes.func.isRequired,
 };
 
 IndividualOption.defaultProps = {
