@@ -16,7 +16,6 @@ const Edit = () => {
   const { questions, id } = useSelector((state) => state.form);
   const [selected, setSelected] = useState(questions[0].id);
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.authentication);
 
   const setFormQuestion = (qid, question) => {
     dispatch(setQuestion({ id: qid, question }));
@@ -25,7 +24,7 @@ const Edit = () => {
   const addNewQuestion = () => {
     const quest = { question: createQuestion(questions.length) };
     dispatch(addQuestion(quest));
-    addQuestionInDB(id, quest);
+    addQuestionInDB(id, quest.question);
   };
 
   const selectQuestionCard = (qid) => {
