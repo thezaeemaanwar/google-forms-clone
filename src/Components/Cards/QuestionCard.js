@@ -20,9 +20,10 @@ import {
 } from "store/data/form.slice";
 import createQuestion from "components/Helpers/CreateQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { removeQuestionFromDB } from "services/firebase/firebase.firestore";
 
 const QuestionCard = ({ question, selected, onClick }) => {
-  const { theme } = useSelector((state) => state.form);
+  const { id, theme } = useSelector((state) => state.form);
   const dispatch = useDispatch();
   const [questionTitle, setQuestionTitle] = useState(question.title);
 
@@ -54,8 +55,10 @@ const QuestionCard = ({ question, selected, onClick }) => {
     dispatch(setQuestion({ id: question.id, question: temp }));
   };
 
-  const deleteQuestion = (id) => {
-    dispatch(removeQuestion({ id }));
+  const deleteQuestion = (qid) => {
+    dispatch(setSaved("Saving..."));
+    dispatch(removeQuestion({ qid }));
+    removeQuestionFromDB(id, question, savedCallBack);
   };
 
   const handleDuplicateQuestion = (id) => {

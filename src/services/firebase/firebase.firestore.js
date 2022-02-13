@@ -10,7 +10,6 @@ import {
   query,
   where,
   arrayRemove,
-  Timestamp,
   arrayUnion,
 } from "firebase/firestore";
 import {
@@ -79,12 +78,14 @@ const addQuestionInDB = async (formId, question) => {
   }
 };
 
-const removeQuestionInDB = async (formId, question) => {
+const removeQuestionFromDB = async (formId, question, savedCallBack) => {
+  console.log("removing", question.id);
   try {
     const docRef = doc(db, "forms", formId);
     await updateDoc(docRef, {
       questions: arrayRemove(question),
     });
+    savedCallBack("All changes saved in Drive");
   } catch (e) {
     console.error(e);
   }
@@ -113,7 +114,7 @@ export {
   getForm,
   getFormsFromFirebase,
   addQuestionInDB,
-  removeQuestionInDB,
+  removeQuestionFromDB,
   addFormInDB,
   setFormInDB,
 };
