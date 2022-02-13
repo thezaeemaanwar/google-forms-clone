@@ -5,15 +5,19 @@ import generateKey from "components/Helpers/GenerateKey";
 export const formSlice = createSlice({
   name: "form",
   initialState: {
+    loading: false,
+    saved: "",
     id: "",
     theme: {
       color: "purple",
       font: "basic",
       backgroundOpacity: 10,
     },
-    title: "",
+    title: "Untitled Form",
     description: "",
     questions: [createQuestion(0)],
+    date: "",
+    shared: true,
   },
   reducers: {
     addQuestion: (state, action) => {
@@ -64,6 +68,22 @@ export const formSlice = createSlice({
     setDescription: (state, action) => {
       state.description = action.payload.description;
     },
+    setForm: (state, action) => {
+      state.id = action.payload.id;
+      state.theme = action.payload.theme;
+      state.title = action.payload.title;
+      state.description = action.payload.description;
+      state.questions = action.payload.questions;
+      state.loading = false;
+      state.date = action.payload.date;
+      state.shared = action.payload.shared;
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setSaved: (state, action) => {
+      state.saved = action.payload.saved;
+    },
   },
 });
 
@@ -79,5 +99,7 @@ export const {
   setDescription,
   duplicateQuestion,
   setDraggedQuestion,
+  setForm,
+  setLoading,
 } = formSlice.actions;
 export default formSlice.reducer;

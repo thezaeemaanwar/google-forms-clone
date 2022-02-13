@@ -1,20 +1,41 @@
 import ThemeEditor from "components/Theme/ThemeEditor";
 import FormHeader from "components/layout/Headers/FormHeader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, Outlet } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getForm } from "services/firebase/firebase.firestore";
+import { setForm, setLoading } from "store/data/form.slice";
+import Loading from "components/Loaders/page_loader";
 
 const CreateForm = () => {
   const { type } = useParams();
-  const { theme } = useSelector((state) => state.form);
+  const { theme, title } = useSelector((state) => state.form);
   const [themeEditorVisibility, setThemeEditorVisibility] = useState(false);
   const toggleThemeEditor = () => {
     setThemeEditorVisibility(!themeEditorVisibility);
   };
-  if (type === "blank")
+
+  const { loading } = useSelector((state) => state.form);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (type !== "blank") {
+      const dispatchCallback = (formData) => {
+        dispatch(setForm(formData.form));
+      };
+      dispatch(setLoading(true));
+      getForm(type, dispatchCallback);
+    }
+  }, [type, dispatch]);
+  if (loading) return <Loading />;
+  else
     return (
       <div>
-        <FormHeader toggleThemeEditor={toggleThemeEditor} />
+        <FormHeader
+          id={type}
+          title={title}
+          toggleThemeEditor={toggleThemeEditor}
+        />
         <div
           className={`w-full min-h-screen ${
             theme.color + theme.backgroundOpacity
@@ -27,7 +48,6 @@ const CreateForm = () => {
         ) : null}
       </div>
     );
-  else return <div>Template</div>;
 };
 
 export default CreateForm;

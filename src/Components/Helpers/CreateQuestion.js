@@ -6,8 +6,8 @@ const createQuestion = (len) => {
   const question = {
     id: generateKey("question" + len),
     title: "Question",
+    optionType: dropdownOptions[2].id,
     options: [createOption(0)],
-    optionType: dropdownOptions[2],
     required: false,
   };
   return question;

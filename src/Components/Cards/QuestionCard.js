@@ -21,6 +21,7 @@ import createQuestion from "components/Helpers/CreateQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const QuestionCard = ({ question, selected, onClick }) => {
+  console.log(question);
   const { theme } = useSelector((state) => state.form);
   const dispatch = useDispatch();
   const [myOptionType, setMyOptionType] = useState(question.optionType);
@@ -43,7 +44,6 @@ const QuestionCard = ({ question, selected, onClick }) => {
   };
 
   const deleteQuestion = (id) => {
-    console.log("in delete question");
     dispatch(removeQuestion({ id }));
   };
 
@@ -52,7 +52,6 @@ const QuestionCard = ({ question, selected, onClick }) => {
   };
 
   const saveTitle = () => {
-    console.log("In set title");
     const ques = { ...question };
     ques.title = questionTitle;
     dispatch(setQuestion({ id: ques.id, question: ques }));

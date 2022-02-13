@@ -1,16 +1,10 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import { setTitle, setDescription } from "store/data/form.slice";
 
-const TitleCard = ({
-  title,
-  description,
-  setTitle,
-  setDescription,
-  color,
-  selected,
-}) => {
-  const { theme } = useSelector((state) => state.form);
+const TitleCard = ({ selected }) => {
+  const { theme, title, description } = useSelector((state) => state.form);
 
   const [formTitle, setFormTitle] = useState(title);
   const [formDescription, setFormDescription] = useState(description);
@@ -35,7 +29,7 @@ const TitleCard = ({
         selected ? "selectedCard" : ""
       } `}
     >
-      <div className={`h-3 ${color}-bg rounded-t-lg`}></div>
+      <div className={`h-3 ${theme.color}-bg rounded-t-lg`}></div>
       <div className="p-6 ">
         <input
           type="text"
