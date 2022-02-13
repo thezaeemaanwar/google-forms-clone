@@ -18,6 +18,7 @@ export const formSlice = createSlice({
     questions: [createQuestion(0)],
     date: "",
     shared: true,
+    error: null,
   },
   reducers: {
     addQuestion: (state, action) => {
@@ -69,14 +70,17 @@ export const formSlice = createSlice({
       state.description = action.payload.description;
     },
     setForm: (state, action) => {
-      state.id = action.payload.id;
-      state.theme = action.payload.theme;
-      state.title = action.payload.title;
-      state.description = action.payload.description;
-      state.questions = action.payload.questions;
-      state.loading = false;
-      state.date = action.payload.date;
-      state.shared = action.payload.shared;
+      if (action.payload.error) state.error = action.payload.error;
+      else {
+        state.id = action.payload.id;
+        state.theme = action.payload.theme;
+        state.title = action.payload.title;
+        state.description = action.payload.description;
+        state.questions = action.payload.questions;
+        state.loading = false;
+        state.date = action.payload.date;
+        state.shared = action.payload.shared;
+      }
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
@@ -101,5 +105,6 @@ export const {
   setDraggedQuestion,
   setForm,
   setLoading,
+  setSaved,
 } = formSlice.actions;
 export default formSlice.reducer;

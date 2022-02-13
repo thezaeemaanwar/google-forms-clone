@@ -15,6 +15,7 @@ const CreateForm = () => {
     setThemeEditorVisibility(!themeEditorVisibility);
   };
 
+  const { user } = useSelector((state) => state.authentication);
   const { loading } = useSelector((state) => state.form);
   const dispatch = useDispatch();
 
@@ -24,9 +25,9 @@ const CreateForm = () => {
         dispatch(setForm(formData.form));
       };
       dispatch(setLoading(true));
-      getForm(type, dispatchCallback);
+      getForm(user.uid, type, dispatchCallback);
     }
-  }, [type, dispatch]);
+  }, [user.uid, type, dispatch]);
   if (loading) return <Loading />;
   else
     return (

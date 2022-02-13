@@ -16,24 +16,35 @@ import {
   setQuestion,
   removeQuestion,
   duplicateQuestion,
+  setSaved,
 } from "store/data/form.slice";
 import createQuestion from "components/Helpers/CreateQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const QuestionCard = ({ question, selected, onClick }) => {
-  console.log(question);
   const { theme } = useSelector((state) => state.form);
   const dispatch = useDispatch();
-  const [myOptionType, setMyOptionType] = useState(question.optionType);
   const [questionTitle, setQuestionTitle] = useState(question.title);
 
+  const setOptionType = (opType) => {
+    const temp = { ...question };
+    temp.optionType = opType;
+    dispatch(setQuestion({ id: question.id, question: temp }));
+  };
   const handleTitleChange = (e) => {
     setQuestionTitle(e.target.value);
+  };
+
+  const savedCallBack = (status) => {
+    if (status.error) dispatch(setSaved("Error Saving data in Drive"));
+    dispatch(setSaved("All changes saved in Drive"));
   };
 
   const setOptions = (options) => {
     const temp = { ...question };
     temp.options = options;
+
+    dispatch(setSaved("Saving..."));
     dispatch(setQuestion({ id: question.id, question: temp }));
   };
 
@@ -87,7 +98,7 @@ const QuestionCard = ({ question, selected, onClick }) => {
           <div>
             <DisplayOptions
               options={question.options}
-              type={question.optionType.text}
+              type={question.optionType}
             />
           </div>
         </div>
@@ -104,14 +115,20 @@ const QuestionCard = ({ question, selected, onClick }) => {
             />
             <CustomDropdown
               options={dropdownOptions}
-              setSelected={setMyOptionType}
-              defaultSelected={myOptionType}
+              setSelected={setOptionType}
+              defaultSelected={
+                dropdownOptions[
+                  dropdownOptions.findIndex(
+                    (d) => d.text === question.optionType
+                  )
+                ]
+              }
             />
           </div>
           <div className="w-full">
             <OptionCard
               options={question.options}
-              type={myOptionType.text}
+              type={question.optionType}
               setOptions={setOptions}
             />
           </div>

@@ -17,7 +17,7 @@ const CustomDropdown = ({ options, setSelected, defaultSelected, type }) => {
   };
   const handleSelectOption = (op) => {
     setSelectedOption(op);
-    setSelected(op);
+    setSelected(op.text);
     toggleDropdownOptions();
   };
 

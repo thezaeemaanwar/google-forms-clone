@@ -25,7 +25,7 @@ const Edit = () => {
   const addNewQuestion = () => {
     const quest = { question: createQuestion(questions.length) };
     dispatch(addQuestion(quest));
-    addQuestionInDB(user.uid, id, questions);
+    addQuestionInDB(id, quest);
   };
 
   const selectQuestionCard = (qid) => {

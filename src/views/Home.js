@@ -17,7 +17,6 @@ import sortIcon from "assets/sort.png";
 import { useSelector } from "react-redux";
 import Loading from "components/Loaders/page_loader";
 import { addFormInDB } from "services/firebase/firebase.firestore";
-import { generateForm } from "components/Helpers/GenerateForm";
 
 const Home = () => {
   const [displayDate, setDisplayDate] = useState("Yesterday");
@@ -33,7 +32,7 @@ const Home = () => {
     setGridView(!gridView);
   };
 
-  const addNewForm = (uid) => {
+  const addNewForm = (name, uid) => {
     const myForm = {
       theme,
       title,

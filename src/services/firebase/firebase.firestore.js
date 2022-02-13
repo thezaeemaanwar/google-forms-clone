@@ -11,11 +11,13 @@ import {
   where,
   arrayRemove,
   Timestamp,
+  arrayUnion,
 } from "firebase/firestore";
 import {
   generateForm,
   generateFormPreview,
 } from "components/Helpers/GenerateForm";
+import { ERR_NOT_AUTHORISED } from "data/Errors";
 
 const getFormsFromFirebase = async (uid, dispatchCallback, loadDispatch) => {
   try {
@@ -23,8 +25,6 @@ const getFormsFromFirebase = async (uid, dispatchCallback, loadDispatch) => {
     const qSnapshot = await getDocs(q);
     const formsData = [];
     qSnapshot.forEach((form) => {
-      console.log("For each");
-      console.log(form.id, "=>", form.data());
       formsData.push(
         generateFormPreview(
           form.id,
@@ -42,41 +42,46 @@ const getFormsFromFirebase = async (uid, dispatchCallback, loadDispatch) => {
   }
 };
 
-const getForm = async (formId, dispatchCallback) => {
-  console.log(formId);
+const getForm = async (uid, formId, dispatchCallback) => {
   try {
+    console.log(uid, formId);
     const docSnap = await getDoc(doc(db, "forms", formId));
     const data = docSnap.data();
-    if (docSnap.exists())
-      dispatchCallback({
-        form: generateForm(
-          formId,
-          data.theme,
-          data.title,
-          data.description,
-          data.questions
-        ),
-      });
-    else console.error("No such form exists");
+    console.log(data);
+    if (data.uid !== uid) {
+      dispatchCallback({ error: ERR_NOT_AUTHORISED });
+    } else {
+      if (docSnap.exists())
+        dispatchCallback({
+          form: generateForm(
+            formId,
+            data.theme,
+            data.title,
+            data.description,
+            data.questions
+          ),
+        });
+      else console.error("No such form exists");
+    }
   } catch (e) {
     console.error(e);
   }
 };
 
-const addQuestionInDB = async (uid, formId, questions) => {
+const addQuestionInDB = async (formId, question) => {
   try {
     const docRef = doc(db, "forms", formId);
     await updateDoc(docRef, {
-      questions: questions,
+      questions: arrayUnion(question),
     });
   } catch (e) {
     console.error(e);
   }
 };
 
-const removeQuestionInDB = async (uid, formId, question) => {
+const removeQuestionInDB = async (formId, question) => {
   try {
-    const docRef = doc(db, "users", uid, "formsCreated", formId);
+    const docRef = doc(db, "forms", formId);
     await updateDoc(docRef, {
       questions: arrayRemove(question),
     });
@@ -87,7 +92,6 @@ const removeQuestionInDB = async (uid, formId, question) => {
 
 const addFormInDB = async (uid, form) => {
   form.uid = uid;
-  console.log(uid, form);
   try {
     const docRef = await addDoc(collection(db, "forms"), form);
     console.log("Added doc", docRef.id);
@@ -111,4 +115,5 @@ export {
   addQuestionInDB,
   removeQuestionInDB,
   addFormInDB,
+  setFormInDB,
 };
