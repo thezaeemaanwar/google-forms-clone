@@ -16,7 +16,11 @@ import {
   generateForm,
   generateFormPreview,
 } from "components/Helpers/GenerateForm";
-import { ERR_NOT_AUTHORISED, SUCCESS_SAVED } from "data/statusMessages";
+import {
+  ERR_NOT_AUTHORISED,
+  ERR_SAVING_FAILED,
+  SUCCESS_SAVED,
+} from "data/statusMessages";
 
 const getFormsFromFirebase = async (uid, dispatchCallback, loadDispatch) => {
   try {
@@ -97,11 +101,15 @@ const addQuestionInDB = async (formId, question, savedCallBack) => {
   }
 };
 
-const setQuestionsInDB = async (formId, questions) => {
+const setQuestionsInDB = async (formId, questions, savedCallBack) => {
   try {
     const formRef = doc(db, "forms", formId);
     await updateDoc(formRef, { questions });
-  } catch (e) {}
+    savedCallBack(SUCCESS_SAVED);
+  } catch (e) {
+    console.error(e);
+    savedCallBack(ERR_SAVING_FAILED);
+  }
 };
 
 const removeQuestionFromDB = async (formId, question, savedCallBack) => {
@@ -114,6 +122,7 @@ const removeQuestionFromDB = async (formId, question, savedCallBack) => {
     savedCallBack(SUCCESS_SAVED);
   } catch (e) {
     console.error(e);
+    savedCallBack(ERR_SAVING_FAILED);
   }
 };
 

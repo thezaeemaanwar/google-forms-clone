@@ -20,11 +20,14 @@ import {
 } from "store/data/form.slice";
 import createQuestion from "components/Helpers/CreateQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { removeQuestionFromDB } from "services/firebase/firebase.firestore";
+import {
+  removeQuestionFromDB,
+  setQuestionsInDB,
+} from "services/firebase/firebase.firestore";
 import { PROGRESS_SAVING, SUCCESS_SAVED } from "data/statusMessages";
 
 const QuestionCard = ({ question, selected, onClick }) => {
-  const { id, theme } = useSelector((state) => state.form);
+  const { id, theme, questions } = useSelector((state) => state.form);
   const dispatch = useDispatch();
   const [questionTitle, setQuestionTitle] = useState(question.title);
 
@@ -45,15 +48,17 @@ const QuestionCard = ({ question, selected, onClick }) => {
   const setOptions = (options) => {
     const temp = { ...question };
     temp.options = options;
-
-    dispatch(setSaved(PROGRESS_SAVING));
     dispatch(setQuestion({ id: question.id, question: temp }));
+    dispatch(setSaved(PROGRESS_SAVING));
+    setQuestionsInDB(id, questions, savedCallBack);
   };
 
   const toggleRequired = (e) => {
     const temp = { ...question };
     temp.required = !question.required;
     dispatch(setQuestion({ id: question.id, question: temp }));
+    dispatch(setSaved(PROGRESS_SAVING));
+    setQuestionsInDB(id, questions, savedCallBack);
   };
 
   const deleteQuestion = (qid) => {
@@ -64,12 +69,17 @@ const QuestionCard = ({ question, selected, onClick }) => {
 
   const handleDuplicateQuestion = (id) => {
     dispatch(duplicateQuestion({ id: question.id, question }));
+    dispatch(setSaved(PROGRESS_SAVING));
+    setQuestionsInDB(id, questions, savedCallBack);
   };
 
   const saveTitle = () => {
     const ques = { ...question };
     ques.title = questionTitle;
     dispatch(setQuestion({ id: ques.id, question: ques }));
+    dispatch(setSaved(PROGRESS_SAVING));
+    console.log("questions", questions);
+    setQuestionsInDB(id, questions, savedCallBack);
   };
 
   return (
