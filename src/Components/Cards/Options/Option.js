@@ -12,7 +12,7 @@ const OptionCard = ({ type, options, setOptions }) => {
   const saveOptions = (option) => {
     const ops = [...options];
     const i = ops.findIndex((o) => o.id === option.id);
-    opd[i].text = option.text;
+    ops[i].text = option.text;
     setOptions(saveOptions);
   };
   const deleteOption = (opId) => {
