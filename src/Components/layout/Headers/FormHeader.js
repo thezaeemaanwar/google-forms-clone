@@ -70,7 +70,6 @@ const FormHeader = ({ id, title, toggleThemeEditor }) => {
         </div>
       </div>
       <NavBar type={id} />
-      {/* <div className="flex items-center justify-center">resp</div> */}
     </header>
   );
 };

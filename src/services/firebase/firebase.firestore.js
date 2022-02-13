@@ -16,7 +16,7 @@ import {
   generateForm,
   generateFormPreview,
 } from "components/Helpers/GenerateForm";
-import { ERR_NOT_AUTHORISED } from "data/Errors";
+import { ERR_NOT_AUTHORISED, SUCCESS_SAVED } from "data/statusMessages";
 
 const getFormsFromFirebase = async (uid, dispatchCallback, loadDispatch) => {
   try {
@@ -67,30 +67,6 @@ const getForm = async (uid, formId, dispatchCallback) => {
   }
 };
 
-const addQuestionInDB = async (formId, question) => {
-  try {
-    const docRef = doc(db, "forms", formId);
-    await updateDoc(docRef, {
-      questions: arrayUnion(question),
-    });
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-const removeQuestionFromDB = async (formId, question, savedCallBack) => {
-  console.log("removing", question.id);
-  try {
-    const docRef = doc(db, "forms", formId);
-    await updateDoc(docRef, {
-      questions: arrayRemove(question),
-    });
-    savedCallBack("All changes saved in Drive");
-  } catch (e) {
-    console.error(e);
-  }
-};
-
 const addFormInDB = async (uid, form) => {
   form.uid = uid;
   try {
@@ -109,12 +85,44 @@ const setFormInDB = async (formId, form) => {
     console.error(e);
   }
 };
+const addQuestionInDB = async (formId, question, savedCallBack) => {
+  try {
+    const docRef = doc(db, "forms", formId);
+    await updateDoc(docRef, {
+      questions: arrayUnion(question),
+    });
+    savedCallBack(SUCCESS_SAVED);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const setQuestionsInDB = async (formId, questions) => {
+  try {
+    const formRef = doc(db, "forms", formId);
+    await updateDoc(formRef, { questions });
+  } catch (e) {}
+};
+
+const removeQuestionFromDB = async (formId, question, savedCallBack) => {
+  console.log("removing", question.id);
+  try {
+    const docRef = doc(db, "forms", formId);
+    await updateDoc(docRef, {
+      questions: arrayRemove(question),
+    });
+    savedCallBack(SUCCESS_SAVED);
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 export {
-  getForm,
   getFormsFromFirebase,
-  addQuestionInDB,
-  removeQuestionFromDB,
+  getForm,
   addFormInDB,
   setFormInDB,
+  addQuestionInDB,
+  setQuestionsInDB,
+  removeQuestionFromDB,
 };

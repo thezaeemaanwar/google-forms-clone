@@ -8,15 +8,20 @@ import {
   addQuestion,
   setDraggedQuestion,
   setQuestion,
+  setSaved,
 } from "store/data/form.slice";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { addQuestionInDB } from "services/firebase/firebase.firestore";
+import { PROGRESS_SAVING } from "data/statusMessages";
 
 const Edit = () => {
   const { questions, id } = useSelector((state) => state.form);
   const [selected, setSelected] = useState(questions[0].id);
   const dispatch = useDispatch();
 
+  const savedCallBack = (saved) => {
+    dispatch(setSaved(saved));
+  };
   const setFormQuestion = (qid, question) => {
     dispatch(setQuestion({ id: qid, question }));
   };
@@ -24,7 +29,8 @@ const Edit = () => {
   const addNewQuestion = () => {
     const quest = { question: createQuestion(questions.length) };
     dispatch(addQuestion(quest));
-    addQuestionInDB(id, quest.question);
+    dispatch(setSaved(PROGRESS_SAVING));
+    addQuestionInDB(id, quest.question, savedCallBack);
   };
 
   const selectQuestionCard = (qid) => {

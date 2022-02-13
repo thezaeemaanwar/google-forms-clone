@@ -21,6 +21,7 @@ import {
 import createQuestion from "components/Helpers/CreateQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { removeQuestionFromDB } from "services/firebase/firebase.firestore";
+import { PROGRESS_SAVING, SUCCESS_SAVED } from "data/statusMessages";
 
 const QuestionCard = ({ question, selected, onClick }) => {
   const { id, theme } = useSelector((state) => state.form);
@@ -38,14 +39,14 @@ const QuestionCard = ({ question, selected, onClick }) => {
 
   const savedCallBack = (status) => {
     if (status.error) dispatch(setSaved("Error Saving data in Drive"));
-    dispatch(setSaved("All changes saved in Drive"));
+    dispatch(setSaved(SUCCESS_SAVED));
   };
 
   const setOptions = (options) => {
     const temp = { ...question };
     temp.options = options;
 
-    dispatch(setSaved("Saving..."));
+    dispatch(setSaved(PROGRESS_SAVING));
     dispatch(setQuestion({ id: question.id, question: temp }));
   };
 
@@ -56,7 +57,7 @@ const QuestionCard = ({ question, selected, onClick }) => {
   };
 
   const deleteQuestion = (qid) => {
-    dispatch(setSaved("Saving..."));
+    dispatch(setSaved(PROGRESS_SAVING));
     dispatch(removeQuestion({ qid }));
     removeQuestionFromDB(id, question, savedCallBack);
   };

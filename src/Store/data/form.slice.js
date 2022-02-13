@@ -86,7 +86,7 @@ export const formSlice = createSlice({
       state.loading = action.payload;
     },
     setSaved: (state, action) => {
-      state.saved = action.payload.saved;
+      state.saved = action.payload;
     },
   },
 });
