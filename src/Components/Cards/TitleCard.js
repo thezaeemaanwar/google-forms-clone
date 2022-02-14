@@ -1,13 +1,20 @@
+import { PROGRESS_SAVING } from "data/statusMessages";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { setTitle, setDescription } from "store/data/form.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormTitleInDB } from "services/firebase/firebase.firestore";
+import { setTitle, setDescription, setSaved } from "store/data/form.slice";
 
 const TitleCard = ({ selected }) => {
-  const { theme, title, description } = useSelector((state) => state.form);
+  const dispatch = useDispatch();
+  const { id, theme, title, description } = useSelector((state) => state.form);
 
   const [formTitle, setFormTitle] = useState(title);
   const [formDescription, setFormDescription] = useState(description);
+
+  const savedCallBack = (msg) => {
+    dispatch(setSaved(msg));
+  };
 
   const handleTitleChange = (e) => {
     setFormTitle(e.target.value);
@@ -17,10 +24,14 @@ const TitleCard = ({ selected }) => {
   };
 
   const saveTitle = (e) => {
+    savedCallBack(PROGRESS_SAVING);
     setTitle(formTitle);
+    setFormTitleInDB(id, formTitle, savedCallBack);
   };
   const saveDescription = (e) => {
+    savedCallBack(PROGRESS_SAVING);
     setDescription(formDescription);
+    setFormDescription(id, formTitle, savedCallBack);
   };
 
   return (

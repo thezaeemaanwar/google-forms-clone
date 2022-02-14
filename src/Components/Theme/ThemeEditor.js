@@ -7,22 +7,44 @@ import { colors, fonts } from "data/Theme/ThemeOptions";
 import ColorComponent from "components/Theme/ColorComponent";
 import BackgroundColorComponent from "components/Theme/BackgroundColorComponent";
 import { useDispatch } from "react-redux";
-import { setBackgroundOpacity, setColor, setFont } from "store/data/form.slice";
+import {
+  setBackgroundOpacity,
+  setColor,
+  setFont,
+  setSaved,
+} from "store/data/form.slice";
 import PropTypes from "prop-types";
 import CustomDropdown from "components/Dropdown/CustomDropdown";
+import { PROGRESS_SAVING } from "data/statusMessages";
+import { setThemeInDB } from "services/firebase/firebase.firestore";
 
 const ThemeEditor = ({ toggleThemeEditor }) => {
-  const { theme } = useSelector((state) => state.form);
-
+  const { id, theme } = useSelector((state) => state.form);
   const dispatch = useDispatch();
+
+  const savedCallBack = (msg) => {
+    dispatch(setSaved(msg));
+  };
   const selectColor = (color) => {
     dispatch(setColor({ color }));
+    savedCallBack(PROGRESS_SAVING);
+    const temp = theme;
+    temp.color = color;
+    setThemeInDB(id, temp, savedCallBack);
   };
   const setBGOpacity = (opacity) => {
     dispatch(setBackgroundOpacity({ opacity }));
+    savedCallBack(PROGRESS_SAVING);
+    const temp = theme;
+    temp.backgroundOpacity = opacity;
+    setThemeInDB(id, temp, savedCallBack);
   };
   const setFormFont = (font) => {
     dispatch(setFont({ font: font.text }));
+    savedCallBack(PROGRESS_SAVING);
+    const temp = theme;
+    temp.font = font.text;
+    setThemeInDB(id, temp, savedCallBack);
   };
   return (
     <div className="fixed right-0 top-28 bg-white h-screen w-80 flex flex-col shadow-xl">

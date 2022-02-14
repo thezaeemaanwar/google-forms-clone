@@ -126,6 +126,48 @@ const removeQuestionFromDB = async (formId, question, savedCallBack) => {
   }
 };
 
+const setThemeInDB = async (formId, theme, savedCallBack) => {
+  try {
+    const docRef = doc(db, "forms", formId);
+    await updateDoc(docRef, { theme });
+    savedCallBack(SUCCESS_SAVED);
+  } catch (e) {
+    console.error(e);
+    savedCallBack(ERR_SAVING_FAILED);
+  }
+};
+
+const setSharedInDB = async (formId, shared, savedCallBack) => {
+  try {
+    const docRef = doc(db, "forms", formId);
+    await updateDoc(docRef, { shared });
+    savedCallBack(SUCCESS_SAVED);
+  } catch (e) {
+    console.error(e);
+    savedCallBack(ERR_SAVING_FAILED);
+  }
+};
+const setFormTitleInDB = async (formId, title, savedCallBack) => {
+  try {
+    const docRef = doc(db, "forms", formId);
+    await updateDoc(docRef, { title });
+    savedCallBack(SUCCESS_SAVED);
+  } catch (e) {
+    console.error(e);
+    savedCallBack(ERR_SAVING_FAILED);
+  }
+};
+const setFormDescriptionInDB = async (formId, description, savedCallBack) => {
+  try {
+    const docRef = doc(db, "forms", formId);
+    await updateDoc(docRef, { description });
+    savedCallBack(SUCCESS_SAVED);
+  } catch (e) {
+    console.error(e);
+    savedCallBack(ERR_SAVING_FAILED);
+  }
+};
+
 export {
   getFormsFromFirebase,
   getForm,
@@ -134,4 +176,8 @@ export {
   addQuestionInDB,
   setQuestionsInDB,
   removeQuestionFromDB,
+  setThemeInDB,
+  setSharedInDB,
+  setFormTitleInDB,
+  setFormDescriptionInDB,
 };
