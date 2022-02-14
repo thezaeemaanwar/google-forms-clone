@@ -28,22 +28,22 @@ const ThemeEditor = ({ toggleThemeEditor }) => {
   const selectColor = (color) => {
     dispatch(setColor({ color }));
     savedCallBack(PROGRESS_SAVING);
-    const temp = theme;
+    const temp = { ...theme };
     temp.color = color;
     setThemeInDB(id, temp, savedCallBack);
   };
   const setBGOpacity = (opacity) => {
     dispatch(setBackgroundOpacity({ opacity }));
     savedCallBack(PROGRESS_SAVING);
-    const temp = theme;
+    const temp = { ...theme };
     temp.backgroundOpacity = opacity;
     setThemeInDB(id, temp, savedCallBack);
   };
   const setFormFont = (font) => {
-    dispatch(setFont({ font: font.text }));
+    dispatch(setFont({ font: font }));
     savedCallBack(PROGRESS_SAVING);
-    const temp = theme;
-    temp.font = font.text;
+    const temp = { ...theme };
+    temp.font = font;
     setThemeInDB(id, temp, savedCallBack);
   };
   return (

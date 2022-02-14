@@ -58,13 +58,17 @@ const QuestionCard = ({ question, selected, onClick }) => {
     const temp = { ...question };
     temp.required = !question.required;
     dispatch(setQuestion({ id: question.id, question: temp }));
+
     dispatch(setSaved(PROGRESS_SAVING));
-    setQuestionsInDB(id, questions, savedCallBack);
+    const tempQ = [...questions];
+    const ind = tempQ.findIndex((x) => x.id === question.id);
+    tempQ[ind] = question;
+    setQuestionsInDB(id, tempQ, savedCallBack);
   };
 
   const deleteQuestion = (qid) => {
     dispatch(setSaved(PROGRESS_SAVING));
-    dispatch(removeQuestion({ qid }));
+    dispatch(removeQuestion({ id: qid }));
     removeQuestionFromDB(id, question, savedCallBack);
   };
 
@@ -79,9 +83,9 @@ const QuestionCard = ({ question, selected, onClick }) => {
     ques.title = questionTitle;
     dispatch(setQuestion({ id: ques.id, question: ques }));
     dispatch(setSaved(PROGRESS_SAVING));
-    console.log("questions", questions);
     setQuestionsInDB(id, questions, savedCallBack);
   };
+  console.log(questions);
 
   return (
     <div
@@ -122,7 +126,7 @@ const QuestionCard = ({ question, selected, onClick }) => {
           <div className="flex justify-between w-full">
             <input
               autoFocus
-              className={`w-2/3 p-3 bg-grey border-fontGrey border-b focus:outline-none ${theme.color}TextField ${theme.font}-text focus:border-b-2`}
+              className={`w-2/3 p-3 bg-grey border-hoverGrey border-b focus:outline-none ${theme.color}TextField ${theme.font}-text focus:border-b-2`}
               placeholder="Question"
               value={questionTitle}
               onChange={(e) => handleTitleChange(e)}

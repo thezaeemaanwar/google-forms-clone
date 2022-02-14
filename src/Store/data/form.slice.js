@@ -50,7 +50,7 @@ export const formSlice = createSlice({
       const temp = state.questions;
       const index = temp.findIndex((e) => e.id === action.payload.id);
       const question = { ...action.payload.question };
-      question.id = generateKey(index);
+      question.id = generateKey("question" + index);
       temp.splice(index, 0, question);
       state.questions = temp;
     },

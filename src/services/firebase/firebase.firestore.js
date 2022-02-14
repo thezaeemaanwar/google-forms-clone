@@ -47,10 +47,8 @@ const getFormsFromFirebase = async (uid, dispatchCallback, loadDispatch) => {
 
 const getForm = async (uid, formId, dispatchCallback) => {
   try {
-    console.log(uid, formId);
     const docSnap = await getDoc(doc(db, "forms", formId));
     const data = docSnap.data();
-    console.log(data);
     if (data.uid !== uid) {
       dispatchCallback({ error: ERR_NOT_AUTHORISED });
     } else {
@@ -107,21 +105,25 @@ const setQuestionsInDB = async (formId, questions, savedCallBack) => {
     await updateDoc(formRef, { questions });
     savedCallBack(SUCCESS_SAVED);
   } catch (e) {
-    console.error(e);
+    console.error("Set Question Error:", e);
     savedCallBack(ERR_SAVING_FAILED);
   }
 };
 
 const removeQuestionFromDB = async (formId, question, savedCallBack) => {
-  console.log("removing", question.id);
+  const qRef = await getDoc(doc(db, "forms", formId));
+  var myQ = {};
+  qRef.data().questions.forEach((q) => {
+    if (q.id === question.id) myQ = q;
+  });
   try {
     const docRef = doc(db, "forms", formId);
     await updateDoc(docRef, {
-      questions: arrayRemove(question),
+      questions: arrayRemove(myQ),
     });
     savedCallBack(SUCCESS_SAVED);
   } catch (e) {
-    console.error(e);
+    console.error("Remove Question Error: ", e);
     savedCallBack(ERR_SAVING_FAILED);
   }
 };
@@ -158,6 +160,7 @@ const setFormTitleInDB = async (formId, title, savedCallBack) => {
   }
 };
 const setFormDescriptionInDB = async (formId, description, savedCallBack) => {
+  console.log("Setting description");
   try {
     const docRef = doc(db, "forms", formId);
     await updateDoc(docRef, { description });

@@ -33,7 +33,7 @@ const IndividualOption = ({ type, option, deleteOption, saveOption }) => {
           }
         />
         <input
-          className={`w-4/5 p-1 pl-0 ml-3 border-b focus:outline-none ${theme.color}TextField focus:border-b-2`}
+          className={`w-4/5 p-1 pl-0 ml-3 border-b border-fontGrey focus:outline-none ${theme.color}TextField focus:border-b-2`}
           placeholder="Option"
           value={iOption}
           onChange={(e) => handleInputChange(e)}
