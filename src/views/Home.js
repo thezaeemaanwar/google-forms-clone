@@ -115,10 +115,10 @@ const Home = () => {
           {loading ? (
             <Loading />
           ) : (
-            <div className="flex w-2/3">
+            <div className={`flex w-2/3 ${gridView ? "flex-row" : "flex-col"}`}>
               {forms.map((form) => (
                 <Link key={form.id} to={`/create/${form.id}/edit`}>
-                  <FormTile key={form.id} formData={form} />
+                  <FormTile key={form.id} formData={form} gridView={gridView} />
                 </Link>
               ))}
             </div>

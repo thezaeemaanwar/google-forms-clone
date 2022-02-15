@@ -3,7 +3,7 @@ import QuestionCard from "components/Cards/QuestionCard";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ToolBar from "components/Toolbar/ToolBar";
-import createQuestion from "components/Helpers/CreateQuestion";
+import createQuestion from "components/Helpers/createQuestion";
 import {
   addQuestion,
   setDraggedQuestion,

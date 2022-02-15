@@ -7,29 +7,32 @@ import {
   setFormTitleInDB,
 } from "services/firebase/firebase.firestore";
 import { setTitle, setDescription, setSaved } from "store/data/form.slice";
+import { useFormik } from "formik";
+import { headerSchema as validationSchema } from "components/Helpers/validations";
 
 const TitleCard = ({ selected }) => {
   const dispatch = useDispatch();
   const { id, theme, title, description } = useSelector((state) => state.form);
-
-  const [formTitle, setFormTitle] = useState(title);
   const [formDescription, setFormDescription] = useState(description);
+
+  const { handleChange, values, errors } = useFormik({
+    initialValues: { title },
+    validationSchema,
+  });
 
   const savedCallBack = (msg) => {
     dispatch(setSaved(msg));
   };
 
-  const handleTitleChange = (e) => {
-    setFormTitle(e.target.value);
-  };
   const handleDescriptionChange = (e) => {
     setFormDescription(e.target.value);
   };
-
   const saveTitle = (e) => {
-    savedCallBack(PROGRESS_SAVING);
-    setTitle(formTitle);
-    setFormTitleInDB(id, formTitle, savedCallBack);
+    if (!errors.title) {
+      savedCallBack(PROGRESS_SAVING);
+      setTitle(values.title);
+      setFormTitleInDB(id, values.title, savedCallBack);
+    }
   };
   const saveDescription = (e) => {
     setDescription(formDescription);
@@ -46,15 +49,18 @@ const TitleCard = ({ selected }) => {
       <div className={`h-3 ${theme.color}-bg rounded-t-lg`}></div>
       <div className="p-6 ">
         <input
+          name="title"
           type="text"
           className={`text-3xl w-full border-b border-hoverGrey focus:border-b-2 ${theme.color}TextField ${theme.font}-text focus:outline-none py-2`}
-          value={formTitle}
-          onChange={(e) => {
-            handleTitleChange(e);
-          }}
+          value={values.title}
+          onChange={handleChange}
           onBlur={saveTitle}
         />
+        <p className="text-red text-xs py-1">
+          {errors.title ? errors.title : null}
+        </p>
         <input
+          name="description"
           type="text"
           className={`text-base w-full border-b border-hoverGrey focus:border-b-2 ${theme.color}TextField focus:outline-none py-1 pt-3`}
           placeholder="Form Description"

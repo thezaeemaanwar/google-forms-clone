@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import createQuestion from "components/Helpers/CreateQuestion";
-import generateKey from "components/Helpers/GenerateKey";
+import createQuestion from "components/Helpers/createQuestion";
+import generateKey from "components/Helpers/generateKey";
 
 export const formSlice = createSlice({
   name: "form",

@@ -15,7 +15,7 @@ import {
 import {
   generateForm,
   generateFormPreview,
-} from "components/Helpers/GenerateForm";
+} from "components/Helpers/generateForm";
 import {
   ERR_NOT_AUTHORISED,
   ERR_SAVING_FAILED,

@@ -8,19 +8,21 @@ import DropdownWithIcon from "components/Dropdown/DropdownwithIcon";
 import { LIST } from "data/viewTypes";
 import PropTypes from "prop-types";
 
-const FormTile = ({ formData, type }) => {
+const FormTile = ({ formData, gridView }) => {
   const actions = [
     { icon: faTextHeight, text: "Rename" },
     { icon: faTrashAlt, text: "Remove" },
     { icon: faExternalLinkAlt, text: "Open in new tab" },
   ];
-  if (type === LIST)
+  if (!gridView)
     return (
-      <div className="w-full rounded-3xl hover:bg-purple/20 flex">
-        <div>
-          <img src={slogo} alt="form" />
+      <div className="w-full rounded-full hover:bg-purple/20 flex justify-between items-center px-3 pl-6">
+        <div className="w-1/2 flex justify-start items-center">
+          <div>
+            <img src={slogo} alt="form" />
+          </div>
+          <div className="ml-2">{formData.title}</div>
         </div>
-        <div>{formData.title}</div>
         <div>{formData.date}</div>
         {/* <div></div> */}
         <DropdownWithIcon options={actions} />

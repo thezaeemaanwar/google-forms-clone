@@ -18,26 +18,30 @@ import {
   duplicateQuestion,
   setSaved,
 } from "store/data/form.slice";
-import createQuestion from "components/Helpers/CreateQuestion";
+import createQuestion from "components/Helpers/createQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   removeQuestionFromDB,
   setQuestionsInDB,
 } from "services/firebase/firebase.firestore";
 import { PROGRESS_SAVING, SUCCESS_SAVED } from "data/statusMessages";
+import { useFormik } from "formik";
+import { questionSchema as validationSchema } from "components/Helpers/validations";
 
 const QuestionCard = ({ question, selected, onClick }) => {
   const { id, theme, questions } = useSelector((state) => state.form);
   const dispatch = useDispatch();
   const [questionTitle, setQuestionTitle] = useState(question.title);
 
+  const { handleChange, values, errors } = useFormik({
+    initialValues: { title: question.title },
+    validationSchema,
+  });
+
   const setOptionType = (opType) => {
     const temp = { ...question };
     temp.optionType = opType;
     dispatch(setQuestion({ id: question.id, question: temp }));
-  };
-  const handleTitleChange = (e) => {
-    setQuestionTitle(e.target.value);
   };
 
   const savedCallBack = (status) => {
@@ -80,10 +84,12 @@ const QuestionCard = ({ question, selected, onClick }) => {
 
   const saveTitle = () => {
     const ques = { ...question };
-    ques.title = questionTitle;
-    dispatch(setQuestion({ id: ques.id, question: ques }));
-    dispatch(setSaved(PROGRESS_SAVING));
-    setQuestionsInDB(id, questions, savedCallBack);
+    ques.title = values.title;
+    if (!errors.title) {
+      dispatch(setQuestion({ id: ques.id, question: ques }));
+      dispatch(setSaved(PROGRESS_SAVING));
+      setQuestionsInDB(id, questions, savedCallBack);
+    }
   };
   console.log(questions);
 
@@ -126,12 +132,14 @@ const QuestionCard = ({ question, selected, onClick }) => {
           <div className="flex justify-between w-full">
             <input
               autoFocus
+              name="title"
               className={`w-2/3 p-3 bg-grey border-hoverGrey border-b focus:outline-none ${theme.color}TextField ${theme.font}-text focus:border-b-2`}
               placeholder="Question"
-              value={questionTitle}
-              onChange={(e) => handleTitleChange(e)}
+              value={values.title}
+              onChange={handleChange}
               onBlur={saveTitle}
             />
+
             <CustomDropdown
               options={dropdownOptions}
               setSelected={setOptionType}
@@ -144,6 +152,9 @@ const QuestionCard = ({ question, selected, onClick }) => {
               }
             />
           </div>
+          <p className="text-red text-xs py-1">
+            {errors.title ? errors.title : null}
+          </p>
           <div className="w-full">
             <OptionCard
               options={question.options}
