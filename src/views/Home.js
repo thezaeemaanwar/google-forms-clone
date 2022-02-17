@@ -9,7 +9,7 @@ import {
   faGripHorizontal,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { formTemplates, ownershipFilters } from "data/Templates";
 import FormTile from "components/Form/FormTile/FormTile";
 import Dropdown from "components/Dropdown/Dropdown";
@@ -32,7 +32,7 @@ const Home = () => {
     (state) => state.form
   );
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const toggleGridView = () => {
     setGridView(!gridView);
   };
@@ -52,7 +52,7 @@ const Home = () => {
     getTemplateFromDB(name);
     setLoading(true);
     addFormInDB(uid, myForm, dispatchCallBack);
-    <Navigate to={`/create/${id}/edit`} />;
+    navigate(`/create/${id}/edit`);
   };
   return (
     <div className="">
@@ -77,14 +77,12 @@ const Home = () => {
           <div className="flex w-2/3 justify-between">
             {formTemplates.map((temp, i) => (
               <div key={temp.name}>
-                {/* <Link to={temp.url}> */}
                 <img
                   className="w-48 border border-hoverGrey hover:border-purple hover:cursor-pointer rounded-md"
                   src={temp.img}
                   alt={`template-${i}`}
                   onClick={() => addNewForm(temp.name, user.uid, temp)}
                 />
-                {/* </Link> */}
                 <div className="mt-2 ml-1 text-black text-sm">{temp.name}</div>
               </div>
             ))}
