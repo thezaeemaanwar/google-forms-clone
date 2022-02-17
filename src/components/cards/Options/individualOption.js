@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { CHECKBOX, MULTIPLE_CHOICE } from "data/OptionTypes";
+import { CHECKBOX, MULTIPLE_CHOICE } from "data/optionTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";

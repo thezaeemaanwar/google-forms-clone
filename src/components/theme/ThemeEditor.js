@@ -3,9 +3,9 @@ import { faPalette, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Icon from "components/icon/Icon";
 import { useSelector } from "react-redux";
-import { colors, fonts } from "data/Theme/ThemeOptions";
-import ColorComponent from "components/theme/ColorComponent";
-import BackgroundColorComponent from "components/theme/BackgroundColorComponent";
+import { colors, fonts } from "data/theme/themeOptions";
+import ColorComponent from "components/theme/colorComponent";
+import BackgroundColorComponent from "components/theme/backgroundColorComponent";
 import { useDispatch } from "react-redux";
 import {
   setBackgroundOpacity,

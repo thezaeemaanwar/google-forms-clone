@@ -1,4 +1,4 @@
-import "components/Slider/slider.css";
+import "components/slider/slider.css";
 import { PropTypes } from "prop-types";
 
 const Slider = ({ theme, required, toggleRequired }) => {

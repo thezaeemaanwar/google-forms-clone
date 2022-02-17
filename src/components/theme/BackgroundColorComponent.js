@@ -1,5 +1,5 @@
-import { opacities } from "data/Theme/ThemeOptions";
-import ColorComponent from "components/theme/ColorComponent";
+import { opacities } from "data/theme/themeOptions";
+import ColorComponent from "components/theme/colorComponent";
 
 const BackgroundColorComponent = ({ color, opacity, setOpacity }) => {
   return (

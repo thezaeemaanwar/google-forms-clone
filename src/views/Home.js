@@ -1,4 +1,4 @@
-import HomeHeader from "components/layout/Headers/HomeHeader";
+import HomeHeader from "components/layout/headers/HomeHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import {
@@ -10,12 +10,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import { formTemplates, ownershipFilters } from "data/Templates";
-import FormTile from "components/form/FormTile/FormTile";
+import { formTemplates, ownershipFilters } from "data/templates";
+import FormTile from "components/form/formTile/FormTile";
 import Dropdown from "components/dropdown/Dropdown";
 import sortIcon from "assets/sort.png";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "components/loaders/page_loader";
+import Loading from "components/loaders/page.loader";
 import {
   addFormInDB,
   getTemplateFromDB,

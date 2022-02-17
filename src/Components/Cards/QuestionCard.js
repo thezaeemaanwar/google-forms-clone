@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import CustomDropdown from "components/dropdown/CustomDropdown";
-import OptionCard from "components/cards/Options/option";
-import { dropdownOptions } from "data/OptionTypes";
-import DisplayOptions from "components/cards/Options/displayOptions";
+import OptionCard from "components/cards/options/Option";
+import { dropdownOptions } from "data/optionTypes";
+import DisplayOptions from "components/cards/options/DisplayOptions";
 import { faClone, faTrashAlt } from "@fortawesome/free-regular-svg-icons";
-import Slider from "components/slider/Slider";
+import Slider from "components/slider/slider";
 import { useDispatch, useSelector } from "react-redux";
 import {
   faEllipsisV,

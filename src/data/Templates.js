@@ -8,7 +8,7 @@ import {
   faPlayCircle,
   faPlusSquare,
 } from "@fortawesome/free-regular-svg-icons";
-import { dropdownOptions } from "data/OptionTypes";
+import { dropdownOptions } from "data/optionTypes";
 import {
   faFileImport,
   faPlusCircle,

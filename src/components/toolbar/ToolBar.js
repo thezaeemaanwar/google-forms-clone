@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { toolBarActions } from "data/Templates";
+import { toolBarActions } from "data/templates";
 import PropTypes from "prop-types";
 
 const ToolBar = ({ addQuestion }) => {

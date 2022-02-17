@@ -1,4 +1,4 @@
-import { CHECKBOX, MULTIPLE_CHOICE } from "data/OptionTypes";
+import { CHECKBOX, MULTIPLE_CHOICE } from "data/optionTypes";
 
 const DisplayOptions = ({ type, options }) => {
   if (type === MULTIPLE_CHOICE || type === CHECKBOX)

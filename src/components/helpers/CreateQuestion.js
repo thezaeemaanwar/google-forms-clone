@@ -1,5 +1,5 @@
 import generateKey from "components/helpers/generateKey";
-import { MULTIPLE_CHOICE } from "data/OptionTypes";
+import { MULTIPLE_CHOICE } from "data/optionTypes";
 import createOption from "components/helpers/createOption";
 
 const createQuestion = (len) => {

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import PublicRoutes from "components/routes/public.routes";
-import Loading from "components/loaders/page_loader";
+import Loading from "components/loaders/page.loader";
 import Landing from "views/Landing";
 import { useEffect } from "react";
 import { checkLogged } from "services/firebase/auth.firebase";

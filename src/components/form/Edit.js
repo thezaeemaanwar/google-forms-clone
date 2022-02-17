@@ -2,7 +2,7 @@ import TitleCard from "components/cards/TitleCard";
 import QuestionCard from "components/cards/QuestionCard";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ToolBar from "components/toolbar/ToolBar";
+import ToolBar from "components/toolbar/toolBar";
 import createQuestion from "components/helpers/createQuestion";
 import {
   addQuestion,

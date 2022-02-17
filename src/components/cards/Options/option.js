@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import IndividualOption from "components/cards/Options/individualOption";
-import { SHORT_ANSWER, PARAGRAPH, MULTIPLE_CHOICE } from "data/OptionTypes";
+import IndividualOption from "components/cards/options/IndividualOption";
+import { SHORT_ANSWER, PARAGRAPH, MULTIPLE_CHOICE } from "data/optionTypes";
 import createOption from "components/helpers/createOption";
 
 const OptionCard = ({ type, options, setOptions }) => {

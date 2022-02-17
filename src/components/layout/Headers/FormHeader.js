@@ -1,7 +1,7 @@
 import { faFolder, faStar, faEye } from "@fortawesome/free-regular-svg-icons";
 import { faPalette, faRedo, faUndo } from "@fortawesome/free-solid-svg-icons";
 import logo from "assets/logo.png";
-import FilledButton from "components/buttons/filledButton";
+import FilledButton from "components/buttons/FilledButton";
 import DropdownWithIcon from "components/dropdown/DropdownwithIcon";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -12,7 +12,7 @@ import {
 } from "store/authentication/authentication.slice";
 import { Link } from "react-router-dom";
 import Icon from "components/icon/Icon";
-import NavBar from "components/layout/Navigation/NavBar";
+import NavBar from "components/layout/navigation/NavBar";
 
 const FormHeader = ({ id, title, toggleThemeEditor }) => {
   const dispatch = useDispatch();
