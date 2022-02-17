@@ -23,7 +23,7 @@ import {
 import { setForm, setLoading } from "store/data/form.slice";
 
 const Home = () => {
-  const [displayDate, setDisplayDate] = useState("Yesterday");
+  const displayDate = "Yesterday";
   const [gridView, setGridView] = useState(false);
   const [ownedFilter, setOwnedFilter] = useState(ownershipFilters[1]);
   const { forms, loading } = useSelector((state) => state.allForms);
@@ -40,6 +40,7 @@ const Home = () => {
   const dispatchCallBack = (form) => {
     dispatch(setForm(form));
   };
+
   const addNewForm = (name, uid) => {
     const myForm = {
       theme,
@@ -94,7 +95,7 @@ const Home = () => {
             <Dropdown
               options={ownershipFilters}
               setSelected={setOwnedFilter}
-              defaultSelected={ownershipFilters[1].text}
+              defaultSelected={ownedFilter.text}
             />
             <div className="flex items-center">
               <div

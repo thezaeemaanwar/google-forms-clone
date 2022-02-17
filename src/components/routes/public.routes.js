@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import CreateForm from "views/CreateForm";
 import Home from "views/Home";
 import { useSelector } from "react-redux";
