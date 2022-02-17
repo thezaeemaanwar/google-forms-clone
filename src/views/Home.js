@@ -11,11 +11,11 @@ import {
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { formTemplates, ownershipFilters } from "data/Templates";
-import FormTile from "components/Form/FormTile/FormTile";
-import Dropdown from "components/Dropdown/Dropdown";
+import FormTile from "components/form/FormTile/FormTile";
+import Dropdown from "components/dropdown/Dropdown";
 import sortIcon from "assets/sort.png";
 import { useDispatch, useSelector } from "react-redux";
-import Loading from "components/Loaders/page_loader";
+import Loading from "components/loaders/page_loader";
 import {
   addFormInDB,
   getTemplateFromDB,

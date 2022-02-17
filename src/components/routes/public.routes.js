@@ -2,13 +2,13 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import CreateForm from "views/CreateForm";
 import Home from "views/Home";
 import { useSelector } from "react-redux";
-import Responses from "components/Form/Responses";
-import Settings from "components/Form/Settings";
+import Responses from "components/form/Responses";
+import Settings from "components/form/Settings";
 import NotFound from "views/404";
-import Edit from "components/Form/Edit";
+import Edit from "components/form/Edit";
 import PropTypes from "prop-types";
 import Landing from "views/Landing";
-import PrivateRoute from "components/Routing/private.routes";
+import PrivateRoute from "components/routes/private.routes";
 
 const PublicRoutes = ({ logged }) => {
   const { theme } = useSelector((state) => state.form);

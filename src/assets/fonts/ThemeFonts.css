@@ -1,0 +1,12 @@
+.basic-text {
+  @apply font-basic;
+}
+.decorative-text {
+  @apply font-decorative;
+}
+.playful-text {
+  @apply font-playful;
+}
+.formal-text {
+  @apply font-formal;
+}

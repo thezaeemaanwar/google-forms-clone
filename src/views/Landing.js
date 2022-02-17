@@ -1,5 +1,5 @@
 import FilledButton from "components/Buttons/filledButton";
-import OutLinedButton from "components/Buttons/outLinedButton";
+import OutLinedButton from "components/buttons/outLinedButton";
 import LandingHeader from "components/layout/Headers/LandingHeader";
 import bg from "assets/bg-1.png";
 import { useDispatch } from "react-redux";

@@ -1,0 +1,299 @@
+.gray-bg {
+  @apply bg-gray;
+}
+.gray-border {
+  @apply border-gray;
+}
+.gray-text {
+  @apply text-gray;
+}
+.grayTextField:focus {
+  @apply border-gray;
+}
+.gray10-bg {
+  @apply bg-gray/10;
+}
+.gray20-bg {
+  @apply bg-gray/20;
+}
+.gray30-bg {
+  @apply bg-gray/30;
+}
+.grey0-bg {
+  background-color: #f6f6f6;
+}
+
+.bluegray-bg {
+  @apply bg-bluegray;
+}
+.bluegray-border {
+  @apply border-bluegray;
+}
+.bluegray-text {
+  @apply text-bluegray;
+}
+.bluegrayTextField:focus {
+  @apply border-bluegray;
+}
+.bluegray10-bg {
+  @apply bg-bluegray/10;
+}
+.bluegray20-bg {
+  @apply bg-bluegray/20;
+}
+.bluegray30-bg {
+  @apply bg-bluegray/30;
+}
+.bluegrey0-bg {
+  background-color: #f6f6f6;
+}
+
+.green-bg {
+  @apply bg-green;
+}
+.green-border {
+  @apply border-green;
+}
+.green-text {
+  @apply text-green;
+}
+.greenTextField:focus {
+  @apply border-green;
+}
+.green10-bg {
+  @apply bg-green/10;
+}
+.green20-bg {
+  @apply bg-green/20;
+}
+.green30-bg {
+  @apply bg-green/30;
+}
+.green0-bg {
+  background-color: #f6f6f6;
+}
+
+.teal-bg {
+  @apply bg-teal;
+}
+.teal-border {
+  @apply border-teal;
+}
+.teal-text {
+  @apply text-teal;
+}
+.tealTextField:focus {
+  @apply border-teal;
+}
+.teal10-bg {
+  @apply bg-teal/10;
+}
+.teal20-bg {
+  @apply bg-teal/20;
+}
+.teal30-bg {
+  @apply bg-teal/30;
+}
+.teal0-bg {
+  background-color: #f6f6f6;
+}
+
+.orange-bg {
+  @apply bg-orange;
+}
+.orange-border {
+  @apply border-orange;
+}
+.orange-text {
+  @apply text-orange;
+}
+.orangeTextField:focus {
+  @apply border-orange;
+}
+.orange10-bg {
+  @apply bg-orange/10;
+}
+.orange20-bg {
+  @apply bg-orange/20;
+}
+.orange30-bg {
+  @apply bg-orange/30;
+}
+.orange0-bg {
+  background-color: #f6f6f6;
+}
+
+.redorange-bg {
+  @apply bg-redorange;
+}
+.redorange-border {
+  @apply border-redorange;
+}
+.redorange-text {
+  @apply text-redorange;
+}
+.redorangeTextField:focus {
+  @apply border-redorange;
+}
+.redorange10-bg {
+  @apply bg-redorange/10;
+}
+.redorange20-bg {
+  @apply bg-redorange/20;
+}
+.redorange30-bg {
+  @apply bg-redorange/30;
+}
+.redorange0-bg {
+  background-color: #f6f6f6;
+}
+
+.cyan-bg {
+  @apply bg-cyan;
+}
+.cyan-border {
+  @apply border-cyan;
+}
+.cyan-text {
+  @apply text-cyan;
+}
+.cyanTextField:focus {
+  @apply border-cyan;
+}
+.cyan10-bg {
+  @apply bg-cyan/10;
+}
+.cyan20-bg {
+  @apply bg-cyan/20;
+}
+.cyan30-bg {
+  @apply bg-cyan/30;
+}
+.cyan0-bg {
+  background-color: #f6f6f6;
+}
+
+.lightblue-bg {
+  @apply bg-lightblue;
+}
+.lightblue-border {
+  @apply border-lightblue;
+}
+.lightblue-text {
+  @apply text-lightblue;
+}
+.lightblueTextField:focus {
+  @apply border-lightblue;
+}
+.lightblue10-bg {
+  @apply bg-lightblue/10;
+}
+.lightblue20-bg {
+  @apply bg-lightblue/20;
+}
+.lightblue30-bg {
+  @apply bg-lightblue/30;
+}
+.lightblue0-bg {
+  background-color: #f6f6f6;
+}
+
+.indigo-bg {
+  @apply bg-indigo;
+}
+.indigo-border {
+  @apply border-indigo;
+}
+.indigo-text {
+  @apply text-indigo;
+}
+.indigoTextField:focus {
+  @apply border-indigo;
+}
+.indigo10-bg {
+  @apply bg-indigo/10;
+}
+.indigo20-bg {
+  @apply bg-indigo/20;
+}
+.indigo30-bg {
+  @apply bg-indigo/30;
+}
+.indigo0-bg {
+  background-color: #f6f6f6;
+}
+
+.red-bg {
+  @apply bg-red;
+}
+.red-border {
+  @apply border-red;
+}
+.red-text {
+  @apply text-red;
+}
+.redTextField:focus {
+  @apply border-red;
+}
+.red10-bg {
+  @apply bg-red/10;
+}
+.red20-bg {
+  @apply bg-red/20;
+}
+.red30-bg {
+  @apply bg-red/30;
+}
+.red0-bg {
+  background-color: #f6f6f6;
+}
+
+.blue-bg {
+  @apply bg-blue;
+}
+.blue-border {
+  @apply border-blue;
+}
+.blue-text {
+  @apply text-blue;
+}
+.blueTextField:focus {
+  @apply border-blue;
+}
+.blue10-bg {
+  @apply bg-blue/10;
+}
+.blue20-bg {
+  @apply bg-blue/20;
+}
+.blue30-bg {
+  @apply bg-blue/30;
+}
+.blue0-bg {
+  background-color: #f6f6f6;
+}
+
+.purple-bg {
+  @apply bg-purple;
+}
+.purple-border {
+  @apply border-purple;
+}
+.purple-text {
+  @apply text-purple;
+}
+.purpleTextField:focus {
+  @apply border-purple;
+}
+.purple10-bg {
+  @apply bg-purple/10;
+}
+.purple20-bg {
+  @apply bg-purple/20;
+}
+.purple30-bg {
+  @apply bg-purple/30;
+}
+.purple0-bg {
+  background-color: #f6f6f6;
+}

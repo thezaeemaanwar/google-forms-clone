@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import PublicRoutes from "components/Routing/public.routes";
-import Loading from "components/Loaders/page_loader";
+import PublicRoutes from "components/routes/public.routes";
+import Loading from "components/loaders/page_loader";
 import Landing from "views/Landing";
 import { useEffect } from "react";
 import { checkLogged } from "services/firebase/auth.firebase";
@@ -8,7 +8,7 @@ import { setUser } from "store/authentication/authentication.slice";
 import { getFormsFromFirebase } from "services/firebase/firestore.firebase";
 import { setForms, setLoading } from "store/data/allForms.slice";
 import { Navigate } from "react-router-dom";
-import UserRoutes from "components/Routing/private.routes";
+import UserRoutes from "components/routes/private.routes";
 
 const App = () => {
   const dispatch = useDispatch();
