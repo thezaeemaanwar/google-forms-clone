@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFolder, faStar, faEye } from "@fortawesome/free-regular-svg-icons";
 import { faPalette, faRedo, faUndo } from "@fortawesome/free-solid-svg-icons";
 import logo from "assets/logo.png";
@@ -15,7 +14,7 @@ import { Link } from "react-router-dom";
 import Icon from "components/Icon/Icon";
 import NavBar from "components/layout/Navigation/NavBar";
 
-const FormHeader = ({ title, toggleThemeEditor }) => {
+const FormHeader = ({ id, title, toggleThemeEditor }) => {
   const dispatch = useDispatch();
   const [ddState, setDdState] = useState(false);
   const toggleDropdown = () => {
@@ -24,10 +23,11 @@ const FormHeader = ({ title, toggleThemeEditor }) => {
   const signOut = () => {
     dispatch(startLoading());
     SignOut((user) => {
-      dispatch(setUser(user));
+      dispatch(setUser({ user }));
     });
   };
   const { user } = useSelector((state) => state.authentication);
+  const { saved } = useSelector((state) => state.form);
   return (
     <header className="fixed top-0 p-2 w-full bg-white h-28 flex flex-col justify-between shadow z-10">
       <div className="flex justify-between items-center">
@@ -39,6 +39,7 @@ const FormHeader = ({ title, toggleThemeEditor }) => {
 
           <Icon icon={faFolder} label="Move to folder" />
           <Icon icon={faStar} label="Star" />
+          <div className="text-xs">{saved}</div>
         </div>
         <div className="flex items-center">
           <Icon icon={faPalette} label="Theme" onClick={toggleThemeEditor} />
@@ -68,8 +69,7 @@ const FormHeader = ({ title, toggleThemeEditor }) => {
           </div>
         </div>
       </div>
-      <NavBar />
-      {/* <div className="flex items-center justify-center">resp</div> */}
+      <NavBar type={id} />
     </header>
   );
 };

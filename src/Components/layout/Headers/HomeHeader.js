@@ -22,7 +22,7 @@ const HomeHeader = () => {
   const signOut = () => {
     dispatch(startLoading());
     SignOut((user) => {
-      dispatch(setUser(user));
+      dispatch(setUser({user}));
     });
   };
 

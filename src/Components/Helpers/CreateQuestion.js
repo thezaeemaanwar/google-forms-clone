@@ -1,13 +1,13 @@
-import generateKey from "components/Helpers/GenerateKey";
-import { dropdownOptions } from "data/OptionTypes";
-import createOption from "components/Helpers/CreateOption";
+import generateKey from "components/Helpers/generateKey";
+import { MULTIPLE_CHOICE } from "data/OptionTypes";
+import createOption from "components/Helpers/createOption";
 
 const createQuestion = (len) => {
   const question = {
     id: generateKey("question" + len),
     title: "Question",
+    optionType: MULTIPLE_CHOICE,
     options: [createOption(0)],
-    optionType: dropdownOptions[2],
     required: false,
   };
   return question;

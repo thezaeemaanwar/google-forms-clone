@@ -1,18 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
-import createQuestion from "components/Helpers/CreateQuestion";
-import generateKey from "components/Helpers/GenerateKey";
+import createQuestion from "components/Helpers/createQuestion";
+import generateKey from "components/Helpers/generateKey";
 
 export const formSlice = createSlice({
   name: "form",
   initialState: {
+    loading: false,
+    saved: "",
+    id: "",
     theme: {
       color: "purple",
       font: "basic",
       backgroundOpacity: 10,
     },
-    title: "",
+    title: "Untitled Form",
     description: "",
     questions: [createQuestion(0)],
+    date: "",
+    shared: true,
+    error: null,
   },
   reducers: {
     addQuestion: (state, action) => {
@@ -44,7 +50,7 @@ export const formSlice = createSlice({
       const temp = state.questions;
       const index = temp.findIndex((e) => e.id === action.payload.id);
       const question = { ...action.payload.question };
-      question.id = generateKey(index);
+      question.id = generateKey("question" + index);
       temp.splice(index, 0, question);
       state.questions = temp;
     },
@@ -63,6 +69,25 @@ export const formSlice = createSlice({
     setDescription: (state, action) => {
       state.description = action.payload.description;
     },
+    setForm: (state, action) => {
+      if (action.payload.error) state.error = action.payload.error;
+      else {
+        state.id = action.payload.id;
+        state.theme = action.payload.theme;
+        state.title = action.payload.title;
+        state.description = action.payload.description;
+        state.questions = action.payload.questions;
+        state.loading = false;
+        state.date = action.payload.date;
+        state.shared = action.payload.shared;
+      }
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setSaved: (state, action) => {
+      state.saved = action.payload;
+    },
   },
 });
 
@@ -78,5 +103,8 @@ export const {
   setDescription,
   duplicateQuestion,
   setDraggedQuestion,
+  setForm,
+  setLoading,
+  setSaved,
 } = formSlice.actions;
 export default formSlice.reducer;

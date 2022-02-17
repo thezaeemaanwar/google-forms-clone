@@ -1,4 +1,4 @@
-import generateKey from "components/Helpers/GenerateKey";
+import generateKey from "components/Helpers/generateKey";
 
 const createOption = (pre) => {
   const option = { id: generateKey("option" + pre), text: "Option" };

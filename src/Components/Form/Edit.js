@@ -3,32 +3,38 @@ import QuestionCard from "components/Cards/QuestionCard";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ToolBar from "components/Toolbar/ToolBar";
-import createQuestion from "components/Helpers/CreateQuestion";
+import createQuestion from "components/Helpers/createQuestion";
 import {
   addQuestion,
   setDraggedQuestion,
   setQuestion,
+  setSaved,
 } from "store/data/form.slice";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { addQuestionInDB } from "services/firebase/firebase.firestore";
+import { PROGRESS_SAVING } from "data/statusMessages";
 
 const Edit = () => {
-  const { theme, questions } = useSelector((state) => state.form);
-  const [formTitle, setFormTitle] = useState("Untitled Form");
-  const [formDescription, setFormDescription] = useState("Form Description");
-  const [selected, setSelected] = useState("gyusegvybct");
+  const { questions, id } = useSelector((state) => state.form);
+  const [selected, setSelected] = useState(questions[0].id);
   const dispatch = useDispatch();
 
-  const setFormQuestion = (id, question) => {
-    dispatch(setQuestion({ id, question }));
+  const savedCallBack = (saved) => {
+    dispatch(setSaved(saved));
+  };
+  const setFormQuestion = (qid, question) => {
+    dispatch(setQuestion({ id: qid, question }));
   };
 
   const addNewQuestion = () => {
     const quest = { question: createQuestion(questions.length) };
     dispatch(addQuestion(quest));
+    dispatch(setSaved(PROGRESS_SAVING));
+    addQuestionInDB(id, quest.question, savedCallBack);
   };
 
-  const selectQuestionCard = (id) => {
-    setSelected(id);
+  const selectQuestionCard = (qid) => {
+    setSelected(qid);
   };
 
   const handleOnDragEnd = (result) => {
@@ -38,15 +44,10 @@ const Edit = () => {
 
   return (
     <div>
-      <div className="w-full  text-black flex flex-col items-center min-h-screen">
-        <div className="w-1/2">
-          <TitleCard
-            title={formTitle}
-            setTitle={setFormTitle}
-            description={formDescription}
-            setDescription={setFormDescription}
-            color={theme.color}
-          />
+      <div className="w-full text-black flex flex-col items-center sm:flex-row sm:items-start sm:justify-center min-h-screen">
+        <div className="w-12 bg-white m-3"></div>
+        <div className="w-11/12 lg:w-1/2 md:w-2/3 sm:w-3/4">
+          <TitleCard />
 
           <DragDropContext onDragEnd={handleOnDragEnd}>
             <Droppable droppableId="questions">

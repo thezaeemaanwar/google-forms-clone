@@ -10,19 +10,38 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
 import { Link } from "react-router-dom";
-import { formTemplates, ownershipFilters, formSamples } from "data/Templates";
+import { formTemplates, ownershipFilters } from "data/Templates";
 import FormTile from "components/Form/FormTile/FormTile";
 import Dropdown from "components/Dropdown/Dropdown";
 import sortIcon from "assets/sort.png";
+import { useSelector } from "react-redux";
+import Loading from "components/Loaders/page_loader";
+import { addFormInDB } from "services/firebase/firebase.firestore";
 
 const Home = () => {
-  const [date, setDate] = useState("Yesterday");
+  const [displayDate, setDisplayDate] = useState("Yesterday");
   const [gridView, setGridView] = useState(false);
   const [ownedFilter, setOwnedFilter] = useState(ownershipFilters[1]);
-  const [forms, setForms] = useState(formSamples);
+  const { forms, loading } = useSelector((state) => state.allForms);
+  const { user } = useSelector((state) => state.authentication);
+  const { theme, title, description, questions } = useSelector(
+    (state) => state.form
+  );
 
   const toggleGridView = () => {
     setGridView(!gridView);
+  };
+
+  const addNewForm = (name, uid) => {
+    const myForm = {
+      theme,
+      title,
+      description,
+      questions,
+      date: new Date(),
+      shared: true,
+    };
+    addFormInDB(uid, myForm);
   };
   return (
     <div className="">
@@ -52,6 +71,7 @@ const Home = () => {
                     className="w-48 border border-hoverGrey hover:border-purple hover:cursor-pointer rounded-md"
                     src={temp.img}
                     alt={`template-${i}`}
+                    onClick={() => addNewForm(temp.name, user.uid, temp)}
                   />
                 </Link>
                 <div className="mt-2 ml-1 text-black text-sm">{temp.name}</div>
@@ -61,7 +81,7 @@ const Home = () => {
         </div>
         <div className="w-full flex flex-col items-center justify-center">
           <div className="w-2/3 flex  justify-between items-center my-2">
-            <div>{date}</div>
+            <div>{displayDate}</div>
             <Dropdown
               options={ownershipFilters}
               setSelected={setOwnedFilter}
@@ -92,11 +112,17 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-2/3">
-            {forms.map((form) => (
-              <FormTile key={form.id} formData={form} />
-            ))}
-          </div>
+          {loading ? (
+            <Loading />
+          ) : (
+            <div className={`flex w-2/3 ${gridView ? "flex-row" : "flex-col"}`}>
+              {forms.map((form) => (
+                <Link key={form.id} to={`/create/${form.id}/edit`}>
+                  <FormTile key={form.id} formData={form} gridView={gridView} />
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>

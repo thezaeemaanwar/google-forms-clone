@@ -16,47 +16,82 @@ import {
   setQuestion,
   removeQuestion,
   duplicateQuestion,
+  setSaved,
 } from "store/data/form.slice";
-import createQuestion from "components/Helpers/CreateQuestion";
+import createQuestion from "components/Helpers/createQuestion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  removeQuestionFromDB,
+  setQuestionsInDB,
+} from "services/firebase/firebase.firestore";
+import { PROGRESS_SAVING, SUCCESS_SAVED } from "data/statusMessages";
+import { useFormik } from "formik";
+import { questionSchema as validationSchema } from "components/Helpers/validations";
 
 const QuestionCard = ({ question, selected, onClick }) => {
-  const { theme } = useSelector((state) => state.form);
+  const { id, theme, questions } = useSelector((state) => state.form);
   const dispatch = useDispatch();
-  const [myOptionType, setMyOptionType] = useState(question.optionType);
   const [questionTitle, setQuestionTitle] = useState(question.title);
 
-  const handleTitleChange = (e) => {
-    setQuestionTitle(e.target.value);
+  const { handleChange, values, errors } = useFormik({
+    initialValues: { title: question.title },
+    validationSchema,
+  });
+
+  const setOptionType = (opType) => {
+    const temp = { ...question };
+    temp.optionType = opType;
+    dispatch(setQuestion({ id: question.id, question: temp }));
+  };
+
+  const savedCallBack = (status) => {
+    if (status.error) dispatch(setSaved("Error Saving data in Drive"));
+    dispatch(setSaved(SUCCESS_SAVED));
   };
 
   const setOptions = (options) => {
+    console.log(options);
     const temp = { ...question };
     temp.options = options;
     dispatch(setQuestion({ id: question.id, question: temp }));
+    dispatch(setSaved(PROGRESS_SAVING));
+    setQuestionsInDB(id, questions, savedCallBack);
   };
 
   const toggleRequired = (e) => {
     const temp = { ...question };
     temp.required = !question.required;
     dispatch(setQuestion({ id: question.id, question: temp }));
+
+    dispatch(setSaved(PROGRESS_SAVING));
+    const tempQ = [...questions];
+    const ind = tempQ.findIndex((x) => x.id === question.id);
+    tempQ[ind] = question;
+    setQuestionsInDB(id, tempQ, savedCallBack);
   };
 
-  const deleteQuestion = (id) => {
-    console.log("in delete question");
-    dispatch(removeQuestion({ id }));
+  const deleteQuestion = (qid) => {
+    dispatch(setSaved(PROGRESS_SAVING));
+    dispatch(removeQuestion({ id: qid }));
+    removeQuestionFromDB(id, question, savedCallBack);
   };
 
   const handleDuplicateQuestion = (id) => {
     dispatch(duplicateQuestion({ id: question.id, question }));
+    dispatch(setSaved(PROGRESS_SAVING));
+    setQuestionsInDB(id, questions, savedCallBack);
   };
 
   const saveTitle = () => {
-    console.log("In set title");
     const ques = { ...question };
-    ques.title = questionTitle;
-    dispatch(setQuestion({ id: ques.id, question: ques }));
+    ques.title = values.title;
+    if (!errors.title) {
+      dispatch(setQuestion({ id: ques.id, question: ques }));
+      dispatch(setSaved(PROGRESS_SAVING));
+      setQuestionsInDB(id, questions, savedCallBack);
+    }
   };
+  console.log(questions);
 
   return (
     <div
@@ -88,7 +123,7 @@ const QuestionCard = ({ question, selected, onClick }) => {
           <div>
             <DisplayOptions
               options={question.options}
-              type={question.optionType.text}
+              type={question.optionType}
             />
           </div>
         </div>
@@ -97,22 +132,33 @@ const QuestionCard = ({ question, selected, onClick }) => {
           <div className="flex justify-between w-full">
             <input
               autoFocus
-              className={`w-2/3 p-3 bg-grey border-fontGrey border-b focus:outline-none ${theme.color}TextField ${theme.font}-text focus:border-b-2`}
+              name="title"
+              className={`w-2/3 p-3 bg-grey border-hoverGrey border-b focus:outline-none ${theme.color}TextField ${theme.font}-text focus:border-b-2`}
               placeholder="Question"
-              value={questionTitle}
-              onChange={(e) => handleTitleChange(e)}
+              value={values.title}
+              onChange={handleChange}
               onBlur={saveTitle}
             />
+
             <CustomDropdown
               options={dropdownOptions}
-              setSelected={setMyOptionType}
-              defaultSelected={myOptionType}
+              setSelected={setOptionType}
+              defaultSelected={
+                dropdownOptions[
+                  dropdownOptions.findIndex(
+                    (d) => d.text === question.optionType
+                  )
+                ]
+              }
             />
           </div>
+          <p className="text-red text-xs py-1">
+            {errors.title ? errors.title : null}
+          </p>
           <div className="w-full">
             <OptionCard
               options={question.options}
-              type={myOptionType.text}
+              type={question.optionType}
               setOptions={setOptions}
             />
           </div>
