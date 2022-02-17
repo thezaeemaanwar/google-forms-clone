@@ -1,4 +1,4 @@
-import FilledButton from "components/Buttons/FilledButton";
+import FilledButton from "components/buttons/FilledButton";
 import OutLinedButton from "components/buttons/OutLinedButton";
 import LandingHeader from "components/layout/headers/LandingHeader";
 import bg from "assets/bg-1.png";
