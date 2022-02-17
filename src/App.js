@@ -8,7 +8,7 @@ import { setUser } from "store/authentication/authentication.slice";
 import { getFormsFromFirebase } from "services/firebase/firestore.firebase";
 import { setForms, setLoading } from "store/data/allForms.slice";
 import { Navigate } from "react-router-dom";
-import UserRoutes from "components/Routing/user.routes";
+import UserRoutes from "components/Routing/private.routes";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -38,8 +38,7 @@ const App = () => {
   else
     return (
       <div>
-        {logged ? <PublicRoutes logged={logged} /> : <UserRoutes />}
-        {/* {logged ? <PublicRoutes /> : <Navigate replace={true} to="/Landing" />} */}
+        <PublicRoutes logged={logged} />
       </div>
     );
 };

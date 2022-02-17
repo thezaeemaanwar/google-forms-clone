@@ -8,16 +8,21 @@ import {
   startLoading,
 } from "store/authentication/authentication.slice";
 import { SignIn } from "services/firebase/auth.firebase";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const dispatchCallback = (payload) => {
     dispatch(setUser(payload));
   };
   const signIn = () => {
     dispatch(startLoading());
     SignIn(dispatchCallback);
+    navigate("/");
   };
+
   return (
     <div>
       <LandingHeader />
