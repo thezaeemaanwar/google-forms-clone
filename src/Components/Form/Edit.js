@@ -11,7 +11,7 @@ import {
   setSaved,
 } from "store/data/form.slice";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { addQuestionInDB } from "services/firebase/firebase.firestore";
+import { addQuestionInDB } from "services/firebase/firestore.firebase";
 import { PROGRESS_SAVING } from "data/statusMessages";
 
 const Edit = () => {

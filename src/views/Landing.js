@@ -7,7 +7,7 @@ import {
   setUser,
   startLoading,
 } from "store/authentication/authentication.slice";
-import { SignIn } from "services/firebase/firebase.auth";
+import { SignIn } from "services/firebase/auth.firebase";
 
 const Landing = () => {
   const dispatch = useDispatch();

@@ -16,7 +16,7 @@ import {
 import PropTypes from "prop-types";
 import CustomDropdown from "components/Dropdown/CustomDropdown";
 import { PROGRESS_SAVING } from "data/statusMessages";
-import { setThemeInDB } from "services/firebase/firebase.firestore";
+import { setThemeInDB } from "services/firebase/firestore.firebase";
 
 const ThemeEditor = ({ toggleThemeEditor }) => {
   const { id, theme } = useSelector((state) => state.form);

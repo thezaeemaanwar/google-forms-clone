@@ -1,4 +1,4 @@
-import { db } from "services/firebase/firebase.config";
+import { db } from "services/firebase/config.firebase";
 import {
   collection,
   getDocs,
@@ -69,11 +69,12 @@ const getForm = async (uid, formId, dispatchCallback) => {
   }
 };
 
-const addFormInDB = async (uid, form) => {
+const addFormInDB = async (uid, form, dispatchCallback) => {
   form.uid = uid;
   try {
     const docRef = await addDoc(collection(db, "forms"), form);
-    console.log("Added doc", docRef.id);
+    form.id = docRef.id;
+    dispatchCallback(form);
   } catch (e) {
     console.error(e);
   }
@@ -83,6 +84,15 @@ const setFormInDB = async (formId, form) => {
   try {
     const docRef = doc(db, "forms", formId);
     await setDoc(docRef, form);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const getTemplateFromDB = async (name) => {
+  try {
+    const docRef = doc(db, "templates", name);
+    await getDoc(docRef);
   } catch (e) {
     console.error(e);
   }
@@ -183,4 +193,5 @@ export {
   setSharedInDB,
   setFormTitleInDB,
   setFormDescriptionInDB,
+  getTemplateFromDB,
 };

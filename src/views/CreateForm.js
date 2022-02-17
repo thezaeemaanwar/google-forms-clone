@@ -3,7 +3,7 @@ import FormHeader from "components/layout/Headers/FormHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getForm } from "services/firebase/firebase.firestore";
+import { getForm } from "services/firebase/firestore.firebase";
 import { setForm, setLoading } from "store/data/form.slice";
 import Loading from "components/Loaders/page_loader";
 

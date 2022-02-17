@@ -13,7 +13,6 @@ const IndividualOption = ({ type, option, deleteOption, saveOption }) => {
   };
 
   const handleFocusOut = () => {
-    console.log("on blur");
     saveOption({ id: option.id, text: iOption });
   };
   const { theme } = useSelector((state) => state.form);

@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setFormDescriptionInDB,
   setFormTitleInDB,
-} from "services/firebase/firebase.firestore";
+} from "services/firebase/firestore.firebase";
 import { setTitle, setDescription, setSaved } from "store/data/form.slice";
 import { useFormik } from "formik";
 import { headerSchema as validationSchema } from "components/Helpers/validations";
@@ -86,8 +86,8 @@ TitleCard.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   color: PropTypes.string,
-  setTitle: PropTypes.func,
-  setDescription: PropTypes.func,
+  setTitle: PropTypes.func.isRequired,
+  setDescription: PropTypes.func.isRequired,
 };
 
 export default TitleCard;

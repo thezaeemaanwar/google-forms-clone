@@ -6,8 +6,9 @@ import Responses from "components/Form/Responses";
 import Settings from "components/Form/Settings";
 import NotFound from "views/404";
 import Edit from "components/Form/Edit";
+import PropTypes from "prop-types";
 
-const PublicRoutes = () => {
+const PublicRoutes = ({ logged }) => {
   const { theme } = useSelector((state) => state.form);
 
   return (
@@ -25,4 +26,10 @@ const PublicRoutes = () => {
   );
 };
 
+PublicRoutes.defaultProps = {
+  logged: false,
+};
+PublicRoutes.propTypes = {
+  logged: PropTypes.bool,
+};
 export default PublicRoutes;

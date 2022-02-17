@@ -5,7 +5,7 @@ import FilledButton from "components/Buttons/filledButton";
 import DropdownWithIcon from "components/Dropdown/DropdownwithIcon";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { SignOut } from "services/firebase/firebase.auth";
+import { SignOut } from "services/firebase/auth.firebase";
 import {
   startLoading,
   setUser,

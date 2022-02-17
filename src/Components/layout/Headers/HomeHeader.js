@@ -4,7 +4,7 @@ import { faBars, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Logo from "assets/logo.png";
 import dots from "assets/dots.png";
 import { useState } from "react";
-import { SignOut } from "services/firebase/firebase.auth";
+import { SignOut } from "services/firebase/auth.firebase";
 import {
   startLoading,
   setUser,

@@ -12,9 +12,7 @@ const OptionCard = ({ type, options, setOptions }) => {
   const saveOptions = (option) => {
     const ops = [...options];
     const i = ops.findIndex((o) => o.id === option.id);
-    console.log(ops[i].text);
     ops[i] = option;
-    console.log("ops", ops);
     setOptions(ops);
   };
   const deleteOption = (opId) => {
@@ -25,7 +23,11 @@ const OptionCard = ({ type, options, setOptions }) => {
   };
 
   if (type === SHORT_ANSWER || type === PARAGRAPH)
-    return <div>Short Anser</div>;
+    return (
+      <div>
+        <input type="text" placeholder="Short Answer" />
+      </div>
+    );
   else
     return (
       <div>

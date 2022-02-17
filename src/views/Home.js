@@ -9,14 +9,18 @@ import {
   faGripHorizontal,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { formTemplates, ownershipFilters } from "data/Templates";
 import FormTile from "components/Form/FormTile/FormTile";
 import Dropdown from "components/Dropdown/Dropdown";
 import sortIcon from "assets/sort.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "components/Loaders/page_loader";
-import { addFormInDB } from "services/firebase/firebase.firestore";
+import {
+  addFormInDB,
+  getTemplateFromDB,
+} from "services/firebase/firestore.firebase";
+import { setForm, setLoading } from "store/data/form.slice";
 
 const Home = () => {
   const [displayDate, setDisplayDate] = useState("Yesterday");
@@ -24,14 +28,18 @@ const Home = () => {
   const [ownedFilter, setOwnedFilter] = useState(ownershipFilters[1]);
   const { forms, loading } = useSelector((state) => state.allForms);
   const { user } = useSelector((state) => state.authentication);
-  const { theme, title, description, questions } = useSelector(
+  const { id, theme, title, description, questions } = useSelector(
     (state) => state.form
   );
+  const dispatch = useDispatch();
 
   const toggleGridView = () => {
     setGridView(!gridView);
   };
 
+  const dispatchCallBack = (form) => {
+    dispatch(setForm(form));
+  };
   const addNewForm = (name, uid) => {
     const myForm = {
       theme,
@@ -41,7 +49,10 @@ const Home = () => {
       date: new Date(),
       shared: true,
     };
-    addFormInDB(uid, myForm);
+    getTemplateFromDB(name);
+    setLoading(true);
+    addFormInDB(uid, myForm, dispatchCallBack);
+    <Navigate to={`/create/${id}/edit`} />;
   };
   return (
     <div className="">
@@ -66,14 +77,14 @@ const Home = () => {
           <div className="flex w-2/3 justify-between">
             {formTemplates.map((temp, i) => (
               <div key={temp.name}>
-                <Link to={temp.url}>
-                  <img
-                    className="w-48 border border-hoverGrey hover:border-purple hover:cursor-pointer rounded-md"
-                    src={temp.img}
-                    alt={`template-${i}`}
-                    onClick={() => addNewForm(temp.name, user.uid, temp)}
-                  />
-                </Link>
+                {/* <Link to={temp.url}> */}
+                <img
+                  className="w-48 border border-hoverGrey hover:border-purple hover:cursor-pointer rounded-md"
+                  src={temp.img}
+                  alt={`template-${i}`}
+                  onClick={() => addNewForm(temp.name, user.uid, temp)}
+                />
+                {/* </Link> */}
                 <div className="mt-2 ml-1 text-black text-sm">{temp.name}</div>
               </div>
             ))}

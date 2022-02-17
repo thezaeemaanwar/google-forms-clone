@@ -23,7 +23,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   removeQuestionFromDB,
   setQuestionsInDB,
-} from "services/firebase/firebase.firestore";
+} from "services/firebase/firestore.firebase";
 import { PROGRESS_SAVING, SUCCESS_SAVED } from "data/statusMessages";
 import { useFormik } from "formik";
 import { questionSchema as validationSchema } from "components/Helpers/validations";
@@ -91,7 +91,6 @@ const QuestionCard = ({ question, selected, onClick }) => {
       setQuestionsInDB(id, questions, savedCallBack);
     }
   };
-  console.log(questions);
 
   return (
     <div

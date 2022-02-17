@@ -3,17 +3,18 @@ import PublicRoutes from "components/Routing/public.routes";
 import Loading from "components/Loaders/page_loader";
 import Landing from "views/Landing";
 import { useEffect } from "react";
-import { checkLogged } from "services/firebase/firebase.auth";
+import { checkLogged } from "services/firebase/auth.firebase";
 import { setUser } from "store/authentication/authentication.slice";
-import { getFormsFromFirebase } from "services/firebase/firebase.firestore";
+import { getFormsFromFirebase } from "services/firebase/firestore.firebase";
 import { setForms, setLoading } from "store/data/allForms.slice";
+import { Navigate } from "react-router-dom";
+import UserRoutes from "components/Routing/user.routes";
 
 const App = () => {
   const dispatch = useDispatch();
   const { logged, loading, user } = useSelector(
     (state) => state.authentication
   );
- 
 
   useEffect(() => {
     const dispatchCallback = (user) => {
@@ -34,7 +35,13 @@ const App = () => {
   }, [user, dispatch]);
 
   if (loading) return <Loading />;
-  else return <div>{logged ? <PublicRoutes /> : <Landing />}</div>;
+  else
+    return (
+      <div>
+        {logged ? <PublicRoutes logged={logged} /> : <UserRoutes />}
+        {/* {logged ? <PublicRoutes /> : <Navigate replace={true} to="/Landing" />} */}
+      </div>
+    );
 };
 
 export default App;
