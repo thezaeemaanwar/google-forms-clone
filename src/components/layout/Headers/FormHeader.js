@@ -1,8 +1,12 @@
 import { faFolder, faStar, faEye } from "@fortawesome/free-regular-svg-icons";
-import { faPalette, faRedo, faUndo } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEllipsisV,
+  faPalette,
+  faRedo,
+  faUndo,
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "assets/logo.png";
 import FilledButton from "components/buttons/FilledButton";
-import DropdownWithIcon from "components/dropdown/DropdownwithIcon";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { SignOut } from "services/firebase/auth.firebase";
@@ -13,6 +17,7 @@ import {
 import { Link } from "react-router-dom";
 import Icon from "components/icon/Icon";
 import NavBar from "components/layout/navigation/NavBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const FormHeader = ({ id, title, toggleThemeEditor }) => {
   const dispatch = useDispatch();
@@ -51,7 +56,7 @@ const FormHeader = ({ id, title, toggleThemeEditor }) => {
             background="bg-purple py-2"
             text="Send"
           />
-          <DropdownWithIcon />
+          <FontAwesomeIcon icon={faEllipsisV} className="px-3" />
           <div className="hover:cursor-pointer" onClick={toggleDropdown}>
             <img
               className="rounded-full w-10 h-10 p-1"

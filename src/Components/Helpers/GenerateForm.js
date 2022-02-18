@@ -1,5 +1,5 @@
 const generateFormPreview = (id, title, img, date, shared) => {
-  return { id, title, img, date, shared };
+  return { id, title, img: img ? img : "", date, shared };
 };
 
 const generateForm = (

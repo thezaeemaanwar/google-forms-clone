@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
 import CustomDropdown from "components/dropdown/CustomDropdown";
 import OptionCard from "components/cards/options/Option";
 import { dropdownOptions } from "data/optionTypes";
@@ -31,7 +30,6 @@ import { questionSchema as validationSchema } from "components/helpers/validatio
 const QuestionCard = ({ question, selected, onClick }) => {
   const { id, theme, questions } = useSelector((state) => state.form);
   const dispatch = useDispatch();
-  const [questionTitle, setQuestionTitle] = useState(question.title);
 
   const { handleChange, values, errors } = useFormik({
     initialValues: { title: question.title },
@@ -50,7 +48,6 @@ const QuestionCard = ({ question, selected, onClick }) => {
   };
 
   const setOptions = (options) => {
-    console.log(options);
     const temp = { ...question };
     temp.options = options;
     dispatch(setQuestion({ id: question.id, question: temp }));

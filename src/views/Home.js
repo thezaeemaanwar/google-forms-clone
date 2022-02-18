@@ -9,7 +9,7 @@ import {
   faGripHorizontal,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { formTemplates, ownershipFilters } from "data/templates";
 import FormTile from "components/form/formTile/FormTile";
 import Dropdown from "components/dropdown/Dropdown";
@@ -19,8 +19,10 @@ import Loading from "components/loaders/page.loader";
 import {
   addFormInDB,
   getTemplateFromDB,
+  renameFormInDB,
 } from "services/firebase/firestore.firebase";
 import { setForm, setLoading } from "store/data/form.slice";
+import { setForms } from "store/data/allForms.slice";
 
 const Home = () => {
   const displayDate = "Yesterday";
@@ -41,7 +43,7 @@ const Home = () => {
     dispatch(setForm(form));
   };
 
-  const addNewForm = (name, uid) => {
+  const addNewForm = async (name, uid) => {
     const myForm = {
       theme,
       title,
@@ -52,9 +54,30 @@ const Home = () => {
     };
     getTemplateFromDB(name);
     setLoading(true);
-    addFormInDB(uid, myForm, dispatchCallBack);
+    await addFormInDB(uid, myForm, dispatchCallBack);
     navigate(`/create/${id}/edit`);
   };
+
+  const openForm = (formId) => {
+    navigate(`/create/${formId}/edit`);
+  };
+
+  const removeForm = (formId) => {
+    const temp = [...forms];
+    const i = temp.findIndex((e) => e.id === formId);
+    temp.splice(i, 1);
+    dispatch(setForms({ forms: temp }));
+  };
+  const renameForm = (formId, name) => {
+    const i = forms.findIndex((e) => e.id === formId);
+    const temp = { ...forms[i] };
+    temp.name = name;
+    dispatch(setForms({ forms: temp }));
+    renameFormInDB(formId, name);
+  };
+
+  console.log(forms);
+
   return (
     <div className="">
       <HomeHeader />
@@ -126,11 +149,21 @@ const Home = () => {
             <Loading />
           ) : (
             <div className={`flex w-2/3 ${gridView ? "flex-row" : "flex-col"}`}>
-              {forms.map((form) => (
-                <Link key={form.id} to={`/create/${form.id}/edit`}>
-                  <FormTile key={form.id} formData={form} gridView={gridView} />
-                </Link>
-              ))}
+              {forms.length ? (
+                1 &&
+                forms.map((form) => (
+                  <FormTile
+                    key={form.id}
+                    formData={form}
+                    removeForm={removeForm}
+                    renameForm={renameForm}
+                    gridView={gridView}
+                    onClick={() => openForm(form.id)}
+                  />
+                ))
+              ) : (
+                <div className="self-center"> No Forms Yet</div>
+              )}
             </div>
           )}
         </div>

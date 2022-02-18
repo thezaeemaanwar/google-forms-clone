@@ -14,6 +14,7 @@ const SignIn = (dispatchCallback) => {
       dispatchCallback({ user: re.user });
     })
     .catch((err) => {
+      console.error(err);
       dispatchCallback({ error: err });
     });
 };
