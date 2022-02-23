@@ -86,8 +86,6 @@ TitleCard.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   color: PropTypes.string,
-  setTitle: PropTypes.func.isRequired,
-  setDescription: PropTypes.func.isRequired,
 };
 
 export default TitleCard;

@@ -85,8 +85,11 @@ const addFormInDB = async (uid, form, dispatchCallback) => {
   form.uid = uid;
   try {
     const docRef = await addDoc(collection(db, "forms"), form);
+    console.log("doc id: ", docRef.id);
     form.id = docRef.id;
-    dispatchCallback(form);
+    form.date = form.date.toDateString();
+    await dispatchCallback(form);
+    return docRef.id;
   } catch (e) {
     console.error(e);
   }

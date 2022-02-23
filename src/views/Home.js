@@ -1,6 +1,6 @@
 import HomeHeader from "components/layout/headers/HomeHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   faEllipsisV,
   faChevronUp,
@@ -9,7 +9,7 @@ import {
   faGripHorizontal,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { formTemplates, ownershipFilters } from "data/templates";
 import FormTile from "components/form/formTile/FormTile";
 import Dropdown from "components/dropdown/Dropdown";
@@ -53,9 +53,11 @@ const Home = () => {
       shared: true,
     };
     getTemplateFromDB(name);
-    setLoading(true);
-    await addFormInDB(uid, myForm, dispatchCallBack);
-    navigate(`/create/${id}/edit`);
+    dispatch(setLoading(true));
+    const myId = await addFormInDB(uid, myForm, dispatchCallBack);
+    console.log("id", myId);
+    dispatch(setLoading(false));
+    navigate(`/create/${myId}/edit`);
   };
 
   const openForm = (formId) => {
