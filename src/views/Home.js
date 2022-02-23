@@ -30,7 +30,7 @@ const Home = () => {
   const [ownedFilter, setOwnedFilter] = useState(ownershipFilters[1]);
   const { forms, loading } = useSelector((state) => state.allForms);
   const { user } = useSelector((state) => state.authentication);
-  const { id, theme, title, description, questions } = useSelector(
+  const { theme, title, description, questions } = useSelector(
     (state) => state.form
   );
   const dispatch = useDispatch();
@@ -51,8 +51,9 @@ const Home = () => {
       questions,
       date: new Date(),
       shared: true,
+      name: "Untitled Form",
     };
-    getTemplateFromDB(name);
+    await getTemplateFromDB(name);
     dispatch(setLoading(true));
     const myId = await addFormInDB(uid, myForm, dispatchCallBack);
     console.log("id", myId);
@@ -77,8 +78,6 @@ const Home = () => {
     dispatch(setForms({ forms: temp }));
     renameFormInDB(formId, name);
   };
-
-  console.log(forms);
 
   return (
     <div className="">

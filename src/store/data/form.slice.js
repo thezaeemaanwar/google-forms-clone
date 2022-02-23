@@ -3,7 +3,7 @@ import createQuestion from "components/helpers/createQuestion";
 import generateKey from "components/helpers/generateKey";
 
 export const formSlice = createSlice({
-  name: "form",
+  name: "Untitled Form",
   initialState: {
     loading: false,
     saved: "",
