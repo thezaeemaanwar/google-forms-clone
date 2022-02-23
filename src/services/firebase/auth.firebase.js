@@ -1,4 +1,4 @@
-import firebase_app from "services/firebase/firebase.config";
+import firebase_app from "services/firebase/config.firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import {
   signInWithRedirect,
@@ -14,6 +14,7 @@ const SignIn = (dispatchCallback) => {
       dispatchCallback({ user: re.user });
     })
     .catch((err) => {
+      console.error(err);
       dispatchCallback({ error: err });
     });
 };

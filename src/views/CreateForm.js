@@ -1,11 +1,11 @@
-import ThemeEditor from "components/Theme/ThemeEditor";
-import FormHeader from "components/layout/Headers/FormHeader";
+import ThemeEditor from "components/theme/themeEditor";
+import FormHeader from "components/layout/headers/FormHeader";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getForm } from "services/firebase/firebase.firestore";
+import { getForm } from "services/firebase/firestore.firebase";
 import { setForm, setLoading } from "store/data/form.slice";
-import Loading from "components/Loaders/page_loader";
+import Loading from "components/loaders/page.loader";
 
 const CreateForm = () => {
   const { type } = useParams();

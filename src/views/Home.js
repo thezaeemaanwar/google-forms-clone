@@ -1,6 +1,6 @@
-import HomeHeader from "components/layout/Headers/HomeHeader";
+import HomeHeader from "components/layout/headers/HomeHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   faEllipsisV,
   faChevronUp,
@@ -9,17 +9,23 @@ import {
   faGripHorizontal,
 } from "@fortawesome/free-solid-svg-icons";
 import { faFolder } from "@fortawesome/free-regular-svg-icons";
-import { Link } from "react-router-dom";
-import { formTemplates, ownershipFilters } from "data/Templates";
-import FormTile from "components/Form/FormTile/FormTile";
-import Dropdown from "components/Dropdown/Dropdown";
+import { useNavigate } from "react-router-dom";
+import { formTemplates, ownershipFilters } from "data/templates";
+import FormTile from "components/form/formTile/FormTile";
+import Dropdown from "components/dropdown/Dropdown";
 import sortIcon from "assets/sort.png";
-import { useSelector } from "react-redux";
-import Loading from "components/Loaders/page_loader";
-import { addFormInDB } from "services/firebase/firebase.firestore";
+import { useDispatch, useSelector } from "react-redux";
+import Loading from "components/loaders/page.loader";
+import {
+  addFormInDB,
+  getTemplateFromDB,
+  renameFormInDB,
+} from "services/firebase/firestore.firebase";
+import { setForm, setLoading } from "store/data/form.slice";
+import { setForms } from "store/data/allForms.slice";
 
 const Home = () => {
-  const [displayDate, setDisplayDate] = useState("Yesterday");
+  const displayDate = "Yesterday";
   const [gridView, setGridView] = useState(false);
   const [ownedFilter, setOwnedFilter] = useState(ownershipFilters[1]);
   const { forms, loading } = useSelector((state) => state.allForms);
@@ -27,12 +33,17 @@ const Home = () => {
   const { theme, title, description, questions } = useSelector(
     (state) => state.form
   );
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const toggleGridView = () => {
     setGridView(!gridView);
   };
 
-  const addNewForm = (name, uid) => {
+  const dispatchCallBack = (form) => {
+    dispatch(setForm(form));
+  };
+
+  const addNewForm = async (name, uid) => {
     const myForm = {
       theme,
       title,
@@ -40,9 +51,34 @@ const Home = () => {
       questions,
       date: new Date(),
       shared: true,
+      name: "Untitled Form",
     };
-    addFormInDB(uid, myForm);
+    await getTemplateFromDB(name);
+    dispatch(setLoading(true));
+    const myId = await addFormInDB(uid, myForm, dispatchCallBack);
+    console.log("id", myId);
+    dispatch(setLoading(false));
+    navigate(`/create/${myId}/edit`);
   };
+
+  const openForm = (formId) => {
+    navigate(`/create/${formId}/edit`);
+  };
+
+  const removeForm = (formId) => {
+    const temp = [...forms];
+    const i = temp.findIndex((e) => e.id === formId);
+    temp.splice(i, 1);
+    dispatch(setForms({ forms: temp }));
+  };
+  const renameForm = (formId, name) => {
+    const i = forms.findIndex((e) => e.id === formId);
+    const temp = { ...forms[i] };
+    temp.name = name;
+    dispatch(setForms({ forms: temp }));
+    renameFormInDB(formId, name);
+  };
+
   return (
     <div className="">
       <HomeHeader />
@@ -63,17 +99,15 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-2/3 justify-between">
+          <div className="flex w-2/3 justify-between flex-wrap overflow-hidden">
             {formTemplates.map((temp, i) => (
-              <div key={temp.name}>
-                <Link to={temp.url}>
-                  <img
-                    className="w-48 border border-hoverGrey hover:border-purple hover:cursor-pointer rounded-md"
-                    src={temp.img}
-                    alt={`template-${i}`}
-                    onClick={() => addNewForm(temp.name, user.uid, temp)}
-                  />
-                </Link>
+              <div key={temp.name} className="w-48 basis-44">
+                <img
+                  className="w-48 border border-hoverGrey hover:border-purple hover:cursor-pointer rounded-md"
+                  src={temp.img}
+                  alt={`template-${i}`}
+                  onClick={() => addNewForm(temp.name, user.uid, temp)}
+                />
                 <div className="mt-2 ml-1 text-black text-sm">{temp.name}</div>
               </div>
             ))}
@@ -85,7 +119,7 @@ const Home = () => {
             <Dropdown
               options={ownershipFilters}
               setSelected={setOwnedFilter}
-              defaultSelected={ownershipFilters[1].text}
+              defaultSelected={ownedFilter.text}
             />
             <div className="flex items-center">
               <div
@@ -104,10 +138,10 @@ const Home = () => {
                   />
                 )}
               </div>
-              <div className="w-10 h-10 flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2]">
+              <div className="w-10 hidden h-10 md:flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2]">
                 <img className="w-5" src={sortIcon} alt="sort" />
               </div>
-              <div className="w-10 h-10 flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2] active:text-purple">
+              <div className="w-10 hidden h-10 md:flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2] active:text-purple">
                 <FontAwesomeIcon icon={faFolder} />
               </div>
             </div>
@@ -115,12 +149,26 @@ const Home = () => {
           {loading ? (
             <Loading />
           ) : (
-            <div className={`flex w-2/3 ${gridView ? "flex-row" : "flex-col"}`}>
-              {forms.map((form) => (
-                <Link key={form.id} to={`/create/${form.id}/edit`}>
-                  <FormTile key={form.id} formData={form} gridView={gridView} />
-                </Link>
-              ))}
+            <div
+              className={`flex flex-wrap w-full md:w-2/3 ${
+                gridView ? "flex-col" : "flex-row"
+              }`}
+            >
+              {forms.length ? (
+                1 &&
+                forms.map((form) => (
+                  <FormTile
+                    key={form.id}
+                    formData={form}
+                    removeForm={removeForm}
+                    renameForm={renameForm}
+                    gridView={gridView}
+                    onClick={() => openForm(form.id)}
+                  />
+                ))
+              ) : (
+                <div className="self-center"> No Forms Yet</div>
+              )}
             </div>
           )}
         </div>

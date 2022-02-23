@@ -1,4 +1,4 @@
-import { db } from "services/firebase/firebase.config";
+import { db } from "services/firebase/config.firebase";
 import {
   collection,
   getDocs,
@@ -11,27 +11,30 @@ import {
   where,
   arrayRemove,
   arrayUnion,
+  deleteDoc,
 } from "firebase/firestore";
 import {
   generateForm,
   generateFormPreview,
-} from "components/Helpers/generateForm";
+} from "components/helpers/generateForm";
 import {
   ERR_NOT_AUTHORISED,
   ERR_SAVING_FAILED,
   SUCCESS_SAVED,
 } from "data/statusMessages";
 
+const formCollection = "forms";
+
 const getFormsFromFirebase = async (uid, dispatchCallback, loadDispatch) => {
   try {
-    const q = query(collection(db, "forms"), where("uid", "==", uid));
+    const q = query(collection(db, formCollection), where("uid", "==", uid));
     const qSnapshot = await getDocs(q);
     const formsData = [];
     qSnapshot.forEach((form) => {
       formsData.push(
         generateFormPreview(
           form.id,
-          form.data().title,
+          form.data().name,
           form.data().img,
           form.data().date.toDate().toDateString(),
           form.data().shared
@@ -47,7 +50,7 @@ const getFormsFromFirebase = async (uid, dispatchCallback, loadDispatch) => {
 
 const getForm = async (uid, formId, dispatchCallback) => {
   try {
-    const docSnap = await getDoc(doc(db, "forms", formId));
+    const docSnap = await getDoc(doc(db, formCollection, formId));
     const data = docSnap.data();
     if (data.uid !== uid) {
       dispatchCallback({ error: ERR_NOT_AUTHORISED });
@@ -69,11 +72,23 @@ const getForm = async (uid, formId, dispatchCallback) => {
   }
 };
 
-const addFormInDB = async (uid, form) => {
+const renameFormInDB = async (formId, name) => {
+  try {
+    const docRef = doc(db, formCollection, formId);
+    await updateDoc(docRef, { name });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const addFormInDB = async (uid, form, dispatchCallback) => {
   form.uid = uid;
   try {
     const docRef = await addDoc(collection(db, "forms"), form);
-    console.log("Added doc", docRef.id);
+    form.id = docRef.id;
+    form.date = form.date.toDateString();
+    await dispatchCallback(form);
+    return docRef.id;
   } catch (e) {
     console.error(e);
   }
@@ -81,15 +96,28 @@ const addFormInDB = async (uid, form) => {
 
 const setFormInDB = async (formId, form) => {
   try {
-    const docRef = doc(db, "forms", formId);
+    const docRef = doc(db, formCollection, formId);
     await setDoc(docRef, form);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const deleteFormFromDB = async (formId) => {
+  const docRef = doc(db, formCollection, formId);
+  await deleteDoc(docRef);
+};
+const getTemplateFromDB = async (name) => {
+  try {
+    const docRef = doc(db, "templates", name);
+    await getDoc(docRef);
   } catch (e) {
     console.error(e);
   }
 };
 const addQuestionInDB = async (formId, question, savedCallBack) => {
   try {
-    const docRef = doc(db, "forms", formId);
+    const docRef = doc(db, formCollection, formId);
     await updateDoc(docRef, {
       questions: arrayUnion(question),
     });
@@ -101,7 +129,7 @@ const addQuestionInDB = async (formId, question, savedCallBack) => {
 
 const setQuestionsInDB = async (formId, questions, savedCallBack) => {
   try {
-    const formRef = doc(db, "forms", formId);
+    const formRef = doc(db, formCollection, formId);
     await updateDoc(formRef, { questions });
     savedCallBack(SUCCESS_SAVED);
   } catch (e) {
@@ -111,13 +139,13 @@ const setQuestionsInDB = async (formId, questions, savedCallBack) => {
 };
 
 const removeQuestionFromDB = async (formId, question, savedCallBack) => {
-  const qRef = await getDoc(doc(db, "forms", formId));
+  const qRef = await getDoc(doc(db, formCollection, formId));
   var myQ = {};
   qRef.data().questions.forEach((q) => {
     if (q.id === question.id) myQ = q;
   });
   try {
-    const docRef = doc(db, "forms", formId);
+    const docRef = doc(db, formCollection, formId);
     await updateDoc(docRef, {
       questions: arrayRemove(myQ),
     });
@@ -130,7 +158,7 @@ const removeQuestionFromDB = async (formId, question, savedCallBack) => {
 
 const setThemeInDB = async (formId, theme, savedCallBack) => {
   try {
-    const docRef = doc(db, "forms", formId);
+    const docRef = doc(db, formCollection, formId);
     await updateDoc(docRef, { theme });
     savedCallBack(SUCCESS_SAVED);
   } catch (e) {
@@ -141,7 +169,7 @@ const setThemeInDB = async (formId, theme, savedCallBack) => {
 
 const setSharedInDB = async (formId, shared, savedCallBack) => {
   try {
-    const docRef = doc(db, "forms", formId);
+    const docRef = doc(db, formCollection, formId);
     await updateDoc(docRef, { shared });
     savedCallBack(SUCCESS_SAVED);
   } catch (e) {
@@ -151,7 +179,7 @@ const setSharedInDB = async (formId, shared, savedCallBack) => {
 };
 const setFormTitleInDB = async (formId, title, savedCallBack) => {
   try {
-    const docRef = doc(db, "forms", formId);
+    const docRef = doc(db, formCollection, formId);
     await updateDoc(docRef, { title });
     savedCallBack(SUCCESS_SAVED);
   } catch (e) {
@@ -160,9 +188,8 @@ const setFormTitleInDB = async (formId, title, savedCallBack) => {
   }
 };
 const setFormDescriptionInDB = async (formId, description, savedCallBack) => {
-  console.log("Setting description");
   try {
-    const docRef = doc(db, "forms", formId);
+    const docRef = doc(db, formCollection, formId);
     await updateDoc(docRef, { description });
     savedCallBack(SUCCESS_SAVED);
   } catch (e) {
@@ -176,6 +203,7 @@ export {
   getForm,
   addFormInDB,
   setFormInDB,
+  deleteFormFromDB,
   addQuestionInDB,
   setQuestionsInDB,
   removeQuestionFromDB,
@@ -183,4 +211,6 @@ export {
   setSharedInDB,
   setFormTitleInDB,
   setFormDescriptionInDB,
+  getTemplateFromDB,
+  renameFormInDB,
 };

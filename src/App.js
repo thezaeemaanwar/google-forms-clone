@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import PublicRoutes from "components/Routing/public.routes";
-import Loading from "components/Loaders/page_loader";
-import Landing from "views/Landing";
+import PublicRoutes from "components/routes/public.routes";
+import Loading from "components/loaders/page.loader";
 import { useEffect } from "react";
-import { checkLogged } from "services/firebase/firebase.auth";
+import { checkLogged } from "services/firebase/auth.firebase";
 import { setUser } from "store/authentication/authentication.slice";
-import { getFormsFromFirebase } from "services/firebase/firebase.firestore";
+import { getFormsFromFirebase } from "services/firebase/firestore.firebase";
 import { setForms, setLoading } from "store/data/allForms.slice";
 
 const App = () => {
@@ -13,7 +12,6 @@ const App = () => {
   const { logged, loading, user } = useSelector(
     (state) => state.authentication
   );
- 
 
   useEffect(() => {
     const dispatchCallback = (user) => {
@@ -34,7 +32,12 @@ const App = () => {
   }, [user, dispatch]);
 
   if (loading) return <Loading />;
-  else return <div>{logged ? <PublicRoutes /> : <Landing />}</div>;
+  else
+    return (
+      <div>
+        <PublicRoutes logged={logged} />
+      </div>
+    );
 };
 
 export default App;
