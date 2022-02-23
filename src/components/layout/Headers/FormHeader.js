@@ -48,15 +48,18 @@ const FormHeader = ({ id, title, toggleThemeEditor }) => {
         </div>
         <div className="flex items-center">
           <Icon icon={faPalette} label="Theme" onClick={toggleThemeEditor} />
-          <Icon icon={faEye} label="Preview" />
-          <Icon icon={faUndo} label="Undo" />
-          <Icon icon={faRedo} label="Redo" />
-          <FilledButton
-            color="text-white"
-            background="bg-purple py-2"
-            text="Send"
-          />
-          <FontAwesomeIcon icon={faEllipsisV} className="px-3" />
+          <div className="hidden md:flex ">
+            <Icon icon={faEye} label="Preview" />
+            <Icon icon={faUndo} label="Undo" />
+            <Icon icon={faRedo} label="Redo" />
+
+            <FilledButton
+              color="text-white"
+              background="bg-purple py-2"
+              text="Send"
+            />
+            <FontAwesomeIcon icon={faEllipsisV} className="px-3" />
+          </div>
           <div className="hover:cursor-pointer" onClick={toggleDropdown}>
             <img
               className="rounded-full w-10 h-10 p-1"

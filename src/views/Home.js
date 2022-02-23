@@ -99,9 +99,9 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-2/3 justify-between">
+          <div className="flex w-2/3 justify-between flex-wrap overflow-hidden">
             {formTemplates.map((temp, i) => (
-              <div key={temp.name}>
+              <div key={temp.name} className="w-48 basis-44">
                 <img
                   className="w-48 border border-hoverGrey hover:border-purple hover:cursor-pointer rounded-md"
                   src={temp.img}
@@ -138,10 +138,10 @@ const Home = () => {
                   />
                 )}
               </div>
-              <div className="w-10 h-10 flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2]">
+              <div className="w-10 hidden h-10 md:flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2]">
                 <img className="w-5" src={sortIcon} alt="sort" />
               </div>
-              <div className="w-10 h-10 flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2] active:text-purple">
+              <div className="w-10 hidden h-10 md:flex justify-center items-center hover:bg-grey hover:cursor-pointer rounded-full active:bg-purple/[0.2] active:text-purple">
                 <FontAwesomeIcon icon={faFolder} />
               </div>
             </div>
@@ -149,7 +149,11 @@ const Home = () => {
           {loading ? (
             <Loading />
           ) : (
-            <div className={`flex w-2/3 ${gridView ? "flex-row" : "flex-col"}`}>
+            <div
+              className={`flex flex-wrap w-full md:w-2/3 ${
+                gridView ? "flex-col" : "flex-row"
+              }`}
+            >
               {forms.length ? (
                 1 &&
                 forms.map((form) => (

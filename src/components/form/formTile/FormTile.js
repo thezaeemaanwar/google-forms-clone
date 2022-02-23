@@ -33,7 +33,7 @@ const FormTile = ({ formData, gridView, onClick, removeForm, renameForm }) => {
     openInNewTab(`/create/${formData.id}/edit`);
   };
 
-  if (!gridView)
+  if (gridView)
     return (
       <li className="w-full rounded-full cursor-pointer hover:bg-purple/10 flex justify-between items-center px-3 pl-6">
         <div onClick={onClick} className="w-3/4">

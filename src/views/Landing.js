@@ -27,10 +27,10 @@ const Landing = () => {
     <div>
       <LandingHeader />
       <div className="flex w-full items-center justify-center pt-24">
-        <div className="flex w-4/5 mt-24 items-center justify-between">
-          <div className="flex flex-col w-1/3 ">
+        <div className="flex flex-col-reverse md:flex-row w-4/5 mt-0 md:mt-24 items-center justify-between">
+          <div className="w-full flex flex-col md:w-1/3 ">
             <div
-              className="text-6xl m-1 text-black"
+              className="text-4xl md:text-6xl m-1 text-black"
               style={{ lineHeight: "72px" }}
             >
               Get insights quickly, with Google Forms
@@ -52,7 +52,7 @@ const Landing = () => {
               />
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="w-full md:w-1/2">
             <img
               className="rounded-lg shadow-xl w-full"
               src={bg}
